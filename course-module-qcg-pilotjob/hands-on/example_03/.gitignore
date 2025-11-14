@@ -1,0 +1,5 @@
+output
+*.log
+*.out
+.qcgpjm-service*
+*.hostfile
