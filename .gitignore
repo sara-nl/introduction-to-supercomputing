@@ -1,0 +1,68 @@
+###############################
+# macOS
+###############################
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS AFP share metadata
+._*
+
+###############################
+# PowerPoint / Office temp files
+###############################
+~$*.ppt*
+*.tmp
+*.bak
+
+###############################
+# LaTeX
+###############################
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.xml
+
+###############################
+# Python
+###############################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+.env
+.venv
+
+###############################
+# C / C++
+###############################
+*.o
+*.a
+*.so
+*.exe
+*.out
+*.obj
+*.dll
+*.dylib
+
+###############################
+# Generic temp / cache / logs
+###############################
+*.tmp
+*.swp
+*.swo
+*.cache
+*.log
+*.err
+*.bak
