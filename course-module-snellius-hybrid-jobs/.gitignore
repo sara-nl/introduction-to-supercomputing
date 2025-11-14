@@ -1,0 +1,27 @@
+# Ignore Slurm output and error files
+*.out
+*.err
+
+# Ignore any specific log files if needed
+*.log
+
+# Ignore object files and binaries
+*.o
+*.obj
+*.exe
+*.out
+
+# Ignore core dumps
+core
+
+# Ignore compiled program files
+a.out
+*.exe
+*.class
+*.dll
+*.so
+*.dylib
+
+# Ignore temporary files created by editors
+*.swp
+*~
