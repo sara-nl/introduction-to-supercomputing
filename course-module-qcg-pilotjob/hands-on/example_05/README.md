@@ -54,3 +54,5 @@ Based on the profile data in the output file, estimate
 
 - the required SBUs for both pipelines
 - the percentage of idle time
+
+You can use spreadsheet software or a simple script.
