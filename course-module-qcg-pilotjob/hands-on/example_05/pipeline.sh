@@ -10,7 +10,7 @@ module load 2024
 module load Python/3.12.3-GCCcore-13.3.0
 
 
-echo START $( date +%s )
+echo START,$( date +%s )
 
 # read all numbers in time 
 exec {fd}< "times.txt" || { echo "Cannot open times.txt" >&2; exit 1; }
@@ -30,4 +30,4 @@ for ((i=0; i<10; i++)); do
     wait
 done
 
-echo END $( date +%s )
+echo END,$( date +%s )

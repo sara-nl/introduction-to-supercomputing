@@ -35,7 +35,7 @@ def main():
     start = time.time()
     time.sleep(n)
     end = time.time()
-    print(f"TASK {cpu} {start:.6f} {end:.6f}")
+    print(f"TASK,{cpu},{start:.6f},{end:.6f}")
 
 
 if __name__ == "__main__":

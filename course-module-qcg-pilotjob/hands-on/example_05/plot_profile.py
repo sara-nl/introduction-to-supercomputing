@@ -23,7 +23,7 @@ def extract_profile(fname):
     events = []
     with open(fname, "r") as fp:
         for line in fp:
-            cols = line.split()
+            cols = line.split(',')
             if cols[0] == "START":
                 start = float(cols[1])
             if cols[0] == "END":

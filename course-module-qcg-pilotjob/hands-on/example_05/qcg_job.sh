@@ -14,6 +14,6 @@ python qcg_job.py
 END=$( date +%s )
 
 # concatenate all output files
-echo START $START
+echo START,$START
 cat $TMPDIR/qcg_*.out
-echo END $END
+echo END,$END
