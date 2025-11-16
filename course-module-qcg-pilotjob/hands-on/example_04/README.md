@@ -21,5 +21,19 @@ sbatch qcg_job.sh
 
 6. Estimate the total execution time and SBUs spent on this task.
 
+The required SBUs can be estimated with the `sacct` tool:
+``` 
+sacct -X --format="JobID%24,Timelimit,AllocCPUS,CPUTime,CPUTimeRAW" -j 16235860
+                   JobID  Timelimit  AllocCPUS    CPUTime CPUTimeRAW 
+------------------------ ---------- ---------- ---------- ---------- 
+                16235860   00:20:00         16   02:00:32       7232 
+```
+
+The raw CPU time in this example is 7232 seconds. It can be converted to SBUs:
+
+``` shell
+1 SBU / CPU hour * 7232 CPU seconds / 3600 seconds per hour = 2.0
+```
+
 ## Data source
 https://www.ncdc.noaa.gov/ghcnd-data-access
