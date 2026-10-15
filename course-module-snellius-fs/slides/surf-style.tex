@@ -1,0 +1,61 @@
+% Colours, fonts and logos for the Snellius file systems deck.
+% Org writes this file into the preamble before \usetheme, so every
+% setting that metropolis would override waits for \AtEndPreamble.
+\usepackage{etoolbox}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, shapes.symbols}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+
+\definecolor{surforange}{HTML}{DB7C2E}
+\definecolor{surfblue}{HTML}{2D67AC}
+\definecolor{surfgreen}{HTML}{469D56}
+\definecolor{fsblue}{cmyk}{0.3,0.1,0,0}
+\definecolor{fsgreen}{cmyk}{0.3,0,0.4,0}
+\definecolor{fspink}{cmyk}{0,0.5,0.25,0}
+\definecolor{fsyellow}{cmyk}{0,0,0.5,0}
+
+\AtEndPreamble{%
+  \usefonttheme{professionalfonts}%
+  \setmonofont{Latin Modern Mono}%
+  % Justified text, as in the 2024 deck.
+  \addtobeamertemplate{block begin}{}{\justifying}%
+  \setbeamertemplate{itemize/enumerate body begin}{\justifying}%
+  \setbeamertemplate{itemize/enumerate subbody begin}{\justifying}%
+  \setbeamerfont{itemize/enumerate subbody}{size=\normalsize}%
+  \setbeamercolor{background canvas}{bg=white}%
+  \setbeamercolor{alerted text}{fg=surforange}%
+  \setbeamercolor{frametitle}{fg=white, bg=surforange}%
+  \setbeamercolor{progress bar}{fg=surforange, bg=surforange!50!black!30}%
+  \setbeamercolor{title separator}{fg=surforange, bg=surforange!50!black!30}%
+  \setbeamercolor{progress bar in head/foot}{fg=surforange, bg=surforange!50!black!30}%
+  \setbeamercolor{progress bar in section page}{fg=surforange, bg=surforange!50!black!30}%
+  \setbeamercolor{block title}{fg=white, bg=surfblue}%
+  \setbeamercolor{block body}{bg=surfblue!10}%
+  \setbeamercolor{block title alerted}{fg=white, bg=surforange}%
+  \setbeamercolor{block body alerted}{bg=surforange!10}%
+  \setbeamercolor{block title example}{fg=white, bg=surfgreen}%
+  \setbeamercolor{block body example}{bg=surfgreen!10}%
+  % SURF logo in the frame title bar.
+  \addtobeamertemplate{frametitle}{}{%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north east, inner sep=0pt]
+        at ([xshift=-6pt, yshift=-5pt]current page.north east)
+        {\includegraphics[height=11.5pt]{figures/surf-logo-small.png}};
+    \end{tikzpicture}%
+    \vspace{-10.5pt}\justifying}%
+  % Title page laid out like the 2024 deck.
+  \setbeamertemplate{title page}{%
+    \vspace*{54pt}%
+    {\usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle\par}%
+    \vspace{2pt}%
+    {\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertsubtitle\par}%
+    \vspace{0pt}%
+    {\usebeamercolor[fg]{title separator}\rule{\textwidth}{0.4pt}\par}%
+    \vspace{12pt}%
+    {\usebeamerfont{author}\textbf{\insertauthor}\par}%
+    {\usebeamerfont{institute}\small\insertinstitute\par}%
+    \vspace{1pt}%
+    {\usebeamerfont{date}\insertdate\par}}%
+}
