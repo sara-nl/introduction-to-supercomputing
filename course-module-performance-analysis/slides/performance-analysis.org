@@ -1,0 +1,1950 @@
+#+TITLE: Performance analysis
+#+OPTIONS: H:1 ':t toc:nil num:nil title:nil ^:nil author:nil date:nil
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [t]
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: \input{pptx-style.tex}
+#+LATEX_HEADER: \input{performance-analysis-style.tex}
+
+# One heading per slide.  Text boxes sit at the position, size and colour
+# of the matching text in the PowerPoint deck; figures/*/gNN.tex
+# draws the shapes and pictures of slide NN.  Build with make.
+
+* Performance analysis
+:PROPERTIES:
+:BEAMER_opt: pg=1,tx=56.88,ty=370.15,ts=50.33,tc=cFFFFFF,tw=323.43,tl=54.08
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g01}
+#+attr_latex: :options [x=56.65,y=472.77,s=27.8,l=33.36,c=cFFFFFF]
+#+begin_tb
+Maxim Masterov
+#+end_tb
+#+attr_latex: :options [x=56.65,y=499.9,s=15.8,l=18.96,c=cFFFFFF]
+#+begin_tb
+15.05.2025
+#+end_tb
+#+attr_latex: :options [x=56.45,y=57.7,s=1.5,l=1.8,c=cEE7628,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+#+attr_latex: :options [x=124.12,y=68.67,s=1.5,l=1.8,c=cEE7628,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+#+attr_latex: :options [x=105.55,y=68.42,s=1.5,l=1.8,c=cEE7628,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+#+attr_latex: :options [x=85.12,y=68.3,s=1.5,l=1.8,c=cEE7628,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+#+attr_latex: :options [x=67.38,y=68.12,s=1.5,l=1.8,c=cEE7628,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+
+* Performance analysis
+:PROPERTIES:
+:BEAMER_opt: pg=2,tx=71.15,ty=227.65,ts=66.07,tc=cFFFFFF,tw=427.17,tl=63.83
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g02}
+
+* Overview of HPC applications
+:PROPERTIES:
+:BEAMER_opt: pg=3
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g03}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- HPC applications are software designed to exploit the power of \\
+  supercomputers or high-performance clusters to solve complex \\
+  problems
+#+end_tb
+#+attr_latex: :options [x=68.18,y=210.42,s=18,l=19.53,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- HPC applications perform intensive computations, run \\
+  communications between parallel processes, and manage input/output \\
+  operations on a high-performance file system
+#+end_tb
+#+attr_latex: :options [x=167.55,y=497.95,s=6,l=7.5]
+#+begin_tb
+@@beamer:@@1. IllustrisTNG. Astrophysics model. https://phys.org/news/2018-02-astrophysicists-illustristng-advanced-universe-kind.html \\
+@@beamer:@@2. VMD. Visualisation software. (2011) PLoS Computational Biology Issue Image | Vol. 7(8) August 2011. PLoS Comput Biol 7(8) \\
+@@beamer:@@3. TotalSim. CFD software. https://www.totalsimulation.co.uk/digital-race-car/
+#+end_tb
+#+attr_latex: :options [x=135.93,y=315.93,s=14.2,l=17.04,c=cFFFFFF]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=361.13,y=315.75,s=14.3,l=17.16,c=cFFFFFF]
+#+begin_tb
+2
+#+end_tb
+#+attr_latex: :options [x=599.92,y=315.75,s=14.3,l=17.16]
+#+begin_tb
+3
+#+end_tb
+
+* A life cycle of an HPC application
+:PROPERTIES:
+:BEAMER_opt: pg=4
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g04}
+#+attr_latex: :options [x=445.3,y=210.05,s=15.8,l=17.28,c=cFFFFFF]
+#+begin_tb
+Run the
+
+application
+#+end_tb
+#+attr_latex: :options [x=662.63,y=391,s=15.8,l=17.27,c=cFFFFFF]
+#+begin_tb
+Evaluate the \\
+performance
+#+end_tb
+#+attr_latex: :options [x=223.25,y=373.4,s=15.8,l=17.27,c=cFFFFFF]
+#+begin_tb
+Make
+
+changes to
+#+end_tb
+#+attr_latex: :options [x=222.18,y=407.93,s=15.8,l=18.02,c=cFFFFFF]
+#+begin_tb
+the
+
+application
+#+end_tb
+
+* A life cycle of an HPC application
+:PROPERTIES:
+:BEAMER_opt: pg=5
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g05}
+#+attr_latex: :options [x=445.3,y=210.05,s=15.8,l=17.28,c=cFFFFFF]
+#+begin_tb
+Run the
+
+application
+#+end_tb
+#+attr_latex: :options [x=662.63,y=391,s=15.8,l=17.27,c=cFFFFFF]
+#+begin_tb
+Evaluate the \\
+performance
+#+end_tb
+#+attr_latex: :options [x=223.25,y=373.4,s=15.8,l=17.27,c=cFFFFFF]
+#+begin_tb
+Make
+
+changes to
+#+end_tb
+#+attr_latex: :options [x=222.18,y=407.93,s=15.8,l=18.02,c=cFFFFFF]
+#+begin_tb
+the
+
+application
+#+end_tb
+
+* How to evaluate the performance?
+:PROPERTIES:
+:BEAMER_opt: pg=6
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g06}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Using tools, e.g. Vtune, Scalasca, Nsight Systems, memory-profiler
+#+end_tb
+#+attr_latex: :options [x=68.18,y=171.35,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Measuring the execution time
+#+end_tb
+#+attr_latex: :options [x=68.18,y=202.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Measuring the memory footprint
+#+end_tb
+#+attr_latex: :options [x=68.18,y=234.45,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Tracking the network load
+#+end_tb
+#+attr_latex: :options [x=68.18,y=266,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Comparing the performance with similar applications/models
+#+end_tb
+#+attr_latex: :options [x=68.18,y=297.53,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Comparing the performance across different hardware
+#+end_tb
+#+attr_latex: :options [x=68.18,y=329.08,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Using "gut feeling"
+#+end_tb
+#+attr_latex: :options [x=741.92,y=165.05,s=9.8,l=11.25,c=cFFFFFF]
+#+begin_tb
+Run the
+
+application
+#+end_tb
+#+attr_latex: :options [x=873.78,y=274.9,s=9.8,l=11.25,c=cFFFFFF]
+#+begin_tb
+Evaluate the \\
+performance
+#+end_tb
+#+attr_latex: :options [x=607.17,y=263.9,s=9.8,l=11.25,c=cFFFFFF]
+#+begin_tb
+Make
+
+changes to
+#+end_tb
+#+attr_latex: :options [x=606.47,y=285.67,s=9.8,l=11.28,c=cFFFFFF]
+#+begin_tb
+the
+
+application
+#+end_tb
+
+* Performance analysis
+:PROPERTIES:
+:BEAMER_opt: pg=7
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g07}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- An application consists of multiple levels of complexity
+#+end_tb
+#+attr_latex: :options [x=68.18,y=171.35,s=18,l=19.55,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Each level may have certain effect on the performance and should be \\
+  evaluated individually@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=82.18,y=220.92,s=15.8,l=18.96,b,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- IO
+#+end_tb
+#+attr_latex: :options [x=82.18,y=250.23,s=15.8,l=18.96,b,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- Communications
+#+end_tb
+#+attr_latex: :options [x=82.18,y=279.5,s=15.8,l=18.96,b,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- Computations
+#+end_tb
+#+attr_latex: :options [x=82.18,y=308.8,s=15.8,l=18.96,b,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- Memory footprint
+#+end_tb
+#+attr_latex: :options [x=741.92,y=165.05,s=9.8,l=11.25,c=cFFFFFF]
+#+begin_tb
+Run the
+
+application
+#+end_tb
+#+attr_latex: :options [x=873.78,y=274.9,s=9.8,l=11.25,c=cFFFFFF]
+#+begin_tb
+Evaluate the \\
+performance
+#+end_tb
+#+attr_latex: :options [x=607.17,y=263.9,s=9.8,l=11.25,c=cFFFFFF]
+#+begin_tb
+Make
+
+changes to
+#+end_tb
+#+attr_latex: :options [x=606.47,y=285.67,s=9.8,l=11.28,c=cFFFFFF]
+#+begin_tb
+the
+
+application
+#+end_tb
+
+* Performance analysis - IO
+:PROPERTIES:
+:BEAMER_opt: pg=8
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g08}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Parallel vs sequential filesystems
+#+end_tb
+#+attr_latex: :options [x=68.18,y=171.35,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- We can measure read/write speed
+#+end_tb
+#+attr_latex: :options [x=68.18,y=202.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Data can be ASCII or binary
+#+end_tb
+#+attr_latex: :options [x=68.18,y=234.45,s=18,l=19.53,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Different file formats help, as some are sequential, \\
+  some are parallel
+#+end_tb
+#+attr_latex: :options [x=68.18,y=285.52,s=18,l=19.53,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- The easiest way to evaluate performance is to measure the elapsed time \\
+  of IO operations
+#+end_tb
+#+attr_latex: :options [x=237.55,y=370.72,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+Format
+#+end_tb
+#+attr_latex: :options [x=429.9,y=370.72,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+IO operation
+#+end_tb
+#+attr_latex: :options [x=636.68,y=370.72,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+Speed, [MB/s]
+#+end_tb
+#+attr_latex: :options [x=245.63,y=414.6,s=18,l=21.6]
+#+begin_tb
+ASCII
+#+end_tb
+#+attr_latex: :options [x=460.3,y=399.97,s=18,l=21.6]
+#+begin_tb
+Read
+#+end_tb
+#+attr_latex: :options [x=676.85,y=399.97,s=18,l=21.6]
+#+begin_tb
+29.7
+#+end_tb
+#+attr_latex: :options [x=459.65,y=429.2,s=18,l=21.6]
+#+begin_tb
+Write
+#+end_tb
+#+attr_latex: :options [x=676.85,y=429.2,s=18,l=21.6]
+#+begin_tb
+24.9
+#+end_tb
+#+attr_latex: :options [x=242.35,y=473.08,s=18,l=21.6]
+#+begin_tb
+Binary
+#+end_tb
+#+attr_latex: :options [x=460.3,y=458.45,s=18,l=21.6]
+#+begin_tb
+Read
+#+end_tb
+#+attr_latex: :options [x=667.22,y=458.45,s=18,l=21.6]
+#+begin_tb
+2666.4
+#+end_tb
+#+attr_latex: :options [x=459.65,y=487.7,s=18,l=21.6]
+#+begin_tb
+Write
+#+end_tb
+#+attr_latex: :options [x=667.22,y=487.7,s=18,l=21.6]
+#+begin_tb
+1586.5
+#+end_tb
+#+attr_latex: :options [x=327.2,y=342.73,s=14.3,l=17.16]
+#+begin_tb
+10M vector of 64-bit FP values on NVME file system
+#+end_tb
+
+* Performance analysis - IO
+:PROPERTIES:
+:BEAMER_opt: pg=9
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g09}
+
+* Performance analysis - IO
+:PROPERTIES:
+:BEAMER_opt: pg=10
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g10}
+
+* Performance analysis - Communications
+:PROPERTIES:
+:BEAMER_opt: pg=11
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g11}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Leads to a decrease in performance as the number of active processes \\
+  increases
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Optimisation may require knowledge of the network structure
+#+end_tb
+#+attr_latex: :options [x=68.18,y=222.42,s=18,l=19.53,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Some frameworks allow for run-time tuning of the communication \\
+  algorithms (e.g. with MPI tune)
+#+end_tb
+#+attr_latex: :options [x=333.13,y=462.58,s=12,l=14.4,c=c595959]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=326.72,y=388.7,s=12,l=14.4,c=c595959]
+#+begin_tb
+10
+#+end_tb
+#+attr_latex: :options [x=320.33,y=314.85,s=12,l=14.4,c=c595959]
+#+begin_tb
+100
+#+end_tb
+#+attr_latex: :options [x=347.38,y=478.05,s=12,l=14.4,c=c595959]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=409.75,y=478.05,s=12,l=14.4,c=c595959]
+#+begin_tb
+2
+#+end_tb
+#+attr_latex: :options [x=472.13,y=478.05,s=12,l=14.4,c=c595959]
+#+begin_tb
+4
+#+end_tb
+#+attr_latex: :options [x=534.5,y=478.05,s=12,l=14.4,c=c595959]
+#+begin_tb
+8
+#+end_tb
+#+attr_latex: :options [x=593.67,y=478.05,s=12,l=14.4,c=c595959]
+#+begin_tb
+16
+#+end_tb
+#+attr_latex: :options [x=656.05,y=478.05,s=12,l=14.4,c=c595959]
+#+begin_tb
+32
+#+end_tb
+#+attr_latex: :options [x=485.13,y=497.17,s=13.5,l=16.2,c=c595959]
+#+begin_tb
+@@beamer:@@#nodes
+#+end_tb
+#+attr_latex: :options [x=457.02,y=526.72,s=12,l=14.4,c=c595959]
+#+begin_tb
+Ideal
+#+end_tb
+#+attr_latex: :options [x=513.1,y=526.72,s=12,l=14.4,c=c595959]
+#+begin_tb
+Real
+#+end_tb
+#+attr_latex: :options [x=90.7,y=275.75,s=18,l=21.6]
+#+begin_tb
+Scales with
+#+end_tb
+#+attr_latex: :options [x=183.02,y=275.75,s=18,l=21.6,f=math,fw=20.06]
+#+begin_tb
+𝑂(
+#+end_tb
+#+attr_latex: :options [x=214.95,y=275.75,s=18,l=21.6,f=math,fw=19.06]
+#+begin_tb
+𝑃)
+#+end_tb
+#+attr_latex: :options [x=234.01,y=275.75,s=18,l=21.6]
+#+begin_tb
+for
+#+end_tb
+#+attr_latex: :options [x=262.33,y=275.75,s=18,l=21.6,i]
+#+begin_tb
+P
+#+end_tb
+#+attr_latex: :options [x=272.98,y=275.75,s=18,l=21.6]
+#+begin_tb
+processes
+#+end_tb
+#+attr_latex: :options [x=313.83,y=411.12,s=13.5,l=16.2,c=c595959,r=90]
+#+begin_tb
+Speedup
+#+end_tb
+#+attr_latex: :options [x=68.18,y=275.75,s=18,l=21.6,c=cEE7628,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+
+* Performance analysis - Communications
+:PROPERTIES:
+:BEAMER_opt: pg=12
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g12}
+
+* Performance analysis - Communications
+:PROPERTIES:
+:BEAMER_opt: pg=13
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g13}
+
+* Performance analysis - Computations
+:PROPERTIES:
+:BEAMER_opt: pg=14
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g14}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Dozens* of packages that allow to analyse performance of sequential and \\
+  parallel codes
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Different tools suit different parallelisation strategies (threaded, \\
+  distributed, GPU)
+#+end_tb
+#+attr_latex: :options [x=68.18,y=241.95,s=18,l=19.53,b,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textmd{@@Many tools use@@beamer:}@@ hardware counters @@beamer:\textmd{@@that@@beamer:}@@ have to be enabled explicitly \\
+  on Snellius
+#+end_tb
+#+attr_latex: :options [x=138.1,y=380.48,s=15.8,l=19.55,c=cF2F2F2,f=cal,code]
+#+begin_tb
+@@beamer:@@#SBATCH --constraint=hwperf \\
+@@beamer:@@#SBATCH --exclusive
+#+end_tb
+#+attr_latex: :options [x=90.7,y=293.03,s=18,l=21.6]
+#+begin_tb
+Scales with
+#+end_tb
+#+attr_latex: :options [x=183.02,y=293.03,s=18,l=21.6,f=math,fw=39.16]
+#+begin_tb
+𝑂(𝑃)
+#+end_tb
+#+attr_latex: :options [x=222.18,y=293.03,s=18,l=21.6]
+#+begin_tb
+for
+#+end_tb
+#+attr_latex: :options [x=250.47,y=293.03,s=18,l=21.6,i]
+#+begin_tb
+P
+#+end_tb
+#+attr_latex: :options [x=261.12,y=293.03,s=18,l=21.6]
+#+begin_tb
+processes
+#+end_tb
+#+attr_latex: :options [x=68.18,y=293.03,s=18,l=21.6,c=cEE7628,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+
+* Performance analysis - Memory
+:PROPERTIES:
+:BEAMER_opt: pg=15
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g15}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Memory footprint: how much RAM does an application use
+#+end_tb
+#+attr_latex: :options [x=68.18,y=171.35,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- May affect cache misses and, therefore, performance
+#+end_tb
+#+attr_latex: :options [x=68.18,y=202.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- May dictate the scale at which application should be executed
+#+end_tb
+#+attr_latex: :options [x=102.47,y=367.45,s=15.8,l=19.53,c=cF2F2F2,f=cal,code]
+#+begin_tb
+@@beamer:\$@@ valgrind --tool=massif <prog> \\
+@@beamer:\$@@ ms_print massif.out.XXX
+#+end_tb
+
+* Strong and weak scaling
+:PROPERTIES:
+:BEAMER_opt: pg=16
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g16}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textcolor{c000000}{\textbf{@@Strong scaling@@beamer:}}\textcolor{c000000}{@@:@@beamer:}@@ the problem size is *fixed*, the number of \\
+  processors is *increased*
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=19.52,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Amdahl's law* - the speedup is limited by the fraction of the \\
+  serial part of the software that is not amenable to \\
+  parallelization
+#+end_tb
+#+attr_latex: :options [x=68.18,y=356.12,s=18,l=21.6,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- s: proportion of the execution time spent on the serial part
+#+end_tb
+#+attr_latex: :options [x=68.18,y=387.65,s=18,l=19.52,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- p: the share spent on the parallel part
+#+end_tb
+#+attr_latex: :options [x=68.18,y=438.73,s=18,l=21.6,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- N: number of processes
+#+end_tb
+#+attr_latex: :options [x=589.9,y=419.85,s=12,l=14.4,c=c595959]
+#+begin_tb
+0
+#+end_tb
+#+attr_latex: :options [x=589.9,y=359.83,s=12,l=14.4,c=c595959]
+#+begin_tb
+5
+#+end_tb
+#+attr_latex: :options [x=583.5,y=299.83,s=12,l=14.4,c=c595959]
+#+begin_tb
+10
+#+end_tb
+#+attr_latex: :options [x=583.5,y=239.8,s=12,l=14.4,c=c595959]
+#+begin_tb
+15
+#+end_tb
+#+attr_latex: :options [x=583.5,y=179.78,s=12,l=14.4,c=c595959]
+#+begin_tb
+20
+#+end_tb
+#+attr_latex: :options [x=583.5,y=119.75,s=12,l=14.4,c=c595959]
+#+begin_tb
+25
+#+end_tb
+#+attr_latex: :options [x=751.88,y=472.83,s=13.5,l=16.2,c=c595959]
+#+begin_tb
+@@beamer:@@#cores
+#+end_tb
+#+attr_latex: :options [x=613.4,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+50%
+#+end_tb
+#+attr_latex: :options [x=668.13,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+60%
+#+end_tb
+#+attr_latex: :options [x=722.85,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+70%
+#+end_tb
+#+attr_latex: :options [x=777.58,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+80%
+#+end_tb
+#+attr_latex: :options [x=832.3,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+90%
+#+end_tb
+#+attr_latex: :options [x=887.03,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+95%
+#+end_tb
+#+attr_latex: :options [x=241.65,y=286.12,s=15.8,l=18.96,f=math,fw=75.98]
+#+begin_tb
+𝑠𝑝𝑒𝑒𝑑𝑢𝑝=
+#+end_tb
+#+attr_latex: :options [x=345.82,y=274,s=15.8,l=18.96,f=math,fw=8.74]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=322.3,y=296.85,s=15.8,l=18.96,f=math,fw=55.35]
+#+begin_tb
+𝑠+ 𝑝/𝑁
+#+end_tb
+#+attr_latex: :options [x=577,y=292.23,s=13.5,l=16.2,c=c595959,r=90]
+#+begin_tb
+Speedup
+#+end_tb
+
+* Strong and weak scaling
+:PROPERTIES:
+:BEAMER_opt: pg=17
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g17}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Weak scaling*: the problem size *increases* with the number \\
+  of processes
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=19.52,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Gustafson's law* - the parallel part scales linearly with the \\
+  amount of resources, while the serial part stays \\
+  fixed as the problem grows
+#+end_tb
+#+attr_latex: :options [x=68.18,y=324.58,s=18,l=21.6,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- s: proportion of the execution time spent on the serial part
+#+end_tb
+#+attr_latex: :options [x=68.18,y=356.12,s=18,l=19.53,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- p: the share spent on the parallel part
+#+end_tb
+#+attr_latex: :options [x=68.18,y=407.17,s=18,l=21.6,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- N: number of processes
+#+end_tb
+#+attr_latex: :options [x=615.53,y=420.83,s=12,l=14.4,c=c595959]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=609.13,y=360.6,s=12,l=14.4,c=c595959]
+#+begin_tb
+10
+#+end_tb
+#+attr_latex: :options [x=602.72,y=300.4,s=12,l=14.4,c=c595959]
+#+begin_tb
+100
+#+end_tb
+#+attr_latex: :options [x=596.32,y=240.17,s=12,l=14.4,c=c595959]
+#+begin_tb
+1000
+#+end_tb
+#+attr_latex: :options [x=589.93,y=179.98,s=12,l=14.4,c=c595959]
+#+begin_tb
+10000
+#+end_tb
+#+attr_latex: :options [x=583.53,y=119.75,s=12,l=14.4,c=c595959]
+#+begin_tb
+100000
+#+end_tb
+#+attr_latex: :options [x=764.7,y=472.83,s=13.5,l=16.2,c=c595959]
+#+begin_tb
+@@beamer:@@#cores
+#+end_tb
+#+attr_latex: :options [x=613.42,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+50%
+#+end_tb
+#+attr_latex: :options [x=668.15,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+60%
+#+end_tb
+#+attr_latex: :options [x=722.88,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+70%
+#+end_tb
+#+attr_latex: :options [x=777.6,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+80%
+#+end_tb
+#+attr_latex: :options [x=832.32,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+90%
+#+end_tb
+#+attr_latex: :options [x=887.05,y=502.38,s=12,l=14.4,c=c595959]
+#+begin_tb
+95%
+#+end_tb
+#+attr_latex: :options [x=239.8,y=271.6,s=15.8,l=18.96,f=math,fw=139.73]
+#+begin_tb
+𝑠𝑝𝑒𝑒𝑑𝑢𝑝= 𝑠+ 𝑝⋅𝑁
+#+end_tb
+#+attr_latex: :options [x=647.03,y=431.45,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=667.2,y=431.45,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+2
+#+end_tb
+#+attr_latex: :options [x=687.38,y=431.45,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+4
+#+end_tb
+#+attr_latex: :options [x=707.55,y=431.45,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+8
+#+end_tb
+#+attr_latex: :options [x=727.72,y=437.85,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+16
+#+end_tb
+#+attr_latex: :options [x=747.9,y=437.85,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+32
+#+end_tb
+#+attr_latex: :options [x=768.08,y=437.85,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+64
+#+end_tb
+#+attr_latex: :options [x=788.25,y=444.25,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+128
+#+end_tb
+#+attr_latex: :options [x=808.42,y=444.25,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+256
+#+end_tb
+#+attr_latex: :options [x=828.63,y=444.25,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+512
+#+end_tb
+#+attr_latex: :options [x=848.8,y=450.65,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+1024
+#+end_tb
+#+attr_latex: :options [x=868.98,y=450.65,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+2048
+#+end_tb
+#+attr_latex: :options [x=889.15,y=450.65,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+4096
+#+end_tb
+#+attr_latex: :options [x=909.33,y=450.65,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+8192
+#+end_tb
+#+attr_latex: :options [x=929.5,y=457.05,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+16384
+#+end_tb
+#+attr_latex: :options [x=577.03,y=292.7,s=13.5,l=16.2,c=c595959,r=90]
+#+begin_tb
+Speedup
+#+end_tb
+
+* Strong and weak scaling
+:PROPERTIES:
+:BEAMER_opt: pg=18
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g18}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Speedup and efficiency@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=68.18,y=266,s=18,l=21.6,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- T_s: the amount of time needed to complete a serial task
+#+end_tb
+#+attr_latex: :options [x=68.18,y=297.53,s=18,l=19.55,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- T_N: the time a parallel task takes on N processes
+#+end_tb
+#+attr_latex: :options [x=68.18,y=348.6,s=18,l=21.6,c=c202122,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- N: number of processes
+#+end_tb
+#+attr_latex: :options [x=606.75,y=439.4,s=12,l=14.4,c=c595959]
+#+begin_tb
+0
+#+end_tb
+#+attr_latex: :options [x=600.35,y=414.88,s=12,l=14.4,c=c595959]
+#+begin_tb
+20
+#+end_tb
+#+attr_latex: :options [x=600.35,y=390.35,s=12,l=14.4,c=c595959]
+#+begin_tb
+40
+#+end_tb
+#+attr_latex: :options [x=600.35,y=365.82,s=12,l=14.4,c=c595959]
+#+begin_tb
+60
+#+end_tb
+#+attr_latex: :options [x=600.35,y=341.32,s=12,l=14.4,c=c595959]
+#+begin_tb
+80
+#+end_tb
+#+attr_latex: :options [x=593.95,y=316.8,s=12,l=14.4,c=c595959]
+#+begin_tb
+100
+#+end_tb
+#+attr_latex: :options [x=593.95,y=292.27,s=12,l=14.4,c=c595959]
+#+begin_tb
+120
+#+end_tb
+#+attr_latex: :options [x=760.8,y=492.38,s=13.5,l=16.2,c=c595959]
+#+begin_tb
+@@beamer:@@#cores
+#+end_tb
+#+attr_latex: :options [x=727.72,y=521.92,s=12,l=14.4,c=c595959]
+#+begin_tb
+Ideal
+#+end_tb
+#+attr_latex: :options [x=783.8,y=521.92,s=12,l=14.4,c=c595959]
+#+begin_tb
+Real
+#+end_tb
+#+attr_latex: :options [x=608.38,y=217.62,s=12,l=14.4,c=c595959]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=601.97,y=187.58,s=12,l=14.4,c=c595959]
+#+begin_tb
+10
+#+end_tb
+#+attr_latex: :options [x=595.58,y=157.52,s=12,l=14.4,c=c595959]
+#+begin_tb
+100
+#+end_tb
+#+attr_latex: :options [x=589.17,y=127.5,s=12,l=14.4,c=c595959]
+#+begin_tb
+1000
+#+end_tb
+#+attr_latex: :options [x=582.78,y=97.45,s=12,l=14.4,c=c595959]
+#+begin_tb
+10000
+#+end_tb
+#+attr_latex: :options [x=576.38,y=67.4,s=12,l=14.4,c=c595959]
+#+begin_tb
+100000
+#+end_tb
+#+attr_latex: :options [x=761.1,y=269.62,s=13.5,l=16.2,c=c595959]
+#+begin_tb
+@@beamer:@@#cores
+#+end_tb
+#+attr_latex: :options [x=136.15,y=200.35,s=15.8,l=18.96,f=math,fw=75.98]
+#+begin_tb
+𝑠𝑝𝑒𝑒𝑑𝑢𝑝=
+#+end_tb
+#+attr_latex: :options [x=218.68,y=188.23,s=15.8,l=18.96,f=math,fw=9.39]
+#+begin_tb
+𝑇
+#+end_tb
+#+attr_latex: :options [x=226,y=191.5,s=12,l=14.4,f=math,fw=5.82]
+#+begin_tb
+𝑠
+#+end_tb
+#+attr_latex: :options [x=216.8,y=211.08,s=15.8,l=18.96,f=math,fw=9.39]
+#+begin_tb
+𝑇
+#+end_tb
+#+attr_latex: :options [x=224.6,y=214.35,s=12,l=14.4,f=math,fw=9.09]
+#+begin_tb
+𝑁
+#+end_tb
+#+attr_latex: :options [x=318.82,y=200.35,s=15.8,l=18.96,f=math,fw=93.19]
+#+begin_tb
+𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑐𝑦=
+#+end_tb
+#+attr_latex: :options [x=418.33,y=188.23,s=15.8,l=18.96,f=math,fw=8.74]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=416.67,y=211.08,s=15.8,l=18.96,f=math,fw=11.55]
+#+begin_tb
+𝑁
+#+end_tb
+#+attr_latex: :options [x=433.38,y=188.23,s=15.8,l=18.96,f=math,fw=9.39]
+#+begin_tb
+𝑇
+#+end_tb
+#+attr_latex: :options [x=440.7,y=191.5,s=12,l=14.4,f=math,fw=5.82]
+#+begin_tb
+𝑠
+#+end_tb
+#+attr_latex: :options [x=431.5,y=211.08,s=15.8,l=18.96,f=math,fw=9.39]
+#+begin_tb
+𝑇
+#+end_tb
+#+attr_latex: :options [x=439.3,y=214.35,s=12,l=14.4,f=math,fw=9.09]
+#+begin_tb
+𝑁
+#+end_tb
+#+attr_latex: :options [x=587.48,y=402.8,s=13.5,l=16.2,c=c595959,r=90]
+#+begin_tb
+Efficiency, [%]
+#+end_tb
+#+attr_latex: :options [x=629.77,y=228.23,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=651.9,y=228.23,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+2
+#+end_tb
+#+attr_latex: :options [x=674.03,y=228.23,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+4
+#+end_tb
+#+attr_latex: :options [x=696.15,y=228.23,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+8
+#+end_tb
+#+attr_latex: :options [x=718.28,y=234.62,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+16
+#+end_tb
+#+attr_latex: :options [x=740.43,y=234.62,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+32
+#+end_tb
+#+attr_latex: :options [x=762.55,y=234.62,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+64
+#+end_tb
+#+attr_latex: :options [x=784.67,y=241.05,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+128
+#+end_tb
+#+attr_latex: :options [x=806.8,y=241.05,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+256
+#+end_tb
+#+attr_latex: :options [x=828.92,y=241.05,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+512
+#+end_tb
+#+attr_latex: :options [x=851.05,y=247.45,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+1024
+#+end_tb
+#+attr_latex: :options [x=873.2,y=247.45,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+2048
+#+end_tb
+#+attr_latex: :options [x=895.32,y=247.45,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+4096
+#+end_tb
+#+attr_latex: :options [x=917.45,y=247.45,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+8192
+#+end_tb
+#+attr_latex: :options [x=939.58,y=253.85,s=12,l=14.4,c=c595959,r=90]
+#+begin_tb
+16384
+#+end_tb
+#+attr_latex: :options [x=569.88,y=164.92,s=13.5,l=16.2,c=c595959,r=90]
+#+begin_tb
+Speedup
+#+end_tb
+
+* A life cycle of an HPC application
+:PROPERTIES:
+:BEAMER_opt: pg=19
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g19}
+#+attr_latex: :options [x=445.3,y=210.05,s=15.8,l=17.28,c=cFFFFFF]
+#+begin_tb
+Run the
+
+application
+#+end_tb
+#+attr_latex: :options [x=662.63,y=391,s=15.8,l=17.27,c=cFFFFFF]
+#+begin_tb
+Evaluate the \\
+performance
+#+end_tb
+#+attr_latex: :options [x=223.25,y=373.4,s=15.8,l=17.27,c=cFFFFFF]
+#+begin_tb
+Make
+
+changes to
+#+end_tb
+#+attr_latex: :options [x=222.18,y=407.93,s=15.8,l=18.02,c=cFFFFFF]
+#+begin_tb
+the
+
+application
+#+end_tb
+
+* Standard techniques
+:PROPERTIES:
+:BEAMER_opt: pg=20
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g20}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Change the model/method to a faster one
+#+end_tb
+#+attr_latex: :options [x=68.18,y=171.35,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Change the backend (e.g. linear algebra) to a faster one
+#+end_tb
+#+attr_latex: :options [x=68.18,y=202.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Reduce the precision (e.g. from 64-bit FP to 32-bit FP)
+#+end_tb
+#+attr_latex: :options [x=68.18,y=234.45,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Optimise data structures (e.g. from AOS to SOA)
+#+end_tb
+#+attr_latex: :options [x=68.18,y=266,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Optimise IO operations
+#+end_tb
+#+attr_latex: :options [x=68.18,y=297.53,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Optimise data transfers (cache, network)
+#+end_tb
+#+attr_latex: :options [x=68.18,y=329.08,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Make application hardware-aware
+#+end_tb
+#+attr_latex: :options [x=68.18,y=360.62,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Use different hardware
+#+end_tb
+#+attr_latex: :options [x=68.18,y=392.18,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Optimise memory footprint
+#+end_tb
+#+attr_latex: :options [x=68.18,y=423.7,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Use different programming language
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=21
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g21}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- A visual model that shows the performance of an application or \\
+  its kernel with respect to the hardware limitations.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Shows potential benefits and priority of optimisations.
+#+end_tb
+#+attr_latex: :options [x=358.02,y=511.33,s=13.5,l=16.2,c=c595959,b]
+#+begin_tb
+Arithmetic Intensity (AI), [FLOP/Byte]
+#+end_tb
+#+attr_latex: :options [x=211.15,y=380.3,s=13.5,l=16.2,c=c595959,b,r=90]
+#+begin_tb
+GFLOPS
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=22
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g22}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- A visual model that shows the performance of an application or \\
+  its kernel with respect to the hardware limitations.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Shows potential benefits and priority of optimisations.
+#+end_tb
+#+attr_latex: :options [x=358.02,y=511.33,s=13.5,l=16.2,c=c595959,b]
+#+begin_tb
+Arithmetic Intensity (AI), [FLOP/Byte]
+#+end_tb
+#+attr_latex: :options [x=544.53,y=261.2,s=15.8,l=18.96]
+#+begin_tb
+Peak performance
+#+end_tb
+#+attr_latex: :options [x=211.15,y=380.3,s=13.5,l=16.2,c=c595959,b,r=90]
+#+begin_tb
+GFLOPS
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=23
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g23}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- A visual model that shows the performance of an application or \\
+  its kernel with respect to the hardware limitations.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Shows potential benefits and priority of optimisations.
+#+end_tb
+#+attr_latex: :options [x=358.02,y=511.33,s=13.5,l=16.2,c=c595959,b]
+#+begin_tb
+Arithmetic Intensity (AI), [FLOP/Byte]
+#+end_tb
+#+attr_latex: :options [x=544.53,y=261.2,s=15.8,l=18.96]
+#+begin_tb
+Peak performance
+#+end_tb
+#+attr_latex: :options [x=211.15,y=380.3,s=13.5,l=16.2,c=c595959,b,r=90]
+#+begin_tb
+GFLOPS
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=24
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g24}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- A visual model that shows the performance of an application or \\
+  its kernel with respect to the hardware limitations.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Shows potential benefits and priority of optimisations.
+#+end_tb
+#+attr_latex: :options [x=358.02,y=511.33,s=13.5,l=16.2,c=c595959,b]
+#+begin_tb
+Arithmetic Intensity (AI), [FLOP/Byte]
+#+end_tb
+#+attr_latex: :options [x=544.53,y=261.2,s=15.8,l=18.96]
+#+begin_tb
+Peak performance
+#+end_tb
+#+attr_latex: :options [x=211.15,y=380.3,s=13.5,l=16.2,c=c595959,b,r=90]
+#+begin_tb
+GFLOPS
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=25
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g25}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- A visual model that shows the performance of an application or \\
+  its kernel with respect to the hardware limitations.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Shows potential benefits and priority of optimisations.
+#+end_tb
+#+attr_latex: :options [x=358.02,y=511.33,s=13.5,l=16.2,c=c595959,b]
+#+begin_tb
+Arithmetic Intensity (AI), [FLOP/Byte]
+#+end_tb
+#+attr_latex: :options [x=544.53,y=261.2,s=15.8,l=18.96]
+#+begin_tb
+Peak performance
+#+end_tb
+#+attr_latex: :options [x=324.78,y=239.3,s=15.8,l=18.96]
+#+begin_tb
+Ridge point
+#+end_tb
+#+attr_latex: :options [x=211.15,y=380.3,s=13.5,l=16.2,c=c595959,b,r=90]
+#+begin_tb
+GFLOPS
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=26
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g26}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- A visual model that shows the performance of an application or \\
+  its kernel with respect to the hardware limitations.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Shows potential benefits and priority of optimisations.
+#+end_tb
+#+attr_latex: :options [x=358.02,y=511.33,s=13.5,l=16.2,c=c595959,b]
+#+begin_tb
+Arithmetic Intensity (AI), [FLOP/Byte]
+#+end_tb
+#+attr_latex: :options [x=544.53,y=261.2,s=15.8,l=18.96]
+#+begin_tb
+Peak performance
+#+end_tb
+#+attr_latex: :options [x=324.78,y=239.3,s=15.8,l=18.96]
+#+begin_tb
+Ridge point
+#+end_tb
+#+attr_latex: :options [x=211.15,y=380.3,s=13.5,l=16.2,c=c595959,b,r=90]
+#+begin_tb
+GFLOPS
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=27
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g27}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- A visual model that shows the performance of an application or \\
+  its kernel with respect to the hardware limitations.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Shows potential benefits and priority of optimisations.
+#+end_tb
+#+attr_latex: :options [x=358.02,y=511.33,s=13.5,l=16.2,c=c595959,b]
+#+begin_tb
+Arithmetic Intensity (AI), [FLOP/Byte]
+#+end_tb
+#+attr_latex: :options [x=544.53,y=261.2,s=15.8,l=18.96]
+#+begin_tb
+Peak performance
+#+end_tb
+#+attr_latex: :options [x=324.78,y=239.3,s=15.8,l=18.96]
+#+begin_tb
+Ridge point
+#+end_tb
+#+attr_latex: :options [x=69.05,y=354.57,s=15.8,l=18.96,c=c115C8F]
+#+begin_tb
+Memory-bound
+#+end_tb
+#+attr_latex: :options [x=774.85,y=309.67,s=15.8,l=18.96,c=cBC161F]
+#+begin_tb
+Compute-bound
+#+end_tb
+#+attr_latex: :options [x=211.15,y=380.3,s=13.5,l=16.2,c=c595959,b,r=90]
+#+begin_tb
+GFLOPS
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=28
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g28}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- A visual model that shows the performance of an application or \\
+  its kernel with respect to the hardware limitations.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=190.9,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Shows potential benefits and priority of optimisations.
+#+end_tb
+#+attr_latex: :options [x=358.02,y=511.33,s=13.5,l=16.2,c=c595959,b]
+#+begin_tb
+Arithmetic Intensity (AI), [FLOP/Byte]
+#+end_tb
+#+attr_latex: :options [x=532.17,y=266.83,s=15.8,l=18.96]
+#+begin_tb
+Peak performance DP
+#+end_tb
+#+attr_latex: :options [x=562.13,y=242.67,s=15.8,l=18.96]
+#+begin_tb
+Peak performance SP
+#+end_tb
+#+attr_latex: :options [x=211.15,y=380.3,s=13.5,l=16.2,c=c595959,b,r=90]
+#+begin_tb
+GFLOPS
+#+end_tb
+
+* How to estimate FLOP counts?
+:PROPERTIES:
+:BEAMER_opt: pg=29
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g29}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Manual FLOP estimation
+#+end_tb
+#+attr_latex: :options [x=448.83,y=317.98,s=15.8,l=18.96]
+#+begin_tb
+Addition: 1 FLOP
+#+end_tb
+#+attr_latex: :options [x=448.83,y=347.28,s=15.8,l=18.96]
+#+begin_tb
+Multiplication: 1 FLOP
+#+end_tb
+#+attr_latex: :options [x=609.3,y=332.5,s=15.8,l=18.96]
+#+begin_tb
+*
+#+end_tb
+#+attr_latex: :options [x=623.2,y=332.5,s=15.8,l=18.96,b,i]
+#+begin_tb
+N
+#+end_tb
+#+attr_latex: :options [x=641.32,y=332.5,s=15.8,l=18.96]
+#+begin_tb
+=
+#+end_tb
+#+attr_latex: :options [x=653.1,y=332.5,s=15.8,l=18.96,c=cBC161F,f=math,fw=21.74]
+#+begin_tb
+𝟐𝑵
+#+end_tb
+#+attr_latex: :options [x=678.1,y=332.5,s=15.8,l=18.96,c=cBC161F,b]
+#+begin_tb
+FLOP
+#+end_tb
+
+* How to estimate FLOP counts?
+:PROPERTIES:
+:BEAMER_opt: pg=30
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g30}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Use knowledge of the algorithm complexity (if possible)
+#+end_tb
+#+attr_latex: :options [x=68.18,y=171.35,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- For instance@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=68.18,y=293.03,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- This approach often does not consider the total FLOP count of the \\
+  algorithm
+#+end_tb
+#+attr_latex: :options [x=103.2,y=201.4,s=15.8,l=18.96]
+#+begin_tb
+Generic dense matrix-matrix multiplication@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=407.02,y=201.4,s=15.8,l=18.96,f=math,fw=45.68]
+#+begin_tb
+≈𝑂𝑁
+#+end_tb
+#+attr_latex: :options [x=453.77,y=195.53,s=12,l=14.4,f=math,fw=6.96]
+#+begin_tb
+3
+#+end_tb
+#+attr_latex: :options [x=471.1,y=201.4,s=15.8,l=18.96]
+#+begin_tb
+FLOP
+#+end_tb
+#+attr_latex: :options [x=103.2,y=230.7,s=15.8,l=18.96]
+#+begin_tb
+FFT algorithm@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=204.88,y=230.7,s=15.8,l=18.96,f=math,fw=73.29]
+#+begin_tb
+≈𝑂𝑁𝑙𝑜𝑔
+#+end_tb
+#+attr_latex: :options [x=277.73,y=233.98,s=12,l=14.4,f=math,fw=6.95]
+#+begin_tb
+2
+#+end_tb
+#+attr_latex: :options [x=285.15,y=230.7,s=15.8,l=18.96,f=math,fw=25.32]
+#+begin_tb
+(𝑁)
+#+end_tb
+#+attr_latex: :options [x=320.48,y=230.7,s=15.8,l=18.96]
+#+begin_tb
+FLOP
+#+end_tb
+#+attr_latex: :options [x=786.75,y=381.25,s=15.8,l=18.96,c=cBC161F,f=math,fw=21.62]
+#+begin_tb
+𝟐𝑵
+#+end_tb
+#+attr_latex: :options [x=808.5,y=375.4,s=12,l=14.4,c=cBC161F,f=math,fw=7.18]
+#+begin_tb
+𝟑
+#+end_tb
+#+attr_latex: :options [x=819.43,y=381.25,s=15.8,l=18.96,c=cBC161F,b]
+#+begin_tb
+FLOP
+#+end_tb
+#+attr_latex: :options [x=82.18,y=201.4,s=15.8,l=18.96,c=c070809,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+#+attr_latex: :options [x=82.18,y=230.7,s=15.8,l=18.96,c=c070809,f=arial]
+#+begin_tb
+@@beamer:•@@
+#+end_tb
+
+* How to estimate FLOP counts?
+:PROPERTIES:
+:BEAMER_opt: pg=31
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g31}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Now take a large code base of complex implementation.
+#+end_tb
+
+* How to estimate FLOP counts?
+:PROPERTIES:
+:BEAMER_opt: pg=32
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g32}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Now take a large code base of complex implementation.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=171.35,s=18,l=21.6,b,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Use performance analysis tools!
+#+end_tb
+#+attr_latex: :options [x=202.2,y=209.45,s=9,l=10.8,c=cFFFFFF,f=arial,b]
+#+begin_tb
+Tool name
+#+end_tb
+#+attr_latex: :options [x=351.9,y=209.45,s=9,l=10.8,c=cFFFFFF,f=arial,b]
+#+begin_tb
+Costs
+#+end_tb
+#+attr_latex: :options [x=599.13,y=209.45,s=9,l=10.8,c=cFFFFFF,f=arial,b]
+#+begin_tb
+Description
+#+end_tb
+#+attr_latex: :options [x=203.95,y=225.92,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Linaro DDT
+#+end_tb
+#+attr_latex: :options [x=346.9,y=225.92,s=9,l=10.8,f=arial]
+#+begin_tb
+Non-free
+#+end_tb
+#+attr_latex: :options [x=542.1,y=225.92,s=9,l=10.8,f=arial]
+#+begin_tb
+Full featured graphical, parallel debugger
+#+end_tb
+#+attr_latex: :options [x=200.45,y=243.95,s=9,l=10.8,f=arial,b]
+#+begin_tb
+HPCToolkit
+#+end_tb
+#+attr_latex: :options [x=355.15,y=243.95,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=492.8,y=243.95,s=9,l=10.8,f=arial]
+#+begin_tb
+Integrated suite of tools for parallel program performance analysis
+#+end_tb
+#+attr_latex: :options [x=196.7,y=263.5,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Intel One API
+#+end_tb
+#+attr_latex: :options [x=306.13,y=263.5,s=9,l=10.8,f=arial]
+#+begin_tb
+Free, with conditions
+#+end_tb
+#+attr_latex: :options [x=461.78,y=263.5,s=9,l=10.8,f=arial]
+#+begin_tb
+Stack of different performance analysis and debugging tools (MPI/OpenMP/SIMD)
+#+end_tb
+#+attr_latex: :options [x=206.7,y=281.5,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Valgrind
+#+end_tb
+#+attr_latex: :options [x=355.15,y=281.5,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=563.85,y=281.5,s=9,l=10.8,f=arial]
+#+begin_tb
+Memory errors debugging tool
+#+end_tb
+#+attr_latex: :options [x=203.7,y=298,s=9,l=10.8,f=arial,b]
+#+begin_tb
+TotalView
+#+end_tb
+#+attr_latex: :options [x=346.9,y=298,s=9,l=10.8,f=arial]
+#+begin_tb
+Non-free
+#+end_tb
+#+attr_latex: :options [x=542.1,y=298,s=9,l=10.8,f=arial]
+#+begin_tb
+Full featured graphical, parallel debugger
+#+end_tb
+#+attr_latex: :options [x=209.45,y=316,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Vampir
+#+end_tb
+#+attr_latex: :options [x=346.9,y=316,s=9,l=10.8,f=arial]
+#+begin_tb
+Non-free
+#+end_tb
+#+attr_latex: :options [x=496.55,y=316,s=9,l=10.8,f=arial]
+#+begin_tb
+Full featured trace visualizer for parallel program OTF trace files
+#+end_tb
+#+attr_latex: :options [x=211.2,y=334.02,s=9,l=10.8,f=arial,b]
+#+begin_tb
+memP
+#+end_tb
+#+attr_latex: :options [x=355.15,y=334.02,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=558.1,y=334.02,s=9,l=10.8,f=arial]
+#+begin_tb
+Lightweight memory profiling tool
+#+end_tb
+#+attr_latex: :options [x=213.7,y=350.5,s=9,l=10.8,f=arial,b]
+#+begin_tb
+mpiP
+#+end_tb
+#+attr_latex: :options [x=355.15,y=350.5,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=566.35,y=350.5,s=9,l=10.8,f=arial]
+#+begin_tb
+Lightweight MPI profiling tool
+#+end_tb
+#+attr_latex: :options [x=214.2,y=368.53,s=9,l=10.8,f=arial,b]
+#+begin_tb
+PAPI
+#+end_tb
+#+attr_latex: :options [x=355.15,y=368.53,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=468.53,y=368.53,s=9,l=10.8,f=arial]
+#+begin_tb
+A standardized and portable API for accessing performance counter hardware
+#+end_tb
+#+attr_latex: :options [x=212.2,y=386.55,s=9,l=10.8,f=arial,b]
+#+begin_tb
+likwid
+#+end_tb
+#+attr_latex: :options [x=355.15,y=386.55,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=522.58,y=386.55,s=9,l=10.8,f=arial]
+#+begin_tb
+A *tool* to measure hardware performance counters
+#+end_tb
+#+attr_latex: :options [x=217.33,y=404.55,s=9,l=10.8,b]
+#+begin_tb
+Tau
+#+end_tb
+#+attr_latex: :options [x=355.15,y=404.55,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=506.55,y=404.55,s=9,l=10.8,f=arial]
+#+begin_tb
+Full featured parallel program performance analysis toolkit
+#+end_tb
+#+attr_latex: :options [x=210.95,y=422.58,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Extrae
+#+end_tb
+#+attr_latex: :options [x=355.15,y=422.58,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=581.88,y=422.58,s=9,l=10.8,f=arial]
+#+begin_tb
+MPI/OpenMP profiler
+#+end_tb
+#+attr_latex: :options [x=205.45,y=439.07,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Scalasca
+#+end_tb
+#+attr_latex: :options [x=355.15,y=439.07,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=536.45,y=439.07,s=9,l=10.8,f=arial]
+#+begin_tb
+MPI+OpenMP analysis with Score-P (Score-P/9.2-gompi-2025a)
+#+end_tb
+#+attr_latex: :options [x=206.7,y=455.55,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Darshan
+#+end_tb
+#+attr_latex: :options [x=355.15,y=455.55,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=604.13,y=455.55,s=9,l=10.8,f=arial]
+#+begin_tb
+IO profiler
+#+end_tb
+#+attr_latex: :options [x=210.7,y=472.02,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Nsight
+#+end_tb
+#+attr_latex: :options [x=355.15,y=472.02,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=545.85,y=472.02,s=9,l=10.8,f=arial]
+#+begin_tb
+GPU: nsys (Nsight-Systems/2025.4.1), ncu (CUDA/12.8.0)
+#+end_tb
+#+attr_latex: :options [x=203.2,y=488.52,s=9,l=10.8,f=arial,b]
+#+begin_tb
+Linaro MAP
+#+end_tb
+#+attr_latex: :options [x=346.9,y=488.52,s=9,l=10.8,f=arial]
+#+begin_tb
+Non-free
+#+end_tb
+#+attr_latex: :options [x=536.45,y=488.52,s=9,l=10.8,f=arial]
+#+begin_tb
+performance analysis tool for MPI+OpenMP
+#+end_tb
+#+attr_latex: :options [x=212.95,y=505,s=9,l=10.8,f=arial,b]
+#+begin_tb
+uProf
+#+end_tb
+#+attr_latex: :options [x=355.15,y=505,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=536.45,y=505,s=9,l=10.8,f=arial]
+#+begin_tb
+performance analysis tool for MPI+OpenMP
+#+end_tb
+#+attr_latex: :options [x=213.2,y=521.47,s=9,l=10.8,f=arial,b]
+#+begin_tb
+gprof
+#+end_tb
+#+attr_latex: :options [x=355.15,y=521.47,s=9,l=10.8,f=arial]
+#+begin_tb
+Free
+#+end_tb
+#+attr_latex: :options [x=557.1,y=521.47,s=9,l=10.8,f=arial]
+#+begin_tb
+Standard unix/linux profiling utility
+#+end_tb
+
+* How to estimate FLOP counts?
+:PROPERTIES:
+:BEAMER_opt: pg=33
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g33}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- AMD-uProf@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=120.47,y=190.42,s=15.8,l=18.78,c=cD9D9D9,f=cal,code]
+#+begin_tb
+@@beamer:\$@@ module purge \\
+@@beamer:\$@@ module load 2025 \\
+@@beamer:\$@@ module load AMD-uProf/5.1.701 \\
+@@beamer:{\fontsize{18}{21.6}\selectfont \$@@ AMDuProfPcm roofline -X -o res.csv -- <prog> <args>@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=122.32,y=356.85,s=15.8,l=18.77,c=cD9D9D9,f=cal,code]
+#+begin_tb
+[Profile Data] \\
+Application,./a.out \\
+Type,DRAM \\
+Name,./a.out \\
+Throughput,6.7257 \\
+Bandwidth,2.6767
+#+end_tb
+#+attr_latex: :options [x=691.03,y=350.25,s=15.8,l=18.96,c=cD9D9D9,b]
+#+begin_tb
+Output example
+#+end_tb
+#+attr_latex: :options [x=457.92,y=436.55,s=15.8,l=18.96,c=cD9D9D9,f=cal,code]
+#+begin_tb
+Bandwidth
+#+end_tb
+#+attr_latex: :options [x=413.6,y=425.83,s=15.8,l=18.96,c=cD9D9D9,f=math,fw=33.01]
+#+begin_tb
+𝐴𝐼=
+#+end_tb
+#+attr_latex: :options [x=454.8,y=413.7,s=15.8,l=18.96,c=cD9D9D9,f=cal,code]
+#+begin_tb
+Throughput
+#+end_tb
+
+* Roofline model
+:PROPERTIES:
+:BEAMER_opt: pg=34
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g34}
+
+* How to estimate energy footprint?
+:PROPERTIES:
+:BEAMER_opt: pg=35
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g35}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Add the following options to the job script and submit it@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=68.18,y=329.08,s=18,l=19.52,c=c0070C0,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textcolor{c000000}{@@Read more@@beamer::}@@ \\
+  [[https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/62226671/Energy+Aware+Runtime+EAR][_https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/62226671/Energy+Aware+Runtime+EAR_]]
+#+end_tb
+#+attr_latex: :options [x=120.4,y=198.45,s=15.8,l=19.53,c=cD9D9D9,f=cal,i,code]
+#+begin_tb
+@@beamer:@@#SBATCH --ear=on \\
+@@beamer:@@#SBATCH --ear-policy=monitoring
+#+end_tb
+#+attr_latex: :options [x=120.4,y=255.52,s=15.8,l=18.96,c=cD9D9D9,code]
+#+begin_tb
+export EARL_REPORT_LOOPS=1
+#+end_tb
+
+* How to estimate energy footprint?
+:PROPERTIES:
+:BEAMER_opt: pg=36
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g36}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- EAR@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=128.88,y=250.37,s=15.8,l=18.96,c=cD9D9D9,f=cal,code]
+#+begin_tb
+@@beamer:\$@@ eacct -j <job-id>
+#+end_tb
+#+attr_latex: :options [x=92.85,y=288.68,s=15.8,l=18.77,c=cD9D9D9,f=cal,p=0.78,code]
+#+begin_tb
+JOB-STEP AID
+
+GBS \\
+11041163-0 \\
+maximm \\
+0.00/---
+#+end_tb
+#+attr_latex: :options [x=137.28,y=288.68,s=15.8,l=18.77,c=cD9D9D9,f=cal,p=0.75,code]
+#+begin_tb
+USER
+
+CPI ENERGY(J)
+
+2747012
+
+job.sh
+
+---
+#+end_tb
+#+attr_latex: :options [x=203.83,y=288.68,s=15.8,l=19.53,c=cD9D9D9,f=cal,p=0.02,code]
+#+begin_tb
+APPLICATION
+
+GFLOPS/W IO(MBs) MPI% G-POW (T/U)
+
+MO
+
+---
+#+end_tb
+#+attr_latex: :options [x=315.25,y=288.68,s=15.8,l=19.55,c=cD9D9D9,f=cal,p=9.37,code]
+#+begin_tb
+POLICY NODES AVG/DEF/IMC(GHz) TIME(s)
+
+G-FREQ G-UTIL(G/MEM)
+
+2.52/2.60/1.47 56.64
+#+end_tb
+#+attr_latex: :options [x=580.32,y=288.68,s=15.8,l=57.84,c=cD9D9D9,f=cal,code]
+#+begin_tb
+POWER(W)
+
+0.44 14366
+#+end_tb
+#+attr_latex: :options [x=288.98,y=346.52,s=15.8,l=18.96,c=cD9D9D9,f=cal,code]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=481.88,y=346.52,s=15.8,l=18.96,c=cD9D9D9,f=cal,code]
+#+begin_tb
+253.62 1.83
+#+end_tb
+#+attr_latex: :options [x=685.65,y=346.52,s=15.8,l=18.96,c=cD9D9D9,f=cal,code]
+#+begin_tb
+0.0006 0.3
+#+end_tb
+#+attr_latex: :options [x=779.6,y=346.52,s=15.8,l=18.96,c=cD9D9D9,f=cal,code]
+#+begin_tb
+0.0
+#+end_tb
+
+* SLURM
+:PROPERTIES:
+:BEAMER_opt: pg=37,tx=71.15,ty=291.1,ts=66.07,tc=cFFFFFF
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g37}
+
+* SLURM
+:PROPERTIES:
+:BEAMER_opt: pg=38
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g38}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,b,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Nodes@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=82.18,y=169.85,s=15.8,l=18.96,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- *-N*, *@@beamer:-{}-@@nodes*: request a number of nodes for a job
+#+end_tb
+#+attr_latex: :options [x=68.18,y=200.65,s=18,l=21.6,b,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Tasks@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=82.18,y=230.7,s=15.8,l=17.27,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- *-n*, *@@beamer:-{}-@@ntasks*: sbatch does not launch tasks, it requests an allocation of \\
+  resources and submits a batch script. This option advises the Slurm controller \\
+  that job steps run within the allocation will launch a maximum of @@beamer:\textit{@@number@@beamer:}@@ tasks \\
+  and to provide for sufficient resources.
+#+end_tb
+#+attr_latex: :options [x=82.18,y=311.8,s=15.8,l=18.96,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- *@@beamer:-{}-@@ntasks-per-node* - request that @@beamer:\textit{@@ntasks@@beamer:}@@ be invoked on each node.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=343.35,s=18,l=21.6,b,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- CPUs
+#+end_tb
+#+attr_latex: :options [x=82.18,y=372.65,s=15.8,l=17.24,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- *-c*, *@@beamer:-{}-@@cpus-per-task* - Advise the Slurm controller that ensuing job steps will \\
+  require @@beamer:\textit{@@ncpus@@beamer:}@@ number of processors per task. Without this option, the controller \\
+  will just try to allocate one processor per task.
+#+end_tb
+
+* SLURM
+:PROPERTIES:
+:BEAMER_opt: pg=39
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g39}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,b,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Sockets
+#+end_tb
+#+attr_latex: :options [x=82.18,y=169.85,s=15.8,l=17.27,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- *@@beamer:-{}-@@sockets-per-node* - Restrict node selection to nodes with at least the \\
+  specified number of sockets
+#+end_tb
+#+attr_latex: :options [x=68.18,y=217.92,s=18,l=21.6,b,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- GPUs
+#+end_tb
+#+attr_latex: :options [x=82.18,y=247.98,s=15.8,l=17.27,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- *@@beamer:-{}-@@gpus-per-node* - Specify the number of GPUs required for the job on \\
+  each node included in the job's resource allocation.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=325.32,s=18,l=21.6,b,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Allocations
+#+end_tb
+#+attr_latex: :options [x=82.18,y=355.37,s=15.8,l=17.28,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- *@@beamer:-{}-@@contiguous* - If set, then the allocated nodes must form a contiguous \\
+  set
+#+end_tb
+#+attr_latex: :options [x=82.18,y=401.92,s=15.8,l=17.28,ind=21.02,bc=c070809,bf=arial]
+#+begin_tb
+- *@@beamer:-{}-@@exclusive* - The job allocation can not share nodes with other running \\
+  jobs
+#+end_tb
+
+* SLURM
+:PROPERTIES:
+:BEAMER_opt: pg=40
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g40}
+#+attr_latex: :options [x=68.18,y=139.83,s=18,l=21.6,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- *SLURM_JOB_NODELIST* - list of nodes allocated to the job.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=171.35,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- *SLURM_NTASKS* - set to value of the *@@beamer:-{}-@@ntasks* option, if specified. With \\
+  *@@beamer:-{}-@@ntasks-per-node* or *@@beamer:-{}-@@ntasks-per-gpu* instead, it is the \\
+  number of tasks in the job.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=241.95,s=18,l=19.53,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- *SLURM_CPUS_PER_TASK* - number of cpus requested per task. Set if \\
+  the *@@beamer:-{}-@@cpus-per-task* option is specified.
+#+end_tb
+#+attr_latex: :options [x=68.18,y=293.03,s=18,l=19.52,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- *SLURM_GPUS* - number of GPUs requested. Only set if the -G, @@beamer:-{}-@@ \\
+  *gpus* option is specified.
+#+end_tb
+
+* Abbreviations
+:PROPERTIES:
+:BEAMER_opt: pg=20
+:END:
+#+beamer: \slidegraphics{figures/performance-analysis/g20}
+#+attr_latex: :options [x=68.18,y=139.83,s=16,l=19.2,p=5,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- American Standard Code for Information \\
+  Interchange (ASCII)
+- Array of structures (AOS)
+- Computational fluid dynamics (CFD)
+- Distributed Debugging Tool (DDT)
+- Energy Aware Runtime (EAR)
+- Fast Fourier transform (FFT)
+- Floating-point operation (FLOP)
+- Linaro Forge profiler (MAP)
+#+end_tb
+#+attr_latex: :options [x=500,y=139.83,s=16,l=19.2,p=5,ind=22.52,bc=cEE7628,bf=arial]
+#+begin_tb
+- Message Passing Interface (MPI)
+- Non-Volatile Memory Express (NVME)
+- Open Trace Format (OTF)
+- Performance Application Programming Interface (PAPI)
+- Reduced instruction set computer (RISC)
+- Single instruction multiple data (SIMD)
+- Structure of arrays (SOA)
+- Visual Molecular Dynamics (VMD)
+#+end_tb

@@ -1,0 +1,25 @@
+% Fonts and title position for the performance analysis deck.
+% The PowerPoint deck uses Aptos, which is not free to share.
+% Roboto, narrowed to Aptos widths, stands in when Aptos is missing.
+% Calibri maps to Carlito, Arial to Liberation Sans, and Cambria Math to
+% Latin Modern Math.
+% Ligatures=TeX turns the ASCII quotes and dashes of the source into
+% typographic ones; the code listings use Carlito without them, so they
+% keep quotes and hyphens as typed.
+\IfFontExistsTF{Aptos}
+  {\newfontfamily\fapt{Aptos}[Ligatures=TeX]}
+  {\newfontfamily\fapt{Roboto}[Extension=.ttf, UprightFont=*-Regular,
+     BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic,
+     FakeStretch=0.966, Ligatures=TeX]}
+\newfontfamily\fcal{Carlito}[Ligatures=TeX]
+\newfontfamily\fcalc{Carlito}
+\newfontfamily\farial{Liberation Sans}[Ligatures=TeX]
+\newfontfamily\fmath{Latin Modern Math}
+\setmonofont{Liberation Mono}
+\def\pptxbase{apt}
+\def\pptxcode{calc}
+\def\pptxtitlef{apt}
+\def\pptxtitlex{68.18}
+\def\pptxtitley{84.75}
+\def\pptxtitles{33.8}
+\input{figures/performance-analysis/colors.tex}
