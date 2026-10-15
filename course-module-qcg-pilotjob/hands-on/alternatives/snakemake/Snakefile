@@ -1,0 +1,33 @@
+# Example 4 with Snakemake: one average per CSV file, then result.csv from all of them.
+# QCG_MAX_INPUTS (or MAX_INPUTS) limits the number of files (all of them by default).
+import glob
+import os
+
+MAX = int(os.environ.get("QCG_MAX_INPUTS") or os.environ.get("MAX_INPUTS", "0"))
+NAMES = sorted(os.path.basename(f)[:-len(".csv")] for f in glob.glob("input/*.csv"))
+NAMES = NAMES[:MAX] if MAX else NAMES
+
+
+rule all:
+    input:
+        "result.csv",
+
+
+rule average:
+    input:
+        "input/{name}.csv",
+    output:
+        "averages/{name}.csv",
+    shell:
+        "python3 ../../example_04/average.py {input} > {output}"
+
+
+# Snakemake starts this rule only when every file it needs exists: the dependency that
+# qcg_job_v0.py forgets is part of the rule itself.
+rule aggregate:
+    input:
+        expand("averages/{name}.csv", name=NAMES),
+    output:
+        "result.csv",
+    shell:
+        "cat {input} | sort > {output}"

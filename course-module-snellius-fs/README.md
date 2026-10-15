@@ -11,8 +11,11 @@ Last login: Wed Nov 8 18:33:29 2023
 On the login node, we will identify the different file systems:
 1. `/home`
 2. `/scratch-shared`
-3. `/project`
+3. `/projects`
 4. `/archive`
+
+> [!NOTE]
+> On an SRC cluster with EESSI 2025.06, the manager workspace shares `/home`, `/scratch` and `/project` with the compute nodes over NFS, and each job gets space on the node's own disk as `$TMPDIR`. The cluster has no `/scratch-shared`, `/scratch-node` or `/archive`, and no `myquota`; use `df -h` and `du -sh` instead. The job scripts run as they are: the cluster has a partition named `rome`, and `module load 2025` loads EESSI 2025.06.
 
 ## Home
 The home file system, often denoted as `/home`, is the storage space dedicated to individual user accounts on Snellius. It serves as a personal workspace where users can store their important files, configuration files, scripts, and other data. **Each user on Snellius has their own dedicated home directory** within the `/home` file system, which is found at `/home/<username>`. The home directory is usually private and can only be accessed by the user who owns it. Other users typically don't have access to your home directory. Although you can change its access permissions, you should be very restrictive in using this capability.
@@ -33,7 +36,7 @@ scur1448@home4|GiB:quota=200.00,limit=210.00,usage=0.0000%|Inodes:quota=1000000,
 
 The home directory is typically designed for **long-term storage of essential files** and data. It's not the ideal location for temporary or large files that you're actively working on. Files stored in the home directory are often **backed up regularly to prevent data loss** in case of hardware failures or accidental file deletion. SURF supplies a versioned **incremental backup service** for your home directory that is run overnight. Files that have been backed up are retained in the backup repository for **three weeks** after they have been deleted from the file system. We can restore files and/or directories when you accidentally remove them or overwrite them with the wrong contents.
 
-While the home file system is suitable for long-term storage, it's not optimized for high-performance I/O or large data processing tasks. For such operations, other file systems like `/scratch` or `/project` may be more suitable.
+While the home file system is suitable for long-term storage, it's not optimized for high-performance I/O or large data processing tasks. For such operations, other file systems like `/scratch` or `/projects` may be more suitable.
 
 ## Scratch
 The scratch file systems are intended as fast temporary storage that can be used while running a job and can be accessed by all users with a valid account on the system. A user's default scratch space capacity quota is 8 TiB, which is counted over all data usage of scratch-local and scratch-shared of the user. Again, you can check your quota and current usage with the `myquota` command.
@@ -90,6 +93,9 @@ Next, confirm that the file in the scratch-local system is absent.
 [scur1448@int5 ~]$ 
 ```
 
+> [!NOTE]
+> On an SRC cluster, `$TMPDIR` in a job is `/localscratch/$USER.$SLURM_JOB_ID.0` on the node's own disk, and the cluster deletes it when the job ends. The cluster has one login node, so compare the login node's `/tmp` with a job's `$TMPDIR` instead of comparing `int5` with `int6`.
+
 Next, use the script below to launch a job that lists the contents of `$TMPDIR`, creates a file, and prints the path and real path to `$TMPDIR`.
 
 ```
@@ -145,7 +151,10 @@ The scratch-node behavior is technically similar to scratch-local. For each assi
 
 Please be aware that when requesting a shared node, you will only receive a portion of the local NVMe disk, such as 25%, 50%, or 75%, depending on the requested job resources.
 
-Scratch-node is available on a subset of Snellius nodes. To secure a node with the scratch-node file system, you may use the `--constraint=scratch-node` flag in your job configuration.
+Scratch-node is available on all fat nodes and on a subset of thin and GPU nodes. To secure a node with the scratch-node file system, you may use the `--constraint=scratch-node` flag in your job configuration.
+
+> [!NOTE]
+> Scratch-node and `--constraint=scratch-node` exist only on Snellius. On an SRC cluster, `$TMPDIR` already sits on the node's own disk, so drop the constraint and write to `$TMPDIR` in the exercise.
 
 #### Exercise
 Modify the script above to launch a job that creates a file on scratch-node and displays the file's real path.
@@ -163,6 +172,9 @@ realpath "$TMPDIR/testfile-scratch-node.foo"
 ```
 
 #### Advanced exercise: Creating large file sets and evaluating transfers
+
+> On an SRC cluster, `/home` and `/scratch` share one disk on the manager, often a few tens of GB for the whole class, and there are no per-user quotas. Run this exercise with 100 files instead of 1000 (`{1..100}`), use a job's `$TMPDIR` as the second file system instead of scratch, and do the clean-up at the end. The same goes for `ex1/run.sh`: it writes up to 10^9 numbers (more than 7 GB) to `$HOME`; on an SRC cluster set `wdir=$TMPDIR` and `iend=9` before you submit it.
+
 
 ##### Objective
 - Learn how to generate large numbers of files with random data.
