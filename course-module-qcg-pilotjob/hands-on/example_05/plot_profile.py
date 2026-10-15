@@ -5,8 +5,9 @@ import matplotlib
 Create a profile plot based on the Slurm outputfile of example_05
 Usage
 
-module load 2024
-module load SciPy-bundle/2024.05-gfbf-2024a
+module load 2025
+module load SciPy-bundle/2025.06-gfbf-2025a
+module load matplotlib/3.10.3-gfbf-2025a
 
 python plot_profile.py <<<slurm_output_file>>>
 """

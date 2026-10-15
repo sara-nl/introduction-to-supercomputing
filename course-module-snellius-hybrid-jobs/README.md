@@ -84,8 +84,8 @@ First, **create a Slurm script** named `load_modules.sh` with the following cont
 #SBATCH -t 01:00:00             # Time limit
 
 # Load the necessary modules
-module load 2023                # Load the general 2023 module
-module load foss/2023a          # Load the foss compiler module
+module load 2025                # Load the general 2025 module
+module load foss/2025a          # Load the foss compiler module
 
 # Verify the loaded modules by checking the version of the compiler
 echo "Loaded modules:"

@@ -23,7 +23,6 @@ for jname in job_names:
                   args=["average.py", os.path.join("input", jname)],
                   stdout='average_{}'.format(jname),
                   stderr='job.{}.err'.format(jname),
-                  modules=["2024", "Python/3.12.3-GCCcore-13.3.0"],
                   iteration=1
                  )
 
