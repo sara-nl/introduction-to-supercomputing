@@ -97,9 +97,9 @@ The method above is very verbose. Instead, let’s record a few key ones in the 
 [<username>@int6 ~]$ echo "Home directory: $HOME" >> <username>.dat
 [<username>@int6 ~]$ echo "Login node: $HOSTNAME" >> <username>.dat
 [<username>@int6 ~]$ cat <username>.dat
-Username: <username>.dat
-Current directory: /home/<username>/
-Home directory: /home/<username>/
+Username: <username>
+Current directory: /home/<username>
+Home directory: /home/<username>
 Login node: int6.local.snellius.surf.nl
 ```
 
@@ -128,7 +128,7 @@ On Snellius, accounting information is collected and exposed through dedicated c
 Finally, use the following commands to collect details about your quota and compute budgets, and include them to your log file:
 
 ```
-[<username>@int6 ~]$ last -n -R 1 $USER
+[<username>@int6 ~]$ last -n 1 -R $USER
 <username>  pts/5        Tue Oct 28 20:12   still logged in
 [<username>@int6 ~]$ myquota
 <username>@home6
@@ -140,3 +140,108 @@ Finally, use the following commands to collect details about your quota and comp
 ```
 
 Now you have a single file summarising your system and user environment on Snellius — a simple but practical way to document what’s running under the hood.
+
+---
+
+## 2. Compiling and submitting a job
+
+**Objective:** Compile a small OpenMP program on the login node, run it on a compute node through Slurm, and check what the job used.
+
+### 2.1. Compiling a parallel program
+
+Create a directory and a C file that prints one line per OpenMP thread:
+
+```bash
+mkdir -p $HOME/hello
+cd $HOME/hello
+cat > hello.c << 'END'
+#include <stdio.h>
+#include <omp.h>
+
+int main(void)
+{
+    #pragma omp parallel
+    printf("Hello from thread %d of %d\n", omp_get_thread_num(), omp_get_num_threads());
+    return 0;
+}
+END
+```
+
+Load the 2025 software stack and its GCC compiler, then compile with OpenMP enabled:
+
+```bash
+module load 2025
+module load GCC/14.2.0
+gcc -O2 -fopenmp hello.c -o hello
+```
+
+Compiling on the login node is fine. Running the program with many threads is not: that is what the compute nodes are for.
+
+### 2.2. Submitting the job
+
+Save the following job script as `hello.sh` in the same directory. It asks for 16 cores on one `rome` node, the smallest allocation on that partition, and runs one thread per core:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=hello
+#SBATCH --partition=rome
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=00:05:00
+#SBATCH --output=hello-%j.out
+
+module purge
+module load 2025
+module load GCC/14.2.0
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+./hello
+```
+
+Submit it and note the job ID that `sbatch` prints:
+
+```bash
+sbatch hello.sh
+```
+
+### 2.3. Monitoring the job
+
+While the job waits or runs, `squeue` lists it. The `ST` column shows `PD` for pending and `R` for running:
+
+```bash
+squeue -u $USER
+```
+
+When the job has left the queue, read its output. It has 16 lines, in a different order on every run:
+
+```bash
+cat hello-<jobid>.out
+```
+
+`sacct` reports the state and run time of a finished job, and `seff` how much of the requested CPU time and memory it used:
+
+```bash
+sacct -j <jobid> --format=JobID,JobName,Partition,AllocCPUS,State,Elapsed
+seff <jobid>
+```
+
+A job that used a small share of the CPU time it asked for wastes budget. Ask for fewer cores next time, or check that the program uses all of them.
+
+### 2.4. A first GPU job
+
+GPU nodes have their own partitions, and a job has to ask for GPUs explicitly. Save this as `gpu.sh`:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=gpu-hello
+#SBATCH --partition=gpu_a100
+#SBATCH --nodes=1
+#SBATCH --gpus-per-node=1
+#SBATCH --time=00:05:00
+#SBATCH --output=gpu-hello-%j.out
+
+nvidia-smi
+```
+
+Submit it with `sbatch gpu.sh`. The output lists the one A100 GPU the job received. A GPU hour costs more budget than a CPU core hour, so keep GPU test jobs short.

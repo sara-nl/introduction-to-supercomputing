@@ -11,7 +11,7 @@ Last login: Wed Nov 8 18:33:29 2023
 On the login node, we will identify the different file systems:
 1. `/home`
 2. `/scratch-shared`
-3. `/project`
+3. `/projects`
 4. `/archive`
 
 ## Home
@@ -33,7 +33,7 @@ scur1448@home4|GiB:quota=200.00,limit=210.00,usage=0.0000%|Inodes:quota=1000000,
 
 The home directory is typically designed for **long-term storage of essential files** and data. It's not the ideal location for temporary or large files that you're actively working on. Files stored in the home directory are often **backed up regularly to prevent data loss** in case of hardware failures or accidental file deletion. SURF supplies a versioned **incremental backup service** for your home directory that is run overnight. Files that have been backed up are retained in the backup repository for **three weeks** after they have been deleted from the file system. We can restore files and/or directories when you accidentally remove them or overwrite them with the wrong contents.
 
-While the home file system is suitable for long-term storage, it's not optimized for high-performance I/O or large data processing tasks. For such operations, other file systems like `/scratch` or `/project` may be more suitable.
+While the home file system is suitable for long-term storage, it's not optimized for high-performance I/O or large data processing tasks. For such operations, other file systems like `/scratch` or `/projects` may be more suitable.
 
 ## Scratch
 The scratch file systems are intended as fast temporary storage that can be used while running a job and can be accessed by all users with a valid account on the system. A user's default scratch space capacity quota is 8 TiB, which is counted over all data usage of scratch-local and scratch-shared of the user. Again, you can check your quota and current usage with the `myquota` command.
@@ -96,7 +96,7 @@ Next, use the script below to launch a job that lists the contents of `$TMPDIR`,
 #!/bin/bash
 #SBATCH -J files
 #SBATCH -t 5
-#SBATCH -p thin_course
+#SBATCH -p rome
 
 hostname
 ls -l $TMPDIR
@@ -145,7 +145,7 @@ The scratch-node behavior is technically similar to scratch-local. For each assi
 
 Please be aware that when requesting a shared node, you will only receive a portion of the local NVMe disk, such as 25%, 50%, or 75%, depending on the requested job resources.
 
-Scratch-node is available on a subset of Snellius nodes. To secure a node with the scratch-node file system, you may use the `--constraint=scratch-node` flag in your job configuration.
+Scratch-node is available on all fat nodes and on a subset of the `rome`, `genoa` and GPU nodes. To secure a node with the scratch-node file system, you may use the `--constraint=scratch-node` flag in your job configuration.
 
 #### Exercise
 Modify the script above to launch a job that creates a file on scratch-node and displays the file's real path.
@@ -154,7 +154,7 @@ Modify the script above to launch a job that creates a file on scratch-node and 
 #!/bin/bash
 #SBATCH -J scratch-node-test
 #SBATCH -t 5
-#SBATCH -p thin_course
+#SBATCH -p rome
 #SBATCH --constraint=scratch-node
 
 touch "$TMPDIR/testfile-scratch-node.foo"
