@@ -37,6 +37,9 @@ Snellius features a range of node types:
 
 The front-end nodes of the cluster are accessed via `snellius.surf.nl`, and all job submissions and resource management are handled through Slurm. For additional details on the system, you can refer to the [SURF User Knowledge Base](https://servicedesk.surf.nl/wiki/display/WIKI/Snellius) or explore the [Snellius virtual tour](https://visualization.surf.nl/snellius-virtual-tour/) for a more interactive overview.
 
+> [!NOTE]
+> On an SRC cluster, the compute nodes are three cloud workspaces with a few cores each (`sinfo -o '%n %c %m'`), connected by Ethernet instead of InfiniBand. `module load 2025` and `module load foss/2025a` work as on Snellius. Options given to `sbatch` override the `#SBATCH` lines, so shrink a job on the command line instead of editing the script, for example `sbatch --nodes=3 --ntasks=6 submit-dot-hybrid.sh 30000000`. In the tables, drop the columns with 128 or 256 tasks, and leave out the two largest vector sizes, which need more memory than a workspace has. Expect weaker scaling across nodes than on Snellius.
+
 ### Connecting to Snellius
 
 Since this module is part of the third section in the *Introduction to Supercomputing* course series, we assume that participants already have established connections to Snellius and are familiar with the system, including moving data and interacting with the filesystem. 
@@ -84,8 +87,8 @@ First, **create a Slurm script** named `load_modules.sh` with the following cont
 #SBATCH -t 01:00:00             # Time limit
 
 # Load the necessary modules
-module load 2023                # Load the general 2023 module
-module load foss/2023a          # Load the foss compiler module
+module load 2025                # Load the general 2025 module
+module load foss/2025a          # Load the foss compiler module
 
 # Verify the loaded modules by checking the version of the compiler
 echo "Loaded modules:"

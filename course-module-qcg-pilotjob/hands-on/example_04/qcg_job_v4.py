@@ -10,6 +10,11 @@ for filename in glob(os.path.join("input/*.csv"), recursive = False):
     # determine the job name and append it to the list
     job_names.append(os.path.basename(filename))
 
+# QCG_MAX_INPUTS limits the run to that many input files, e.g. on a small cluster
+max_inputs = int(os.environ.get("QCG_MAX_INPUTS", "0"))
+if max_inputs:
+    job_names = sorted(job_names)[:max_inputs]
+
 # create the QCG manager and the Jobs object
 manager = LocalManager()
 jobs = Jobs()
@@ -23,7 +28,6 @@ for jname in job_names:
              args=["average.py", os.path.join("input", jname)],
              stdout='average_{}'.format(jname),
              stderr='job.{}.err'.format(jname),
-             modules=["2024", "Python/3.12.3-GCCcore-13.3.0"],
              iteration=1
             )
 

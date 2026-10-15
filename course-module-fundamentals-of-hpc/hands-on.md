@@ -31,6 +31,9 @@ To access Snellius, connect via SSH ([troubleshooting guide](https://servicedesk
 $ ssh <username>@snellius.surf.nl
 ```
 
+> [!NOTE]
+> On an SRC cluster, log in to the manager workspace with the address your trainer gives you, using the password or SSH key that you set with your enrolment link. The prompt shows the manager's hostname instead of `int6`. `myquota` and `accinfo` exist only on Snellius: use `df -h /home /scratch` for question 6, and skip question 7, because SRC charges the collaboration's wallet instead of a compute budget.
+
 When you log in, you are placed on a login node (for example int4 or int6), and **interact with the system through a shell**. The shell interprets your **commands**, executes **programs**, and provides access to your **environment** variables: named values that configure your session.
 
 ### 1.2. Creating your first file

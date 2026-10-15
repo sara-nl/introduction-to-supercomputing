@@ -5,8 +5,8 @@
 #SBATCH -t 10
 #SBATCH --array 0-999%10
 
-module load 2024
-module load Python/3.12.3-GCCcore-13.3.0
+module load 2025
+module load Python/3.13.1-GCCcore-14.2.0
 
 # copy input data and scripts to working directory
 cp -r $SLURM_SUBMIT_DIR/input_mod $TMPDIR/
