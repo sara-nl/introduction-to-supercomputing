@@ -1,0 +1,21 @@
+% Fonts and title position for the fundamentals deck.
+% The 2026 PowerPoint deck uses Aptos, which is not free to share.
+% Roboto, narrowed to Aptos widths, stands in when Aptos is missing.
+\IfFontExistsTF{Aptos}
+  {\newfontfamily\fapt{Aptos}[Ligatures=TeX]}
+  {\newfontfamily\fapt{Roboto}[Extension=.ttf, UprightFont=*-Regular,
+     BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic,
+     FakeStretch=0.966, Ligatures=TeX]}
+% Ligatures=TeX turns the ASCII quotes and dashes of the source into
+% typographic ones; the monospaced font keeps them as typed.
+\newfontfamily\fcg{TeX Gyre Adventor}[Ligatures=TeX]
+\newfontfamily\fcal{Carlito}[Ligatures=TeX]
+\newfontfamily\farial{Liberation Sans}[Ligatures=TeX]
+\newfontfamily\fmono{Liberation Mono}
+\setmonofont{Liberation Mono}
+\def\pptxbase{apt}
+\def\pptxtitlef{apt}
+\def\pptxtitlex{68.12}
+\def\pptxtitley{84.48}
+\def\pptxtitles{34}
+\input{figures/fundamentals-of-hpc/colors.tex}

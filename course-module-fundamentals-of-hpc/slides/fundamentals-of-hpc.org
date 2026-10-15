@@ -1,0 +1,3024 @@
+#+TITLE: Fundamentals of high-performance computing
+#+OPTIONS: H:1 ':t toc:nil num:nil title:nil ^:nil author:nil date:nil
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [t]
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: \input{pptx-style.tex}
+#+LATEX_HEADER: \input{fundamentals-of-hpc-style.tex}
+
+# One heading per slide.  Text boxes sit at the position, size and colour
+# of the matching text in the March 2026 PowerPoint deck; figures/*/gNN.tex
+# draws the shapes and pictures of slide NN.  Build with make.
+
+* Fundamentals of high-performance computing
+:PROPERTIES:
+:BEAMER_opt: pg=1,tx=56.82,ty=98.03,ts=36,tw=320.44,tl=38.88
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g01}
+#+attr_latex: :options [x=56.61,y=225.89,s=18,l=21.6]
+#+begin_tb
+General online course
+#+end_tb
+#+attr_latex: :options [x=56.61,y=246.84,s=12,l=14.4]
+#+begin_tb
+6 March, 2026
+#+end_tb
+
+* Agenda
+:PROPERTIES:
+:BEAMER_opt: pg=2
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g02}
+#+attr_latex: :options [x=83.54,y=234.02,s=22,l=28.33,c=cFFFFFF]
+#+begin_tb
+@@beamer:{\fontsize{60}{72}\selectfont \textbf{@@01@@beamer:}}@@ \\
+HPC basics
+#+end_tb
+#+attr_latex: :options [x=372.78,y=234.02,s=22,l=28.33,c=cFFFFFF]
+#+begin_tb
+@@beamer:{\fontsize{60}{72}\selectfont \textbf{@@02@@beamer:}}@@ \\
+SURF facilities
+#+end_tb
+#+attr_latex: :options [x=662.02,y=234.02,s=22,l=28.33,c=cFFFFFF]
+#+begin_tb
+@@beamer:{\fontsize{60}{72}\selectfont \textbf{@@03@@beamer:}}@@ \\
+Job submission
+#+end_tb
+#+attr_latex: :options [x=83.54,y=408.35,s=22,l=28.33,c=cFFFFFF]
+#+begin_tb
+@@beamer:{\fontsize{60}{72}\selectfont \textbf{@@04@@beamer:}}@@ \\
+Environment modules
+#+end_tb
+#+attr_latex: :options [x=372.78,y=408.35,s=22,l=28.33,c=cFFFFFF]
+#+begin_tb
+@@beamer:{\fontsize{60}{72}\selectfont \textbf{@@05@@beamer:}}@@ \\
+Hands-on session
+#+end_tb
+
+* HPC basics
+:PROPERTIES:
+:BEAMER_opt: pg=3,tx=71.1,ty=290.96,ts=66,tc=cFFFFFF
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g03}
+
+* Science and HPC
+:PROPERTIES:
+:BEAMER_opt: pg=4
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g04}
+#+attr_latex: :options [x=112.76,y=258.63,s=14,l=16.8,c=cFFFFFF,b]
+#+begin_tb
+Astrophysics
+#+end_tb
+#+attr_latex: :options [x=147.91,y=434.42,s=14,l=16.8,c=cFFFFFF,b]
+#+begin_tb
+AI
+#+end_tb
+#+attr_latex: :options [x=437.86,y=258.63,s=14,l=16.8,c=cFFFFFF,b]
+#+begin_tb
+CFD
+#+end_tb
+#+attr_latex: :options [x=426.22,y=434.42,s=14,l=16.8,c=cFFFFFF,b]
+#+begin_tb
+Climate
+#+end_tb
+#+attr_latex: :options [x=715.58,y=258.63,s=14,l=16.8,c=cFFFFFF,b]
+#+begin_tb
+Chemistry
+#+end_tb
+#+attr_latex: :options [x=696.02,y=434.42,s=14,l=16.8,c=cFFFFFF,b]
+#+begin_tb
+Human behavior
+#+end_tb
+#+attr_latex: :options [x=288.04,y=261.11,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://cerncourier.com/a/hpc-computing-collaboration-kicks-off/][_source_]]
+#+end_tb
+#+attr_latex: :options [x=585.49,y=261.11,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://www.3ds.com/products/simulia/computational-fluid-dynamics-simulation][_source_]]
+#+end_tb
+#+attr_latex: :options [x=882.95,y=261.11,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://medium.com/@info_89535/applications-of-fullerene-in-medicine-20942944e41d][_source_]]
+#+end_tb
+#+attr_latex: :options [x=585.49,y=437.39,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://www.feedstuffs.com/commentary/weather-update-january-3-2025][_source_]]
+#+end_tb
+#+attr_latex: :options [x=288.04,y=437.39,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://www.pymnts.com/cpi-posts/dutch-government-embraces-europes-ai-act-allocates-e204-5-million-for-local-investment/][_source_]]
+#+end_tb
+#+attr_latex: :options [x=882.22,y=437.39,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://www.smartcitiesworld.net/news/siemens-unveils-connected-vehicle-app-3194][_source_]]
+#+end_tb
+
+* High-performance computing is
+:PROPERTIES:
+:BEAMER_opt: pg=5
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g05}
+#+attr_latex: :options [x=684.39,y=449.28,s=11,l=13.2,c=cFFFFFF]
+#+begin_tb
+Snellius Supercomputer
+#+end_tb
+#+attr_latex: :options [x=56.69,y=140.02,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- an area of computer-based *computation*. It includes all computing work \\
+  that requires a high computing capacity or storage capacity.
+#+end_tb
+#+attr_latex: :options [x=56.69,y=190.89,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- the use of *parallel* processing for running advanced application programs \\
+  efficiently, reliably and fast.
+#+end_tb
+#+attr_latex: :options [x=56.69,y=241.77,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- the practice of aggregating computing power to solve *large* problems \\
+  in science, engineering, or business, at much higher performance \\
+  than a typical desktop computer or workstation.
+#+end_tb
+#+attr_latex: :options [x=56.69,y=331.53,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- the use of super computers and parallel processing techniques for \\
+  solving *complex* computational problems.
+#+end_tb
+
+* A computer is
+:PROPERTIES:
+:BEAMER_opt: pg=6
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g06}
+#+attr_latex: :options [x=68.12,y=140.02,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- a machine that processes data by \\
+  executing instructions to perform \\
+  calculations, automate tasks, and \\
+  *solve complex problems* efficiently.
+#+end_tb
+#+attr_latex: :options [x=68.12,y=229.77,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- an *electronic system*. Its CPU \\
+  (control unit and ALU) processes \\
+  data, moves it over buses to memory \\
+  (RAM, cache, storage), and talks \\
+  to peripherals.
+#+end_tb
+#+attr_latex: :options [x=72.08,y=389.94,s=16,l=17.28,c=cFFFFFF]
+#+begin_tb
+A computer is *a programmable electronic system that processes data through hardware and software.* Hardware, \\
+including the *CPU (control unit and ALU), memory, buses, and peripherals*, handles computation, data transfer, and \\
+interaction. Software, such as the *operating system and applications*, directs hardware operations for automation, \\
+problem-solving, and data processing.
+#+end_tb
+#+attr_latex: :options [x=670.68,y=352.03,s=18,l=21.6,b,i]
+#+begin_tb
+And Boolean logic, zeros and ones!
+#+end_tb
+
+* A computer is
+:PROPERTIES:
+:BEAMER_opt: pg=7
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g07}
+#+attr_latex: :options [x=130.92,y=234.5,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://www.computerhope.com/jargon/s/sandybri.htm][_source_]]
+#+end_tb
+#+attr_latex: :options [x=470.44,y=473.59,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://bit-tech.net/reviews/tech/cpus/intel-sandy-bridge-review/1/][_source_]]
+#+end_tb
+#+attr_latex: :options [x=893.61,y=330.36,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://commons.wikimedia.org/wiki/File:8_bytes_vs._8Gbytes.jpg][_source_]]
+#+end_tb
+#+attr_latex: :options [x=893.51,y=505.91,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://www.reddit.com/r/MechanicalKeyboards/comments/uu7p0b/many_keyboards/][_source_]]
+#+end_tb
+#+attr_latex: :options [x=687.42,y=505.91,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://www.freepik.com/premium-ai-image/rear-view-hacker-dark-room-with-computers-monitors-computer-monitors-room-with-many-screens-monitors-wall-ai-generated_77786144.htm][_source_]]
+#+end_tb
+#+attr_latex: :options [x=893.61,y=168.18,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://commons.wikimedia.org/wiki/File:8_bytes_vs._8Gbytes.jpg][_source_]]
+#+end_tb
+
+* A larger computer could be
+:PROPERTIES:
+:BEAMER_opt: pg=8
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g08}
+
+* A larger computer actually is
+:PROPERTIES:
+:BEAMER_opt: pg=9
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g09}
+
+* High-performance computing is
+:PROPERTIES:
+:BEAMER_opt: pg=10
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g10}
+#+attr_latex: :options [x=684.39,y=449.28,s=11,l=13.2,c=cFFFFFF]
+#+begin_tb
+Snellius Supercomputer
+#+end_tb
+#+attr_latex: :options [x=56.69,y=140.02,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- an area of computer-based *computation*. It includes all computing work \\
+  that requires a high computing capacity or storage capacity.
+#+end_tb
+#+attr_latex: :options [x=56.69,y=190.89,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- the use of *parallel* processing for running advanced application programs \\
+  efficiently, reliably and fast.
+#+end_tb
+#+attr_latex: :options [x=56.69,y=241.77,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- the practice of aggregating computing power to solve *large* problems \\
+  in science, engineering, or business, at much higher performance \\
+  than a typical desktop computer or workstation.
+#+end_tb
+#+attr_latex: :options [x=56.69,y=331.53,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- the use of super computers and parallel processing techniques for \\
+  solving *complex* computational problems.
+#+end_tb
+#+attr_latex: :options [x=72.86,y=386.31,s=16,l=19.2,c=cFFFFFF,b]
+#+begin_tb
+High-Performance Computing (HPC) @@beamer:\textmd{@@aggregates computing power and employs@@beamer:}@@ \\
+parallel processing @@beamer:\textmd{@@to solve complex problems in@@beamer:}@@ science, engineering, and \\
+business@@beamer:\textmd{@@. It enables@@beamer:}@@ advanced simulations, large-scale data analysis, and \\
+high-speed computations @@beamer:\textmd{@@beyond the capabilities of standard desktops or@@beamer:}@@ \\
+@@beamer:\textmd{@@workstations.@@beamer:}@@
+#+end_tb
+
+* SURF facilities
+:PROPERTIES:
+:BEAMER_opt: pg=11,tx=71.1,ty=290.96,ts=66,tc=cFFFFFF
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g11}
+
+* SURF location in Amsterdam
+:PROPERTIES:
+:BEAMER_opt: pg=12
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g12}
+#+attr_latex: :options [x=741.26,y=445.57,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://museumtijdschrift.nl/artspot/science-park-amsterdam-2/][_source_]]
+#+end_tb
+#+attr_latex: :options [x=663.4,y=295.43,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+Data Center
+#+end_tb
+#+attr_latex: :options [x=522.34,y=360.89,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+SURF
+#+end_tb
+#+attr_latex: :options [x=426.2,y=389.76,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+NLeSC
+#+end_tb
+#+attr_latex: :options [x=352.35,y=166.82,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+UvA
+#+end_tb
+
+* Dutch national
+:PROPERTIES:
+:BEAMER_opt: pg=13
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g13}
+#+attr_latex: :options [x=68.12,y=121.19,s=34,l=40.8,b]
+#+begin_tb
+supercomputers
+#+end_tb
+#+attr_latex: :options [x=417.58,y=40.84,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Year
+#+end_tb
+#+attr_latex: :options [x=474.39,y=40.84,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Name
+#+end_tb
+#+attr_latex: :options [x=593.31,y=40.84,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Machine
+#+end_tb
+#+attr_latex: :options [x=724.54,y=40.84,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+R@@beamer:{\fontsize{8}{9.6}\selectfont @@p@@beamer:}@@ (Gflop/s)
+#+end_tb
+#+attr_latex: :options [x=818.74,y=40.84,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+kW
+#+end_tb
+#+attr_latex: :options [x=860.02,y=40.84,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Gflop/s/kW
+#+end_tb
+#+attr_latex: :options [x=416.86,y=62.44,s=12,l=14.4]
+#+begin_tb
+1984
+#+end_tb
+#+attr_latex: :options [x=533.98,y=62.44,s=12,l=14.4]
+#+begin_tb
+CDC Cyber 205-611 1-pipe
+#+end_tb
+#+attr_latex: :options [x=763.42,y=62.44,s=12,l=14.4]
+#+begin_tb
+0.10
+#+end_tb
+#+attr_latex: :options [x=817.3,y=62.44,s=12,l=14.4]
+#+begin_tb
+250
+#+end_tb
+#+attr_latex: :options [x=887.5,y=62.44,s=12,l=14.4]
+#+begin_tb
+0.0004
+#+end_tb
+#+attr_latex: :options [x=416.86,y=84.04,s=12,l=14.4]
+#+begin_tb
+1988
+#+end_tb
+#+attr_latex: :options [x=533.98,y=84.04,s=12,l=14.4]
+#+begin_tb
+CDC Cyber 205-642 2-pipe
+#+end_tb
+#+attr_latex: :options [x=763.42,y=84.04,s=12,l=14.4]
+#+begin_tb
+0.20
+#+end_tb
+#+attr_latex: :options [x=817.3,y=84.04,s=12,l=14.4]
+#+begin_tb
+250
+#+end_tb
+#+attr_latex: :options [x=887.5,y=84.04,s=12,l=14.4]
+#+begin_tb
+0.0008
+#+end_tb
+#+attr_latex: :options [x=416.86,y=105.64,s=12,l=14.4]
+#+begin_tb
+1990
+#+end_tb
+#+attr_latex: :options [x=533.98,y=105.64,s=12,l=14.4]
+#+begin_tb
+IBM ES 9000-720
+#+end_tb
+#+attr_latex: :options [x=763.42,y=105.64,s=12,l=14.4]
+#+begin_tb
+0.83
+#+end_tb
+#+attr_latex: :options [x=817.3,y=105.64,s=12,l=14.4]
+#+begin_tb
+100
+#+end_tb
+#+attr_latex: :options [x=887.5,y=105.64,s=12,l=14.4]
+#+begin_tb
+0.0083
+#+end_tb
+#+attr_latex: :options [x=416.86,y=127.24,s=12,l=14.4]
+#+begin_tb
+1990
+#+end_tb
+#+attr_latex: :options [x=533.98,y=127.24,s=12,l=14.4]
+#+begin_tb
+Cray Y-MP4/464
+#+end_tb
+#+attr_latex: :options [x=763.42,y=127.24,s=12,l=14.4]
+#+begin_tb
+1.33
+#+end_tb
+#+attr_latex: :options [x=817.3,y=127.24,s=12,l=14.4]
+#+begin_tb
+200
+#+end_tb
+#+attr_latex: :options [x=887.5,y=127.24,s=12,l=14.4]
+#+begin_tb
+0.0067
+#+end_tb
+#+attr_latex: :options [x=416.86,y=148.84,s=12,l=14.4]
+#+begin_tb
+1993
+#+end_tb
+#+attr_latex: :options [x=533.98,y=148.84,s=12,l=14.4]
+#+begin_tb
+Parsytec GCel 3/512
+#+end_tb
+#+attr_latex: :options [x=763.42,y=148.84,s=12,l=14.4]
+#+begin_tb
+0.80
+#+end_tb
+#+attr_latex: :options [x=817.3,y=148.84,s=12,l=14.4]
+#+begin_tb
+100
+#+end_tb
+#+attr_latex: :options [x=887.5,y=148.84,s=12,l=14.4]
+#+begin_tb
+0.0080
+#+end_tb
+#+attr_latex: :options [x=416.86,y=170.44,s=12,l=14.4]
+#+begin_tb
+1994
+#+end_tb
+#+attr_latex: :options [x=461.98,y=170.44,s=12,l=14.4,b]
+#+begin_tb
+Elsa
+#+end_tb
+#+attr_latex: :options [x=533.98,y=170.44,s=12,l=14.4]
+#+begin_tb
+Cray Y-MP C98/4256
+#+end_tb
+#+attr_latex: :options [x=779.62,y=170.44,s=12,l=14.4]
+#+begin_tb
+4
+#+end_tb
+#+attr_latex: :options [x=817.3,y=170.44,s=12,l=14.4]
+#+begin_tb
+300
+#+end_tb
+#+attr_latex: :options [x=887.5,y=170.44,s=12,l=14.4]
+#+begin_tb
+0.0133
+#+end_tb
+#+attr_latex: :options [x=416.86,y=192.04,s=12,l=14.4]
+#+begin_tb
+1995
+#+end_tb
+#+attr_latex: :options [x=533.98,y=192.04,s=12,l=14.4]
+#+begin_tb
+IBM SP2/76
+#+end_tb
+#+attr_latex: :options [x=773.26,y=192.04,s=12,l=14.4]
+#+begin_tb
+20
+#+end_tb
+#+attr_latex: :options [x=817.3,y=192.04,s=12,l=14.4]
+#+begin_tb
+200
+#+end_tb
+#+attr_latex: :options [x=887.5,y=192.04,s=12,l=14.4]
+#+begin_tb
+0.1010
+#+end_tb
+#+attr_latex: :options [x=416.86,y=213.64,s=12,l=14.4]
+#+begin_tb
+1997
+#+end_tb
+#+attr_latex: :options [x=461.98,y=213.64,s=12,l=14.4,b]
+#+begin_tb
+Elsa
+#+end_tb
+#+attr_latex: :options [x=533.98,y=213.64,s=12,l=14.4]
+#+begin_tb
+Cray Y-MP C916/121024
+#+end_tb
+#+attr_latex: :options [x=773.26,y=213.64,s=12,l=14.4]
+#+begin_tb
+12
+#+end_tb
+#+attr_latex: :options [x=817.3,y=213.64,s=12,l=14.4]
+#+begin_tb
+500
+#+end_tb
+#+attr_latex: :options [x=887.5,y=213.64,s=12,l=14.4]
+#+begin_tb
+0.0240
+#+end_tb
+#+attr_latex: :options [x=416.86,y=235.24,s=12,l=14.4]
+#+begin_tb
+1998
+#+end_tb
+#+attr_latex: :options [x=533.98,y=235.24,s=12,l=14.4]
+#+begin_tb
+IBM SP P2SC
+#+end_tb
+#+attr_latex: :options [x=773.26,y=235.24,s=12,l=14.4]
+#+begin_tb
+48
+#+end_tb
+#+attr_latex: :options [x=817.3,y=235.24,s=12,l=14.4]
+#+begin_tb
+350
+#+end_tb
+#+attr_latex: :options [x=887.5,y=235.24,s=12,l=14.4]
+#+begin_tb
+0.1371
+#+end_tb
+#+attr_latex: :options [x=416.86,y=256.84,s=12,l=14.4]
+#+begin_tb
+2000
+#+end_tb
+#+attr_latex: :options [x=461.98,y=256.84,s=12,l=14.4,b]
+#+begin_tb
+Teras
+#+end_tb
+#+attr_latex: :options [x=533.98,y=256.84,s=12,l=14.4]
+#+begin_tb
+SGI Origin 3800
+#+end_tb
+#+attr_latex: :options [x=757.06,y=256.84,s=12,l=14.4]
+#+begin_tb
+1,024
+#+end_tb
+#+attr_latex: :options [x=817.3,y=256.84,s=12,l=14.4]
+#+begin_tb
+300
+#+end_tb
+#+attr_latex: :options [x=887.5,y=256.84,s=12,l=14.4]
+#+begin_tb
+3.4000
+#+end_tb
+#+attr_latex: :options [x=416.86,y=278.44,s=12,l=14.4]
+#+begin_tb
+2004
+#+end_tb
+#+attr_latex: :options [x=461.98,y=278.44,s=12,l=14.4,b]
+#+begin_tb
+Aster
+#+end_tb
+#+attr_latex: :options [x=533.98,y=278.44,s=12,l=14.4]
+#+begin_tb
+SGI Altix 3700
+#+end_tb
+#+attr_latex: :options [x=757.06,y=278.44,s=12,l=14.4]
+#+begin_tb
+2,176
+#+end_tb
+#+attr_latex: :options [x=817.3,y=278.44,s=12,l=14.4]
+#+begin_tb
+200
+#+end_tb
+#+attr_latex: :options [x=910.06,y=278.44,s=12,l=14.4]
+#+begin_tb
+11
+#+end_tb
+#+attr_latex: :options [x=416.86,y=300.04,s=12,l=14.4]
+#+begin_tb
+2007
+#+end_tb
+#+attr_latex: :options [x=461.98,y=300.04,s=12,l=14.4,b]
+#+begin_tb
+Huygens
+#+end_tb
+#+attr_latex: :options [x=533.98,y=300.04,s=12,l=14.4]
+#+begin_tb
+IBM p575 Power5+
+#+end_tb
+#+attr_latex: :options [x=750.7,y=300.04,s=12,l=14.4]
+#+begin_tb
+14,592
+#+end_tb
+#+attr_latex: :options [x=817.3,y=300.04,s=12,l=14.4]
+#+begin_tb
+375
+#+end_tb
+#+attr_latex: :options [x=910.06,y=300.04,s=12,l=14.4]
+#+begin_tb
+40
+#+end_tb
+#+attr_latex: :options [x=416.86,y=321.64,s=12,l=14.4]
+#+begin_tb
+2008
+#+end_tb
+#+attr_latex: :options [x=461.98,y=321.64,s=12,l=14.4,b]
+#+begin_tb
+Huygens
+#+end_tb
+#+attr_latex: :options [x=533.98,y=321.64,s=12,l=14.4]
+#+begin_tb
+IBM p575 Power6
+#+end_tb
+#+attr_latex: :options [x=750.7,y=321.64,s=12,l=14.4]
+#+begin_tb
+62,566
+#+end_tb
+#+attr_latex: :options [x=817.3,y=321.64,s=12,l=14.4]
+#+begin_tb
+540
+#+end_tb
+#+attr_latex: :options [x=903.7,y=321.64,s=12,l=14.4]
+#+begin_tb
+116
+#+end_tb
+#+attr_latex: :options [x=416.86,y=343.24,s=12,l=14.4]
+#+begin_tb
+2009
+#+end_tb
+#+attr_latex: :options [x=461.98,y=343.24,s=12,l=14.4,b]
+#+begin_tb
+Huygens
+#+end_tb
+#+attr_latex: :options [x=533.98,y=343.24,s=12,l=14.4]
+#+begin_tb
+IBM p575 Power6
+#+end_tb
+#+attr_latex: :options [x=750.7,y=343.24,s=12,l=14.4]
+#+begin_tb
+64,973
+#+end_tb
+#+attr_latex: :options [x=817.3,y=343.24,s=12,l=14.4]
+#+begin_tb
+560
+#+end_tb
+#+attr_latex: :options [x=903.7,y=343.24,s=12,l=14.4]
+#+begin_tb
+116
+#+end_tb
+#+attr_latex: :options [x=416.86,y=364.84,s=12,l=14.4]
+#+begin_tb
+2013
+#+end_tb
+#+attr_latex: :options [x=461.98,y=364.84,s=12,l=14.4,b]
+#+begin_tb
+Cartesius
+#+end_tb
+#+attr_latex: :options [x=533.98,y=364.84,s=12,l=14.4]
+#+begin_tb
+Bull bullx DLC
+#+end_tb
+#+attr_latex: :options [x=744.34,y=364.84,s=12,l=14.4]
+#+begin_tb
+250,000
+#+end_tb
+#+attr_latex: :options [x=817.3,y=364.84,s=12,l=14.4]
+#+begin_tb
+260
+#+end_tb
+#+attr_latex: :options [x=903.7,y=364.84,s=12,l=14.4]
+#+begin_tb
+962
+#+end_tb
+#+attr_latex: :options [x=734.5,y=386.44,s=12,l=14.4]
+#+begin_tb
+1,000,000
+#+end_tb
+#+attr_latex: :options [x=817.3,y=386.44,s=12,l=14.4]
+#+begin_tb
+520
+#+end_tb
+#+attr_latex: :options [x=897.34,y=386.44,s=12,l=14.4]
+#+begin_tb
+1923
+#+end_tb
+#+attr_latex: :options [x=734.5,y=408.04,s=12,l=14.4]
+#+begin_tb
+1,840,000
+#+end_tb
+#+attr_latex: :options [x=817.3,y=408.04,s=12,l=14.4]
+#+begin_tb
+850
+#+end_tb
+#+attr_latex: :options [x=897.34,y=408.04,s=12,l=14.4]
+#+begin_tb
+2168
+#+end_tb
+#+attr_latex: :options [x=734.5,y=429.64,s=12,l=14.4]
+#+begin_tb
+9,810,000
+#+end_tb
+#+attr_latex: :options [x=817.3,y=429.64,s=12,l=14.4]
+#+begin_tb
+710
+#+end_tb
+#+attr_latex: :options [x=887.5,y=429.64,s=12,l=14.4]
+#+begin_tb
+13,817
+#+end_tb
+#+attr_latex: :options [x=728.14,y=451.24,s=12,l=14.4]
+#+begin_tb
+14,794,000
+#+end_tb
+#+attr_latex: :options [x=807.46,y=451.24,s=12,l=14.4]
+#+begin_tb
+1,500
+#+end_tb
+#+attr_latex: :options [x=893.86,y=451.24,s=12,l=14.4]
+#+begin_tb
+9,862
+#+end_tb
+#+attr_latex: :options [x=728.14,y=472.84,s=12,l=14.4]
+#+begin_tb
+36,455,000
+#+end_tb
+#+attr_latex: :options [x=807.46,y=472.84,s=12,l=14.4]
+#+begin_tb
+1,800
+#+end_tb
+#+attr_latex: :options [x=887.5,y=472.84,s=12,l=14.4]
+#+begin_tb
+20,252
+#+end_tb
+#+attr_latex: :options [x=782.25,y=496.76,s=8,l=9.6,c=c177ABF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@SARA:@@beamer:}@@ [[https://top500.org/site/48715/][_https://top500.org/site/48715/_]]
+
+@@beamer:\textcolor{c000000}{@@SARA/IC3A:@@beamer:}@@ [[https://top500.org/site/48716/][_https://top500.org/site/48716/_]]
+#+end_tb
+#+attr_latex: :options [x=786.33,y=515.96,s=8,l=9.6,c=c177ABF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@SURFsara:@@beamer:}@@ [[https://top500.org/site/50498/][_https://top500.org/site/50498/_]]
+#+end_tb
+#+attr_latex: :options [x=801.33,y=525.56,s=8,l=9.6,c=c177ABF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@SURF:@@beamer:}@@ [[https://top500.org/site/50900/][_https://top500.org/site/50900/_]]
+#+end_tb
+#+attr_latex: :options [x=325.01,y=386.38,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Year
+#+end_tb
+#+attr_latex: :options [x=409.18,y=386.38,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Machine
+#+end_tb
+#+attr_latex: :options [x=512.56,y=386.38,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+R@@beamer:{\fontsize{8}{9.6}\selectfont @@p@@beamer:}@@ (Gflop/s)
+#+end_tb
+#+attr_latex: :options [x=602.05,y=386.38,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+kW
+#+end_tb
+#+attr_latex: :options [x=636.55,y=386.38,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Gflop/s/kW
+#+end_tb
+#+attr_latex: :options [x=324.28,y=407.98,s=12,l=14.4]
+#+begin_tb
+2000
+#+end_tb
+#+attr_latex: :options [x=369.4,y=407.98,s=12,l=14.4]
+#+begin_tb
+PlayStation 2
+#+end_tb
+#+attr_latex: :options [x=557.8,y=407.98,s=12,l=14.4]
+#+begin_tb
+6.2
+#+end_tb
+#+attr_latex: :options [x=597.14,y=407.98,s=12,l=14.4]
+#+begin_tb
+0.05
+#+end_tb
+#+attr_latex: :options [x=680.24,y=407.98,s=12,l=14.4]
+#+begin_tb
+124
+#+end_tb
+#+attr_latex: :options [x=324.3,y=429.58,s=12,l=14.4]
+#+begin_tb
+2006
+#+end_tb
+#+attr_latex: :options [x=369.42,y=429.58,s=12,l=14.4]
+#+begin_tb
+PlayStation 3
+#+end_tb
+#+attr_latex: :options [x=545.1,y=429.58,s=12,l=14.4]
+#+begin_tb
+230.4
+#+end_tb
+#+attr_latex: :options [x=603.5,y=429.58,s=12,l=14.4]
+#+begin_tb
+0.2
+#+end_tb
+#+attr_latex: :options [x=670.4,y=429.58,s=12,l=14.4]
+#+begin_tb
+1,150
+#+end_tb
+#+attr_latex: :options [x=324.3,y=451.18,s=12,l=14.4]
+#+begin_tb
+2012
+#+end_tb
+#+attr_latex: :options [x=369.42,y=451.18,s=12,l=14.4]
+#+begin_tb
+Raspberry Pi 1
+#+end_tb
+#+attr_latex: :options [x=545.1,y=451.18,s=12,l=14.4]
+#+begin_tb
+0.041
+#+end_tb
+#+attr_latex: :options [x=590.79,y=451.18,s=12,l=14.4]
+#+begin_tb
+0.002
+#+end_tb
+#+attr_latex: :options [x=676.77,y=451.18,s=12,l=14.4]
+#+begin_tb
+16.4
+#+end_tb
+#+attr_latex: :options [x=324.31,y=472.78,s=12,l=14.4]
+#+begin_tb
+2019
+#+end_tb
+#+attr_latex: :options [x=369.43,y=472.78,s=12,l=14.4]
+#+begin_tb
+MacBook Pro M1 Max
+#+end_tb
+#+attr_latex: :options [x=538.75,y=472.78,s=12,l=14.4]
+#+begin_tb
+10,400
+#+end_tb
+#+attr_latex: :options [x=603.51,y=472.78,s=12,l=14.4]
+#+begin_tb
+0.1
+#+end_tb
+#+attr_latex: :options [x=657.69,y=472.78,s=12,l=14.4]
+#+begin_tb
+104,000
+#+end_tb
+#+attr_latex: :options [x=324.31,y=494.38,s=12,l=14.4]
+#+begin_tb
+2021
+#+end_tb
+#+attr_latex: :options [x=369.43,y=494.38,s=12,l=14.4]
+#+begin_tb
+iPhone 13
+#+end_tb
+#+attr_latex: :options [x=545.11,y=494.38,s=12,l=14.4]
+#+begin_tb
+1,712
+#+end_tb
+#+attr_latex: :options [x=590.8,y=494.38,s=12,l=14.4]
+#+begin_tb
+0.015
+#+end_tb
+#+attr_latex: :options [x=657.7,y=494.38,s=12,l=14.4]
+#+begin_tb
+114,133
+#+end_tb
+#+attr_latex: :options [x=324.32,y=515.98,s=12,l=14.4]
+#+begin_tb
+2023
+#+end_tb
+#+attr_latex: :options [x=369.44,y=515.98,s=12,l=14.4]
+#+begin_tb
+High-end gaming laptop
+#+end_tb
+#+attr_latex: :options [x=532.4,y=515.98,s=12,l=14.4]
+#+begin_tb
+110,000
+#+end_tb
+#+attr_latex: :options [x=603.52,y=515.98,s=12,l=14.4]
+#+begin_tb
+0.3
+#+end_tb
+#+attr_latex: :options [x=657.7,y=515.98,s=12,l=14.4]
+#+begin_tb
+366,666
+#+end_tb
+
+* Schematic overview of a supercomputer
+:PROPERTIES:
+:BEAMER_opt: pg=14
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g14}
+#+attr_latex: :options [x=62.96,y=143.61,s=18,l=19.44]
+#+begin_tb
+Users interact with the system through *login nodes*, which \\
+serve as the entry point.
+#+end_tb
+#+attr_latex: :options [x=62.96,y=194.49,s=18,l=19.44,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Login nodes @@beamer:\textmd{@@provide an environment for@@beamer:}@@ code \\
+  development, compilation, and job submission@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=62.96,y=308.25,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Batch scheduler* manages job distribution, queuing, and \\
+  execution on *compute nodes*.
+#+end_tb
+#+attr_latex: :options [x=62.96,y=359.13,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Compute nodes* are dedicated for running large-scale \\
+  computations, allocated dynamically by the scheduler.
+#+end_tb
+#+attr_latex: :options [x=62.96,y=410.02,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Shared filesystem* makes the *same data available* on \\
+  login nodes and compute nodes, so one workflow \\
+  can use both.
+#+end_tb
+#+attr_latex: :options [x=72.11,y=249.27,s=16,l=19.2,c=cFFFFFF]
+#+begin_tb
+Login nodes are shared by all online users in the system and \\
+hence *heavy tasks must be avoided*.
+#+end_tb
+
+* Snellius architecture
+:PROPERTIES:
+:BEAMER_opt: pg=15
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g15}
+#+attr_latex: :options [x=189.58,y=425.07,s=16,l=19.2]
+#+begin_tb
+1,256 rome and genoa nodes + 600 GPUs: *37.9 Pflop/s of peak performance*.
+#+end_tb
+#+attr_latex: :options [x=189.58,y=456.27,s=16,l=19.2]
+#+begin_tb
+Low-latency interconnection network: fat-tree *InfiniBand HDR100, HDR200, and NDR200*.
+#+end_tb
+#+attr_latex: :options [x=189.58,y=487.47,s=16,l=19.2,b]
+#+begin_tb
+720 TB for home @@beamer:\textmd{@@directories and@@beamer:}@@ 12.4 PB for scratch and project @@beamer:\textmd{@@spaces (GPFS).@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=189.58,y=518.67,s=16,l=19.2]
+#+begin_tb
+Specific policy for software installation and maintenance, with three simultaneous available software stacks.
+#+end_tb
+
+* Snellius system details
+:PROPERTIES:
+:BEAMER_opt: pg=16
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g16}
+#+attr_latex: :options [x=69.44,y=129.16,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Partition
+#+end_tb
+#+attr_latex: :options [x=138.56,y=129.16,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+@@beamer:@@#Nodes
+#+end_tb
+#+attr_latex: :options [x=197.24,y=129.16,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Memory per node
+#+end_tb
+#+attr_latex: :options [x=309.11,y=129.16,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+@@beamer:@@#Cores
+#+end_tb
+#+attr_latex: :options [x=395.24,y=129.16,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+CPU model
+#+end_tb
+#+attr_latex: :options [x=503.76,y=129.16,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+@@beamer:@@#GPUs
+#+end_tb
+#+attr_latex: :options [x=596.52,y=129.16,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+GPU model
+#+end_tb
+#+attr_latex: :options [x=713.89,y=129.16,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+SBU/hour
+#+end_tb
+#+attr_latex: :options [x=813.86,y=121.96,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Smallest
+
+allocation
+#+end_tb
+#+attr_latex: :options [x=79.4,y=160.64,s=12,l=14.4]
+#+begin_tb
+rome
+#+end_tb
+#+attr_latex: :options [x=149.96,y=160.64,s=12,l=14.4]
+#+begin_tb
+520
+#+end_tb
+#+attr_latex: :options [x=226.16,y=160.64,s=12,l=14.4]
+#+begin_tb
+256 GB
+#+end_tb
+#+attr_latex: :options [x=319.19,y=160.64,s=12,l=14.4]
+#+begin_tb
+128
+#+end_tb
+#+attr_latex: :options [x=365.84,y=160.4,s=11,l=13.2]
+#+begin_tb
+AMD Rome 7H12 2.6 GHz
+#+end_tb
+#+attr_latex: :options [x=733.92,y=160.64,s=12,l=14.4]
+#+begin_tb
+128
+#+end_tb
+#+attr_latex: :options [x=832.93,y=160.64,s=12,l=14.4]
+#+begin_tb
+1/8
+#+end_tb
+#+attr_latex: :options [x=70.77,y=187.61,s=12,l=14.4]
+#+begin_tb
+fat_rome
+#+end_tb
+#+attr_latex: :options [x=153.21,y=187.61,s=12,l=14.4]
+#+begin_tb
+72
+#+end_tb
+#+attr_latex: :options [x=221.25,y=187.61,s=12,l=14.4]
+#+begin_tb
+1,024 GB
+#+end_tb
+#+attr_latex: :options [x=319.55,y=187.85,s=12,l=14.4,f=cal]
+#+begin_tb
+128
+#+end_tb
+#+attr_latex: :options [x=365.84,y=187.37,s=11,l=13.2]
+#+begin_tb
+AMD Rome 7H12 2.6 GHz
+#+end_tb
+#+attr_latex: :options [x=733.92,y=187.61,s=12,l=14.4]
+#+begin_tb
+192
+#+end_tb
+#+attr_latex: :options [x=832.93,y=187.61,s=12,l=14.4]
+#+begin_tb
+1/8
+#+end_tb
+#+attr_latex: :options [x=64.27,y=217.88,s=12,l=14.4]
+#+begin_tb
+himem_4tb
+#+end_tb
+#+attr_latex: :options [x=156.31,y=217.88,s=12,l=14.4]
+#+begin_tb
+2
+#+end_tb
+#+attr_latex: :options [x=221.23,y=217.88,s=12,l=14.4]
+#+begin_tb
+4,096 GB
+#+end_tb
+#+attr_latex: :options [x=319.54,y=218.12,s=12,l=14.4,f=cal]
+#+begin_tb
+128
+#+end_tb
+#+attr_latex: :options [x=365.84,y=211.05,s=11,l=13.2]
+#+begin_tb
+AMD Rome 7H12 2.6 GHz
+#+end_tb
+#+attr_latex: :options [x=733.92,y=217.89,s=12,l=14.4]
+#+begin_tb
+256
+#+end_tb
+#+attr_latex: :options [x=832.93,y=217.89,s=12,l=14.4]
+#+begin_tb
+1/8
+#+end_tb
+#+attr_latex: :options [x=64.27,y=251.49,s=12,l=14.4]
+#+begin_tb
+himem_8tb
+#+end_tb
+#+attr_latex: :options [x=156.31,y=251.49,s=12,l=14.4]
+#+begin_tb
+2
+#+end_tb
+#+attr_latex: :options [x=221.23,y=251.49,s=12,l=14.4]
+#+begin_tb
+8,192 GB
+#+end_tb
+#+attr_latex: :options [x=319.54,y=251.73,s=12,l=14.4,f=cal]
+#+begin_tb
+128
+#+end_tb
+#+attr_latex: :options [x=365.84,y=244.65,s=11,l=13.2]
+#+begin_tb
+AMD Rome 7H12 2.6 GHz
+#+end_tb
+#+attr_latex: :options [x=733.92,y=251.49,s=12,l=14.4]
+#+begin_tb
+384
+#+end_tb
+#+attr_latex: :options [x=832.93,y=251.49,s=12,l=14.4]
+#+begin_tb
+1/8
+#+end_tb
+#+attr_latex: :options [x=77.13,y=285.1,s=12,l=14.4]
+#+begin_tb
+genoa
+#+end_tb
+#+attr_latex: :options [x=149.97,y=285.1,s=12,l=14.4]
+#+begin_tb
+736
+#+end_tb
+#+attr_latex: :options [x=226.17,y=285.1,s=12,l=14.4]
+#+begin_tb
+384 GB
+#+end_tb
+#+attr_latex: :options [x=319.55,y=285.34,s=12,l=14.4,f=cal]
+#+begin_tb
+192
+#+end_tb
+#+attr_latex: :options [x=364.88,y=284.85,s=11,l=13.2]
+#+begin_tb
+AMD Genoa 9654 2.4 GHz
+#+end_tb
+#+attr_latex: :options [x=733.92,y=285.09,s=12,l=14.4]
+#+begin_tb
+192
+#+end_tb
+#+attr_latex: :options [x=829.71,y=285.09,s=12,l=14.4]
+#+begin_tb
+1/8
+#+end_tb
+#+attr_latex: :options [x=68.49,y=318.71,s=12,l=14.4]
+#+begin_tb
+fat_genoa
+#+end_tb
+#+attr_latex: :options [x=153.21,y=318.71,s=12,l=14.4]
+#+begin_tb
+48
+#+end_tb
+#+attr_latex: :options [x=221.25,y=318.71,s=12,l=14.4]
+#+begin_tb
+1,536 GB
+#+end_tb
+#+attr_latex: :options [x=319.55,y=318.95,s=12,l=14.4,f=cal]
+#+begin_tb
+192
+#+end_tb
+#+attr_latex: :options [x=364.88,y=318.47,s=11,l=13.2]
+#+begin_tb
+AMD Genoa 9654 2.4 GHz
+#+end_tb
+#+attr_latex: :options [x=733.92,y=318.71,s=12,l=14.4]
+#+begin_tb
+288
+#+end_tb
+#+attr_latex: :options [x=829.71,y=318.71,s=12,l=14.4]
+#+begin_tb
+1/8
+#+end_tb
+#+attr_latex: :options [x=68.97,y=352.32,s=12,l=14.4]
+#+begin_tb
+gpu_a100
+#+end_tb
+#+attr_latex: :options [x=153.21,y=352.32,s=12,l=14.4]
+#+begin_tb
+62
+#+end_tb
+#+attr_latex: :options [x=226.17,y=352.32,s=12,l=14.4]
+#+begin_tb
+512 GB
+#+end_tb
+#+attr_latex: :options [x=322.55,y=352.56,s=12,l=14.4,f=cal]
+#+begin_tb
+72
+#+end_tb
+#+attr_latex: :options [x=366.56,y=352.08,s=11,l=13.2]
+#+begin_tb
+Intel Xeon 8360Y 2.5 GHz
+#+end_tb
+#+attr_latex: :options [x=519.12,y=352.32,s=12,l=14.4]
+#+begin_tb
+4
+#+end_tb
+#+attr_latex: :options [x=577.68,y=352.32,s=12,l=14.4]
+#+begin_tb
+NVIDIA A100 40 GB
+#+end_tb
+#+attr_latex: :options [x=733.93,y=352.32,s=12,l=14.4]
+#+begin_tb
+512
+#+end_tb
+#+attr_latex: :options [x=832.94,y=352.32,s=12,l=14.4]
+#+begin_tb
+1/8
+#+end_tb
+#+attr_latex: :options [x=68.48,y=385.94,s=12,l=14.4]
+#+begin_tb
+gpu_h100
+#+end_tb
+#+attr_latex: :options [x=153.2,y=385.94,s=12,l=14.4]
+#+begin_tb
+88
+#+end_tb
+#+attr_latex: :options [x=226.16,y=385.94,s=12,l=14.4]
+#+begin_tb
+768 GB
+#+end_tb
+#+attr_latex: :options [x=322.54,y=386.18,s=12,l=14.4,f=cal]
+#+begin_tb
+64
+#+end_tb
+#+attr_latex: :options [x=367.76,y=385.7,s=11,l=13.2]
+#+begin_tb
+AMD EPYC 9334 2.7 GHz
+#+end_tb
+#+attr_latex: :options [x=519.12,y=385.94,s=12,l=14.4]
+#+begin_tb
+4
+#+end_tb
+#+attr_latex: :options [x=557.76,y=385.94,s=12,l=14.4]
+#+begin_tb
+NVIDIA H100 (SXM5) 94 GB
+#+end_tb
+#+attr_latex: :options [x=733.93,y=385.94,s=12,l=14.4]
+#+begin_tb
+768
+#+end_tb
+#+attr_latex: :options [x=832.94,y=385.94,s=12,l=14.4]
+#+begin_tb
+1/4
+#+end_tb
+#+attr_latex: :options [x=74.37,y=416.23,s=12,l=14.4]
+#+begin_tb
+staging
+#+end_tb
+#+attr_latex: :options [x=153.21,y=416.23,s=12,l=14.4]
+#+begin_tb
+10
+#+end_tb
+#+attr_latex: :options [x=226.17,y=416.23,s=12,l=14.4]
+#+begin_tb
+256 GB
+#+end_tb
+#+attr_latex: :options [x=322.56,y=416.47,s=12,l=14.4,f=cal]
+#+begin_tb
+16
+#+end_tb
+#+attr_latex: :options [x=367.76,y=415.99,s=11,l=13.2]
+#+begin_tb
+AMD EPYC 7F32 3.2 GHz
+#+end_tb
+#+attr_latex: :options [x=737.04,y=416.23,s=12,l=14.4]
+#+begin_tb
+32
+#+end_tb
+#+attr_latex: :options [x=829.7,y=416.23,s=12,l=14.4]
+#+begin_tb
+1/32
+#+end_tb
+#+attr_latex: :options [x=80.48,y=443.19,s=12,l=14.4]
+#+begin_tb
+login
+#+end_tb
+#+attr_latex: :options [x=156.32,y=443.19,s=12,l=14.4]
+#+begin_tb
+3
+#+end_tb
+#+attr_latex: :options [x=312.44,y=443.19,s=12,l=14.4,b]
+#+begin_tb
+Login nodes must not be used for heavy tasks@@beamer:\textmd{@@. Their hardware configuration may differ.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=899,y=465.54,s=8,l=9.6,c=c177ABF,a=r]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@Snellius system details:@@beamer:}@@ [[https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/92668136/System+details][_https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/92668136/System+details_]] \\
+@@beamer:\textcolor{c000000}{@@Obtaining an account:@@beamer:}@@ [[https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660190/Obtaining+an+account+on+Snellius][_https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660190/Obtaining+an+account+on+Snellius_]] \\
+@@beamer:\textcolor{c000000}{@@Software stack and building:@@beamer:}@@ [[https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660266/Software][_https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660266/Software_]]
+#+end_tb
+
+* How does accounting work?
+:PROPERTIES:
+:BEAMER_opt: pg=17
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g17}
+#+attr_latex: :options [x=69.44,y=122.09,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Partition
+#+end_tb
+#+attr_latex: :options [x=138.56,y=122.09,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+@@beamer:@@#Nodes
+#+end_tb
+#+attr_latex: :options [x=197.24,y=122.09,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Memory per node
+#+end_tb
+#+attr_latex: :options [x=309.11,y=122.09,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+@@beamer:@@#Cores
+#+end_tb
+#+attr_latex: :options [x=395.24,y=122.09,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+CPU model
+#+end_tb
+#+attr_latex: :options [x=503.76,y=122.09,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+@@beamer:@@#GPUs
+#+end_tb
+#+attr_latex: :options [x=596.52,y=122.09,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+GPU model
+#+end_tb
+#+attr_latex: :options [x=713.89,y=122.09,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+SBU/hour
+#+end_tb
+#+attr_latex: :options [x=813.86,y=114.89,s=12,l=14.4,c=cFFFFFF,b]
+#+begin_tb
+Smallest
+
+allocation
+#+end_tb
+#+attr_latex: :options [x=70.64,y=153.56,s=12,l=14.4]
+#+begin_tb
+Example
+#+end_tb
+#+attr_latex: :options [x=156.32,y=153.56,s=12,l=14.4]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=229.28,y=153.56,s=12,l=14.4]
+#+begin_tb
+16 GB
+#+end_tb
+#+attr_latex: :options [x=325.54,y=153.56,s=12,l=14.4]
+#+begin_tb
+8
+#+end_tb
+#+attr_latex: :options [x=401.84,y=153.33,s=11,l=13.2]
+#+begin_tb
+Processor
+#+end_tb
+#+attr_latex: :options [x=519.12,y=153.57,s=12,l=14.4]
+#+begin_tb
+2
+#+end_tb
+#+attr_latex: :options [x=597.6,y=153.57,s=12,l=14.4]
+#+begin_tb
+Accelerator
+#+end_tb
+#+attr_latex: :options [x=737.05,y=153.57,s=12,l=14.4]
+#+begin_tb
+64
+#+end_tb
+#+attr_latex: :options [x=832.94,y=153.57,s=12,l=14.4]
+#+begin_tb
+1/2
+#+end_tb
+#+attr_latex: :options [x=341.54,y=295.66,s=14,l=16.8]
+#+begin_tb
+32 SBU
+#+end_tb
+#+attr_latex: :options [x=117.49,y=295.73,s=14,l=16.8]
+#+begin_tb
+32 SBU
+#+end_tb
+#+attr_latex: :options [x=565.25,y=295.66,s=14,l=16.8]
+#+begin_tb
+64 SBU
+#+end_tb
+#+attr_latex: :options [x=789.83,y=295.66,s=14,l=16.8]
+#+begin_tb
+64 SBU
+#+end_tb
+#+attr_latex: :options [x=63.89,y=332.16,s=16,l=17.28]
+#+begin_tb
+Each node provides a range of resources, including CPU cores, memory, accelerators (e.g., GPUs), and local disk \\
+storage. For simplicity, documentation typically refers to allocations in terms of the number of CPU cores. However, in \\
+practice, *resource allocation is determined by the most restrictive resource requested*.
+#+end_tb
+#+attr_latex: :options [x=63.89,y=396,s=16,l=17.28,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- If a user requests all CPU cores on a node but no GPUs, the node is still considered *fully allocated*. Even though the \\
+  GPUs remain idle, other users cannot access them because all CPUs are occupied.
+#+end_tb
+#+attr_latex: :options [x=63.89,y=442.56,s=16,l=17.28,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Conversely, if a user requests only one CPU core, the system *rounds up the allocation to the smallest permitted* \\
+  *unit*. The job then gets every CPU core in that unit.
+#+end_tb
+
+* File systems on Snellius
+:PROPERTIES:
+:BEAMER_opt: pg=18
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g18}
+#+attr_latex: :options [x=48.44,y=128.15,s=18,l=21.6,f=mono,b,v]
+#+begin_tb
+#+begin_example
+/home/user
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=48.44,y=159.95,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- User home directory, *200 GB per user.*
+#+end_tb
+#+attr_latex: :options [x=48.44,y=191.39,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Based on fast, parallel file system (GPFS).
+#+end_tb
+#+attr_latex: :options [x=48.44,y=222.83,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Backed up regularly*, so data stays safe.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=254.27,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Intended for storing *important files*, such as:
+#+end_tb
+#+attr_latex: :options [x=62.48,y=284.03,s=16,l=19.2,b,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Source codes
+#+end_tb
+#+attr_latex: :options [x=62.48,y=313.31,s=16,l=19.2,b,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Scripts
+#+end_tb
+#+attr_latex: :options [x=62.48,y=342.59,s=16,l=19.2,b,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Small to medium-sized input and output data
+#+end_tb
+#+attr_latex: :options [x=48.44,y=373.55,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Not intended for large datasets or high-throughput I/O workloads.
+#+end_tb
+#+attr_latex: :options [x=62.48,y=403.31,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Keep essential and frequently used files here.
+#+end_tb
+#+attr_latex: :options [x=62.48,y=432.59,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Regularly clean up unused data to stay within quota.
+#+end_tb
+#+attr_latex: :options [x=62.48,y=461.87,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Move large files to project storage or scratch space for performance efficiency.
+#+end_tb
+
+* File systems on Snellius
+:PROPERTIES:
+:BEAMER_opt: pg=19
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g19}
+#+attr_latex: :options [x=48.44,y=128.27,s=18,l=21.6,f=mono,b,v]
+#+begin_tb
+#+begin_example
+/scratch-local and /scratch-shared
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=48.44,y=159.95,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textmd{@@User working space,@@beamer:}@@ 8 TB guaranteed.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=191.39,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Based on fast, parallel file system (GPFS).
+#+end_tb
+#+attr_latex: :options [x=48.44,y=222.83,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Not backed up.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=254.27,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textbf{@@Temporary storage@@beamer:}@@: data is removed after 6 days (local), 14 days (shared).
+#+end_tb
+#+attr_latex: :options [x=48.44,y=285.71,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Two different implementations:
+#+end_tb
+#+attr_latex: :options [x=62.48,y=315.47,s=16,l=19.2,b,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Scratch local.
+#+end_tb
+#+attr_latex: :options [x=76.4,y=344.75,s=16,l=19.2,b,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- @@beamer:\textmd{@@Dedicated to@@beamer:}@@ individual jobs and compute nodes @@beamer:\textmd{@@on Snellius.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=76.4,y=374.03,s=16,l=19.2,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- Uniquely configured for each compute node upon the initiation of a job.
+#+end_tb
+#+attr_latex: :options [x=76.4,y=403.19,s=16,l=19.2,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- Accessed via the environment variable =$TMPDIR=.
+#+end_tb
+#+attr_latex: :options [x=62.48,y=432.59,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- *Scratch shared*: shared, constant directory visible from both login and compute nodes.
+#+end_tb
+
+* File systems on Snellius
+:PROPERTIES:
+:BEAMER_opt: pg=20
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g20}
+#+attr_latex: :options [x=48.44,y=128.15,s=18,l=21.6,f=mono,b,v]
+#+begin_tb
+#+begin_example
+/scratch-node
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=48.44,y=159.95,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Node-local working space of variable size (on demand) with *max 6.4 TB per node*.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=191.39,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Based on local NVMe SSD.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=222.83,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Not backed up.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=254.27,s=18,l=21.6,c=cFFFFFF,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textcolor{c000000}{\textbf{@@Temporary storage@@beamer:}}\textcolor{c000000}{@@: data is@@beamer:}@@ deleted immediately after the job finishes@@beamer:\textcolor{c000000}{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=48.44,y=285.47,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Requested with flag @@beamer:\texttt{--constraint=scratch-node}@@, then accessed via the \\
+  environment variable =$TMPDIR= (replaces Scratch local).
+#+end_tb
+
+* File systems on Snellius
+:PROPERTIES:
+:BEAMER_opt: pg=21
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g21}
+#+attr_latex: :options [x=48.44,y=128.15,s=18,l=21.6,f=mono,b,v]
+#+begin_tb
+#+begin_example
+/projects
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=48.44,y=159.95,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Project working space, given on request.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=191.39,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Based on fast, parallel file system (GPFS).
+#+end_tb
+#+attr_latex: :options [x=48.44,y=222.83,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Not backed up.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=254.27,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textbf{@@Persistent storage@@beamer:}@@: data is removed at the end of the associated project.
+#+end_tb
+#+attr_latex: :options [x=62.48,y=284.03,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Yet, not intended for permanent storage of unused files. Think about *self-managed scratch*.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=314.63,s=18,l=21.6,f=mono,b,v]
+#+begin_tb
+#+begin_example
+/archive
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=48.44,y=346.43,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Long-term archiving space, given on request with *virtually unlimited quota*.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=377.87,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Based on *tape storage* and connected to the tape robot.
+#+end_tb
+#+attr_latex: :options [x=48.44,y=409.31,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Backed up@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=48.44,y=440.75,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Intended for long-term storage of files in compressed format.
+#+end_tb
+#+attr_latex: :options [x=62.48,y=470.51,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Slow, especially to retrieve "old" data, and not available on compute nodes.
+#+end_tb
+
+* Connecting to Snellius
+:PROPERTIES:
+:BEAMER_opt: pg=22
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g22}
+#+attr_latex: :options [x=319.88,y=239.74,s=28,l=33.6,c=cFFFFFF,b]
+#+begin_tb
+[[https://portal.cua.surf.nl/][_https://portal.cua.surf.nl_]]
+#+end_tb
+#+attr_latex: :options [x=64.38,y=118.82,s=18,l=21.6]
+#+begin_tb
+Before first access to the system, login into the SURF user portal, CUA!
+#+end_tb
+#+attr_latex: :options [x=64.38,y=150.26,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- You should have received an email from SURFcua ([[mailto:no-reply@surf.nl][@@beamer:\uline{\textcolor{c177ABF}{@@no-reply@surf.nl@@beamer:}}@@]]) with the subject "@@beamer:\textbf{@@SURFcua new@@beamer:}@@ \\
+  *login <username> created*."
+#+end_tb
+
+* Connecting to Snellius via terminal
+:PROPERTIES:
+:BEAMER_opt: pg=23
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g23}
+#+attr_latex: :options [x=68.12,y=382.03,s=16,l=19.2,c=c070809,b]
+#+begin_tb
+Windows
+#+end_tb
+#+attr_latex: :options [x=68.12,y=401.23,s=12,l=14.4,ind=22.56,bf=arial]
+#+begin_tb
+- MobaXterm (portable recommended):
+#+end_tb
+#+attr_latex: :options [x=90.68,y=415.63,s=12,l=14.4,c=c177ABF,ind=22.56,bf=arial]
+#+begin_tb
+- [[https://mobaxterm.mobatek.net/][_https://mobaxterm.mobatek.net_]]
+
+@@beamer:\textcolor{c000000}{@@PuTTY.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=104.12,y=444.43,s=12,l=14.4,c=c177ABF,ind=22.56,bf=arial]
+#+begin_tb
+- [[https://www.putty.org/][_https://www.putty.org_]]
+#+end_tb
+#+attr_latex: :options [x=365.55,y=382.03,s=16,l=19.2,c=c070809,b]
+#+begin_tb
+macOS
+#+end_tb
+#+attr_latex: :options [x=365.55,y=401.23,s=12,l=14.4,ind=22.56,bf=arial]
+#+begin_tb
+- Native terminal. XQuartz needed for \\
+  graphical output.
+#+end_tb
+#+attr_latex: :options [x=401.55,y=430.03,s=12,l=14.4,c=c177ABF,ind=22.56,bf=arial]
+#+begin_tb
+- [[https://www.xquartz.org/][_https://www.xquartz.org_]]
+#+end_tb
+#+attr_latex: :options [x=662.98,y=382.03,s=16,l=19.2,c=c070809,b]
+#+begin_tb
+Linux
+#+end_tb
+#+attr_latex: :options [x=662.98,y=401.23,s=12,l=14.4,ind=22.56,bf=arial]
+#+begin_tb
+- Native terminal.
+#+end_tb
+#+attr_latex: :options [x=406.55,y=475.5,s=10.6,l=12.72,c=c177ABF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@SURF wiki guide:@@beamer:}@@ [[https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660216/Connecting+to+the+system][_https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660216/Connecting+to+the+system_]]
+#+end_tb
+#+attr_latex: :options [x=62.96,y=123.18,s=18,l=21.6]
+#+begin_tb
+The primary way of accessing Snellius is a *terminal-based connection using SSH*. Through it, you \\
+work on the system, manage files, and submit jobs remotely from your local machine.
+#+end_tb
+#+attr_latex: :options [x=69.43,y=184.93,s=16,l=19.2,c=cFFFFFF]
+#+begin_tb
+A *terminal* is a text-based interface that allows users to interact with a system by entering commands.
+#+end_tb
+
+* Connecting to Snellius via terminal
+:PROPERTIES:
+:BEAMER_opt: pg=24
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g24}
+#+attr_latex: :options [x=64.38,y=118.58,s=18,l=21.6]
+#+begin_tb
+When you log in with =ssh=, you access the login nodes.
+#+end_tb
+#+attr_latex: :options [x=64.38,y=150.02,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Type: =ssh <username>@snellius.surf.nl=.
+#+end_tb
+#+attr_latex: :options [x=64.38,y=181.46,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Alternative for untrusted connections: the SURF door node; its address is on the Snellius login page of the SURF user documentation.
+#+end_tb
+#+attr_latex: :options [x=179.2,y=212.05,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+user@local:~$ ssh scur0000@snellius.surf.nl
+Password:
+scur0000@int4:~$
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=179.16,y=331.23,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+user@local:~$ ls
+local-file.txt
+user@local:~$ scp ./local-file.txt scur0000@snellius.surf.nl:~/
+user@local:~$ scp scur0000@snellius.surf.nl:~/snellius-file.txt ./
+user@local:~$ ls
+snellius-file.txtlocal-file.txt
+user@local:~$ ssh scur0000@snellius.surf.nl
+Password:
+scur0000@int2:~$ ls
+snellius-file.txtlocal-file.txt
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=64.38,y=302.1,s=18,l=21.6]
+#+begin_tb
+With =scp= you can transfer files to and from your local machine.
+#+end_tb
+
+* Connecting to Snellius in a web browser
+:PROPERTIES:
+:BEAMER_opt: pg=25
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g25}
+#+attr_latex: :options [x=264.2,y=466.35,s=28,l=33.6,c=cFFFFFF,b]
+#+begin_tb
+[[https://ondemand.snellius.surf.nl/][_https://ondemand.snellius.surf.nl_]]
+#+end_tb
+#+attr_latex: :options [x=516,y=130.19,s=20,l=21.6,c=c172B4D,f=cal,p=8.03,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+Besides [[https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660216/Connecting+to+the+system][@@beamer:\uline{\textcolor{c177ABF}{@@accessing Snellius via a terminal@@beamer:}}@@]], the system \\
+[[https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660216/Connecting+to+the+system][can also be used via a web browser using the]] \\
+*OpenOnDemand* service allowing users to:
+- manage files,
+- work in a shell without using a terminal client on \\
+  their remote system,
+- launch jobs based on predefined templates,
+- run interactive web services such as RStudio and \\
+  Jupyter Notebooks,
+- run applications with graphical user interfaces.
+#+end_tb
+
+* LUMI, a European flagship supercomputer
+:PROPERTIES:
+:BEAMER_opt: pg=26
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g26}
+#+attr_latex: :options [x=616.03,y=116.17,s=16,l=19.2]
+#+begin_tb
+One of the greenest supercomputers in \\
+the world
+#+end_tb
+#+attr_latex: :options [x=630.32,y=400.01,s=16,l=19.2]
+#+begin_tb
+Owned by EuroHPC JU and \\
+hosted by the LUMI \\
+Consortium
+#+end_tb
+#+attr_latex: :options [x=357.42,y=128.61,s=16,l=19.2]
+#+begin_tb
+One of Europe's fastest \\
+supercomputers
+#+end_tb
+#+attr_latex: :options [x=357.43,y=200.97,s=16,l=19.2]
+#+begin_tb
+@@beamer:{\fontsize{32}{38.4}\selectfont \textcolor{c070809}{\textbf{@@#11@@beamer:}}}@@ on the Top500 list
+#+end_tb
+#+attr_latex: :options [x=81.24,y=431.04,s=32,l=38.4,c=c036B99,f=cg,b]
+#+begin_tb
+2 x
+#+end_tb
+
+* LUMI Hardware
+:PROPERTIES:
+:BEAMER_opt: pg=27
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g27}
+#+attr_latex: :options [x=56.7,y=113.01,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- LUMI-C
+#+end_tb
+#+attr_latex: :options [x=70.74,y=142.77,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- 2048 CPU nodes
+#+end_tb
+#+attr_latex: :options [x=70.74,y=172.05,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Two 64-core AMD EPYC 7763 (Milan)
+#+end_tb
+#+attr_latex: :options [x=70.74,y=201.33,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- 256 GiB RAM (512 GiB @@beamer:/@@1024 GiB for 128/32 high memory nodes)
+#+end_tb
+#+attr_latex: :options [x=56.7,y=263.73,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- LUMI-G
+#+end_tb
+#+attr_latex: :options [x=70.74,y=293.49,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- 2978 GPU nodes
+#+end_tb
+#+attr_latex: :options [x=70.74,y=322.77,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Four AMD MI250x and one 64-core AMD EPYC (Trento)
+#+end_tb
+#+attr_latex: :options [x=56.7,y=383.01,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Network
+#+end_tb
+#+attr_latex: :options [x=70.74,y=412.77,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- HPE Cray Slingshot-11 interconnect, Dragonfly topology
+#+end_tb
+#+attr_latex: :options [x=572.14,y=36.75,s=8,l=9.6]
+#+begin_tb
+AMD EPYC 7763
+#+end_tb
+#+attr_latex: :options [x=572.88,y=235.14,s=8,l=9.6]
+#+begin_tb
+LUMI-G node
+#+end_tb
+#+attr_latex: :options [x=587.5,y=394.61,s=8,l=9.6]
+#+begin_tb
+Dragonfly topology
+#+end_tb
+
+* LUMI Hardware
+:PROPERTIES:
+:BEAMER_opt: pg=28
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g28}
+#+attr_latex: :options [x=52.03,y=133.94,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- LUMI
+#+end_tb
+#+attr_latex: :options [x=66.07,y=163.7,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- 2048 CPU nodes (AMD Milan)
+#+end_tb
+#+attr_latex: :options [x=66.07,y=192.98,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- 2978 GPU nodes with AMD GPUs
+#+end_tb
+#+attr_latex: :options [x=66.07,y=222.26,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- HPE Cray Slingshot-11 interconnect, Dragonfly topology
+#+end_tb
+#+attr_latex: :options [x=52.03,y=304.1,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Snellius
+#+end_tb
+#+attr_latex: :options [x=66.07,y=333.86,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- 1380 CPU nodes (AMD Rome and Genoa)
+#+end_tb
+#+attr_latex: :options [x=66.07,y=363.14,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- 150 GPU nodes with NVIDIA GPUs
+#+end_tb
+#+attr_latex: :options [x=66.07,y=392.42,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Infiniband network, Fat-tree topology
+#+end_tb
+
+* LUMI Hardware
+:PROPERTIES:
+:BEAMER_opt: pg=29
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g29}
+#+attr_latex: :options [x=62.96,y=118.73,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Projects that benefit from @@beamer:\textcolor{c036B99}{@@LUMI's scale@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=77,y=148.49,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Large-scale GPU projects
+#+end_tb
+#+attr_latex: :options [x=90.92,y=177.77,s=16,l=19.2,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- E.g. distributed training of deep neural networks
+#+end_tb
+#+attr_latex: :options [x=90.92,y=207.05,s=16,l=19.2,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- More than ~32-64 GPUs
+#+end_tb
+#+attr_latex: :options [x=62.96,y=255.29,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Projects interested in @@beamer:\textcolor{c036B99}{@@LUMI specifics@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=77,y=285.05,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- AMD hardware and tools
+#+end_tb
+#+attr_latex: :options [x=77,y=314.33,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- HPE Cray software stack and tools
+#+end_tb
+#+attr_latex: :options [x=77,y=343.61,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Slingshot interconnect and Dragonfly network architecture
+#+end_tb
+#+attr_latex: :options [x=62.96,y=391.85,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- For which projects is @@beamer:\textcolor{c036B99}{@@Snellius@@beamer:}@@ the better option?
+#+end_tb
+#+attr_latex: :options [x=77,y=421.61,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Large-scale CPU-only projects
+#+end_tb
+#+attr_latex: :options [x=77,y=450.89,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Projects that require NVIDIA GPUs
+#+end_tb
+
+* Job submission
+:PROPERTIES:
+:BEAMER_opt: pg=30,tx=71.1,ty=290.96,ts=66,tc=cFFFFFF
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g30}
+
+* Batch scheduler for job submission
+:PROPERTIES:
+:BEAMER_opt: pg=31
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g31}
+#+attr_latex: :options [x=62.96,y=143.61,s=18,l=21.6]
+#+begin_tb
+Batch schedulers distribute work to *compute nodes.*
+#+end_tb
+#+attr_latex: :options [x=62.96,y=175.05,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Workflow:
+#+end_tb
+#+attr_latex: :options [x=77,y=204.81,s=16,l=19.2,ind=27,bc=c070809,bf=apt,bb]
+#+begin_tb
+1. *You* upload your data from your computer to the cluster system.
+#+end_tb
+#+attr_latex: :options [x=77,y=234.1,s=16,l=19.2,ind=27,bc=c070809,bf=apt,bb]
+#+begin_tb
+2. [@2] *You* create a job script with the work steps.
+#+end_tb
+#+attr_latex: :options [x=77,y=263.37,s=16,l=19.2,ind=27,bc=c070809,bf=apt,bb]
+#+begin_tb
+3. [@3] *You* submit the job script to the scheduler.
+#+end_tb
+#+attr_latex: :options [x=77,y=292.65,s=16,l=19.2,ind=27,bc=c070809,bf=apt,bb]
+#+begin_tb
+4. [@4] *The scheduler* looks for available computers to run your work.
+#+end_tb
+#+attr_latex: :options [x=77,y=321.93,s=16,l=17.28,ind=27,bc=c070809,bf=apt]
+#+begin_tb
+5. [@5] When a batch node with the requirements you specified \\
+        becomes available, your work runs.
+#+end_tb
+#+attr_latex: :options [x=77,y=368.49,s=16,l=17.28,ind=27,bc=c070809,bf=apt]
+#+begin_tb
+6. [@6] When the job is finished, *you* download the results to your \\
+        computer.
+#+end_tb
+#+attr_latex: :options [x=62.96,y=416.73,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Batch scheduler on Snellius is Slurm:
+#+end_tb
+#+attr_latex: :options [x=77,y=446.49,s=16,l=19.2,c=c177ABF,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- [[https://slurm.schedmd.com/][_https://slurm.schedmd.com_]]
+#+end_tb
+
+* Slurm basic commands
+:PROPERTIES:
+:BEAMER_opt: pg=32
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g32}
+#+attr_latex: :options [x=70.92,y=129.29,s=16,l=19.2,c=cFFFFFF,b]
+#+begin_tb
+Command
+#+end_tb
+#+attr_latex: :options [x=264.96,y=129.29,s=16,l=19.2,c=cFFFFFF,b]
+#+begin_tb
+Parameters
+#+end_tb
+#+attr_latex: :options [x=632.89,y=129.29,s=16,l=19.2,c=cFFFFFF,b]
+#+begin_tb
+Description
+#+end_tb
+#+attr_latex: :options [x=62.96,y=158.97,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+sbatch
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=169.43,y=158.97,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+<jobscript>
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=458.46,y=159.58,s=16,l=19.2]
+#+begin_tb
+Submits a job to the scheduler
+#+end_tb
+#+attr_latex: :options [x=62.94,y=212.9,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+squeue
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=458.46,y=186.54,s=16,l=19.2]
+#+begin_tb
+Inspects the job queue visible to user
+#+end_tb
+#+attr_latex: :options [x=169.41,y=212.9,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+-u <username>
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=458.45,y=213.03,s=16,l=19.2]
+#+begin_tb
+Filters the job queue to inspect jobs of user =<username>=
+#+end_tb
+#+attr_latex: :options [x=169.39,y=239.88,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+-j <jobid>
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=458.43,y=240.48,s=16,l=19.2]
+#+begin_tb
+Filters the job queue to inspect job <job-id>
+#+end_tb
+#+attr_latex: :options [x=62.91,y=266.85,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+scancel
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=169.38,y=266.85,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+<jobid>
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=458.41,y=266.98,s=16,l=19.2]
+#+begin_tb
+Cancels job =<job_id>= before it finishes
+#+end_tb
+#+attr_latex: :options [x=62.89,y=297.14,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+sinfo
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=458.41,y=297.75,s=16,l=19.2]
+#+begin_tb
+Displays information about the state of compute nodes
+#+end_tb
+#+attr_latex: :options [x=62.89,y=330.77,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+sacct
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=458.41,y=331.37,s=16,l=19.2]
+#+begin_tb
+Displays accounting data for jobs and job steps visible to user
+#+end_tb
+#+attr_latex: :options [x=62.89,y=364.4,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+scontrol
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=169.36,y=364.4,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+scontrol show job <job_id>
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=458.41,y=365,s=16,l=19.2]
+#+begin_tb
+Displays job information, including estimated start time
+#+end_tb
+#+attr_latex: :options [x=720.64,y=422.89,s=8,l=9.6,c=c177ABF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@Sbatch:@@beamer:}@@ [[https://slurm.schedmd.com/sbatch.html][_https://slurm.schedmd.com/sbatch.html_]]
+
+@@beamer:\textcolor{c000000}{@@Squeue:@@beamer:}@@ [[https://slurm.schedmd.com/squeue.html][_https://slurm.schedmd.com/squeue.html_]] \\
+@@beamer:\textcolor{c000000}{@@Scancel:@@beamer:}@@ [[https://slurm.schedmd.com/scancel.html][_https://slurm.schedmd.com/scancel.html_]]
+#+end_tb
+#+attr_latex: :options [x=718.12,y=451.69,s=8,l=9.6,c=c177ABF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@Sinfo:@@beamer:}@@ [[https://slurm.schedmd.com/sinfo.html][_https://slurm.schedmd.com/sinfo.html_]]
+
+@@beamer:\textcolor{c000000}{@@Sacct:@@beamer:}@@ [[https://slurm.schedmd.com/sacct.html][_https://slurm.schedmd.com/sacct.html_]]
+
+@@beamer:\textcolor{c000000}{@@Scontrol:@@beamer:}@@ [[https://slurm.schedmd.com/scontrol.html][_https://slurm.schedmd.com/scontrol.html_]]
+#+end_tb
+
+* Running jobs, first example
+:PROPERTIES:
+:BEAMER_opt: pg=33
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g33}
+#+attr_latex: :options [x=410.87,y=134.93,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Create a text file with the lines in the example; name the file \\
+  "job.sh."
+#+end_tb
+#+attr_latex: :options [x=410.87,y=185.57,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Submit this job with *=sbatch job.sh=* and check the status \\
+  with *=squeue -u <username>=*.
+#+end_tb
+#+attr_latex: :options [x=410.87,y=236.45,s=18,l=19.67,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Use *=scontrol show job <jobid>=* to find out when your \\
+  job will run.
+#+end_tb
+#+attr_latex: :options [x=410.87,y=287.57,s=18,l=19.21,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Look at your home directory to see what has happened; look \\
+  for new files (use *=ls=* command).
+#+end_tb
+#+attr_latex: :options [x=410.87,y=338.45,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Which files have been created? Check their content.
+#+end_tb
+#+attr_latex: :options [x=424.91,y=368.21,s=16,l=19.2,b,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- Can you solve the error?
+#+end_tb
+#+attr_latex: :options [x=410.87,y=399.17,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Try to set email notifications: add the following two lines in \\
+  your script:
+#+end_tb
+#+attr_latex: :options [x=424.91,y=448.13,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- @@beamer:\texttt{\#SBATCH --mail-type=BEGIN,END}@@
+#+end_tb
+#+attr_latex: :options [x=424.91,y=477.41,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- @@beamer:\texttt{\#SBATCH --mail-user=<your\_email\_address>}@@
+#+end_tb
+#+attr_latex: :options [x=54.28,y=135.99,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+#!/bin/bash
+#SBATCH --job-name="job-test"
+#SBATCH --nodes=1
+#SBATCH --ntasks=10
+#SBATCH --time=00:01:00
+#SBATCH --partition=rome
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=54.28,y=253.61,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+echo "Who am I?"
+whoami
+echo
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=54.28,y=320.82,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+echo "Where ?"
+srun hostname
+echo
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=54.28,y=388.03,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+sleep 120
+date
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=54.28,y=438.44,s=14,l=16.8,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+echo "DONE"
+#+end_example
+#+end_tb
+
+* Running jobs, second example
+:PROPERTIES:
+:BEAMER_opt: pg=34
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g34}
+#+attr_latex: :options [x=410.87,y=134.93,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Copy exactly the lines of the example into a new file, \\
+  "mpi_job.sh."
+#+end_tb
+#+attr_latex: :options [x=410.87,y=185.57,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Submit the job with *=sbatch mpi_job.sh=*.
+#+end_tb
+#+attr_latex: :options [x=410.87,y=217.25,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Check the output files.
+#+end_tb
+#+attr_latex: :options [x=410.87,y=248.45,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Compare the output when changing @@beamer:\textbf{\texttt{--ntasks=4 to --}}@@ \\
+  @@beamer:\textbf{\texttt{ntasks=8}}@@.
+#+end_tb
+#+attr_latex: :options [x=410.87,y=299.33,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- What happens if you remove *=srun=*?
+#+end_tb
+#+attr_latex: :options [x=410.87,y=330.77,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Try *=mpirun=* instead, and compare the output.
+#+end_tb
+#+attr_latex: :options [x=54.52,y=136.23,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+#!/bin/bash
+#SBATCH --job-name="mpi-test"
+#SBATCH --nodes=1
+#SBATCH --ntasks=4
+#SBATCH --time=00:02:00
+#SBATCH --partition=rome
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=54.52,y=253.85,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+echo "Running an MPI job..."
+srun hostname
+echo "DONE"
+#+end_example
+#+end_tb
+
+* Running jobs, third example
+:PROPERTIES:
+:BEAMER_opt: pg=35
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g35}
+#+attr_latex: :options [x=410.87,y=134.93,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Put the lines of the two examples in two text files, \\
+  "first-job.sh" and "second-job.sh."
+#+end_tb
+#+attr_latex: :options [x=410.87,y=185.57,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Submit the first job with *=sbatch first-job.sh=*.
+#+end_tb
+#+attr_latex: :options [x=410.87,y=217.01,s=18,l=21.6,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textmd{@@Get its job ID@@beamer:}@@ (=squeue -u <username>=).
+#+end_tb
+#+attr_latex: :options [x=410.87,y=248.69,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Submit the second job so that it only starts *after the first job* \\
+  *completes*:
+#+end_tb
+#+attr_latex: :options [x=424.91,y=297.65,s=16,l=17.4,b,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- @@beamer:\texttt{sbatch --dependency=afterok:<jobid> second-}@@ \\
+  =job.sh=
+#+end_tb
+#+attr_latex: :options [x=410.87,y=346.13,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Check the queue. What do you observe?
+#+end_tb
+#+attr_latex: :options [x=55.2,y=136.91,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+#!/bin/bash
+#SBATCH --job-name="first-job"
+#SBATCH --time=00:01:00
+#SBATCH --partition=rome
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=55.2,y=220.93,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+echo "First job running..."
+sleep 30
+echo "First job finished."
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=55.2,y=307.15,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+#!/bin/bash
+#SBATCH --job-name="second-job"
+#SBATCH --time=00:01:00
+#SBATCH --partition=rome
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=55.21,y=391.17,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+echo "Second job started after first
+job!"
+#+end_example
+#+end_tb
+
+* Running jobs, practical tips
+:PROPERTIES:
+:BEAMER_opt: pg=36
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g36}
+#+attr_latex: :options [x=55.76,y=335.27,s=18,l=21.6,c=c070809,b]
+#+begin_tb
+Don't use =/home= as work dir
+#+end_tb
+#+attr_latex: :options [x=55.76,y=361.69,s=16,l=18.72]
+#+begin_tb
+Your home directory has limited \\
+performance for high-throughput \\
+tasks; use =/scratch= storage for \\
+faster I/O.
+#+end_tb
+#+attr_latex: :options [x=55.76,y=176.84,s=18,l=21.6,b]
+#+begin_tb
+Give the scheduler an accurate \\
+wall-time estimate
+#+end_tb
+#+attr_latex: :options [x=55.76,y=224.32,s=16,l=19.2]
+#+begin_tb
+An *accurate job time* helps the \\
+scheduler plan, cuts queue times, and \\
+avoids holding resources that other \\
+jobs need.
+#+end_tb
+#+attr_latex: :options [x=633.84,y=335.92,s=18,l=21.6,c=c070809,b]
+#+begin_tb
+Use parallelism
+#+end_tb
+#+attr_latex: :options [x=633.84,y=361.69,s=16,l=18.72]
+#+begin_tb
+Run parallel versions of your programs \\
+and use *=srun=* to efficiently launch \\
+multi-process applications within \\
+Slurm.
+#+end_tb
+#+attr_latex: :options [x=633.84,y=198.55,s=18,l=21.6,c=c070809,b]
+#+begin_tb
+Don't preload software modules
+#+end_tb
+#+attr_latex: :options [x=633.84,y=224.32,s=16,l=19.2]
+#+begin_tb
+Include software module loading in \\
+your job script to ensure *consistency* \\
+*and reproducibility* across runs.
+#+end_tb
+
+* Anatomy of a job script
+:PROPERTIES:
+:BEAMER_opt: pg=37
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g37}
+#+attr_latex: :options [x=491.03,y=134.93,s=18,l=21.6]
+#+begin_tb
+Job scripts consist of:
+#+end_tb
+#+attr_latex: :options [x=491.03,y=166.13,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- the "shebang" line: =#!/bin/bash=,
+#+end_tb
+#+attr_latex: :options [x=491.03,y=197.81,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- scheduler directives,
+#+end_tb
+#+attr_latex: :options [x=491.03,y=229.25,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- command(s) that load software modules \\
+  and set the environment,
+#+end_tb
+#+attr_latex: :options [x=491.03,y=280.13,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- steps to prepare the input,
+#+end_tb
+#+attr_latex: :options [x=491.03,y=311.57,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- the command(s) that run your main task(s),
+#+end_tb
+#+attr_latex: :options [x=491.03,y=343.01,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- command(s) to save your output.
+#+end_tb
+#+attr_latex: :options [x=65.98,y=134.75,s=14,l=16.8,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+#!/bin/bash
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=66.13,y=177.06,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+#SBATCH --job-name="firsttest"
+#SBATCH --nodes=1
+#SBATCH --ntasks=10
+#SBATCH --time=00:01:00
+#SBATCH --partition=rome
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=65.94,y=288.16,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+module load 2025
+module load foss/2025a
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=65.94,y=349.47,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+cp -r <my_folder> $TMPDIR
+cd $TMPDIR
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=65.98,y=410.83,s=14,l=16.8,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+srun a.out
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=65.98,y=453.01,s=14,l=16.8,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+cp -r $TMPDIR/* ~/results
+#+end_example
+#+end_tb
+
+* Slurm useful directives
+:PROPERTIES:
+:BEAMER_opt: pg=38
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g38}
+#+attr_latex: :options [x=65.51,y=126.58,s=16,l=19.2,c=cFFFFFF,b]
+#+begin_tb
+Option
+#+end_tb
+#+attr_latex: :options [x=306.38,y=126.58,s=16,l=19.2,c=cFFFFFF,b]
+#+begin_tb
+Description
+#+end_tb
+#+attr_latex: :options [x=65.51,y=155.01,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--job-name=name
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.38,y=155.61,s=16,l=19.2]
+#+begin_tb
+Informative name for the job, aiding in identification.
+#+end_tb
+#+attr_latex: :options [x=65.51,y=184.04,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--nodes=#
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.38,y=184.64,s=16,l=19.2]
+#+begin_tb
+Specifies the number of nodes to use.
+#+end_tb
+#+attr_latex: :options [x=65.51,y=212.24,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--ntasks=#
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.38,y=212.85,s=16,l=19.2]
+#+begin_tb
+Specifies the number of tasks to execute (distributed parallelism).
+#+end_tb
+#+attr_latex: :options [x=65.51,y=241.27,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--ntasks-per-node=#
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.4,y=241.88,s=16,l=19.2]
+#+begin_tb
+Number of tasks assigned to each physical node.
+#+end_tb
+#+attr_latex: :options [x=65.53,y=271.12,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--cpus-per-task=#
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.4,y=271.72,s=16,l=19.2]
+#+begin_tb
+Specifies the number of cores allocated per task (shared memory parallelism).
+#+end_tb
+#+attr_latex: :options [x=65.53,y=305.33,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--time=[[DD-]HH:]MM:SS
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.4,y=305.94,s=16,l=19.2]
+#+begin_tb
+Maximum allowable runtime for the job.
+#+end_tb
+#+attr_latex: :options [x=65.53,y=338.72,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--mem-per-cpu=#
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.41,y=339.33,s=16,l=19.2]
+#+begin_tb
+RAM required per CPU (in MB).
+#+end_tb
+#+attr_latex: :options [x=65.55,y=366.92,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--mem=#
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.41,y=367.53,s=16,l=19.2]
+#+begin_tb
+RAM required per node (in MB).
+#+end_tb
+#+attr_latex: :options [x=65.55,y=395.95,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--output=name
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.41,y=396.56,s=16,l=19.2]
+#+begin_tb
+File for standard output of the job.
+#+end_tb
+#+attr_latex: :options [x=65.55,y=425.8,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--error=name
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.41,y=426.41,s=16,l=19.2]
+#+begin_tb
+File for error output of the job.
+#+end_tb
+#+attr_latex: :options [x=65.55,y=455.65,s=16,l=19.2,f=mono,v]
+#+begin_tb
+#+begin_example
+--chdir=[dirname]
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=306.41,y=456.25,s=16,l=19.2]
+#+begin_tb
+Working directory for the job.
+#+end_tb
+#+attr_latex: :options [x=741.34,y=475.1,s=8,l=9.6,c=c177ABF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@Sbatch:@@beamer:}@@ [[https://slurm.schedmd.com/sbatch.html][_https://slurm.schedmd.com/sbatch.html_]]
+#+end_tb
+
+* Environment modules
+:PROPERTIES:
+:BEAMER_opt: pg=39,tx=71.1,ty=290.96,ts=66,tc=c070809
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g39}
+
+* Software on HPC systems
+:PROPERTIES:
+:BEAMER_opt: pg=40
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g40}
+#+attr_latex: :options [x=68.12,y=140.02,s=18,l=21.6,b]
+#+begin_tb
+Challenges of managing software on HPC
+#+end_tb
+#+attr_latex: :options [x=68.12,y=171.45,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Diversity*: HPC systems serve researchers from \\
+  different fields (e.g., physics, AI, bioinformatics).
+#+end_tb
+#+attr_latex: :options [x=68.12,y=222.33,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Dependencies*: users need different versions of \\
+  software, and different applications require \\
+  different versions of the same library.
+#+end_tb
+#+attr_latex: :options [x=68.12,y=292.65,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Performance*: precompiled binaries vs. optimized \\
+  builds for HPC architecture (e.g., AVX512, CUDA).
+#+end_tb
+#+attr_latex: :options [x=68.12,y=343.53,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Permission*: Root access is restricted; users must \\
+  manage software within the given environment.
+#+end_tb
+#+attr_latex: :options [x=68.12,y=401.07,s=18,l=19.44]
+#+begin_tb
+Common approaches include *compiling software from source*, *virtual environments* (e.g., \\
+Conda), or *containers* (e.g., Apptainer).
+#+end_tb
+#+attr_latex: :options [x=68.12,y=451.95,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Individual solutions may work for users but are *ineffective for shared HPC environments*.
+#+end_tb
+#+attr_latex: :options [x=68.12,y=483.39,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Supporting users with local installations does not scale* and complicates system-wide \\
+  consistency, performance tuning, and long-term reproducibility.
+#+end_tb
+#+attr_latex: :options [x=899.38,y=365.98,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://docs.lxp.lu/software/module_example/python/][_source_]]
+#+end_tb
+
+* Environment modules
+:PROPERTIES:
+:BEAMER_opt: pg=41
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g41}
+#+attr_latex: :options [x=500.4,y=321.74,s=7,l=8.4,c=c177ABF,i]
+#+begin_tb
+[[https://doc.hpc.iter.es/2023.03/software/lmod/][_source_]]
+#+end_tb
+#+attr_latex: :options [x=538.48,y=102.71,s=18,l=19.44]
+#+begin_tb
+Environment modules allow system administrators \\
+to:
+#+end_tb
+#+attr_latex: :options [x=538.48,y=153.59,s=18,l=19.44,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textmd{@@Provide@@beamer:}@@ a clean and modular environment @@beamer:\textmd{@@for@@beamer:}@@ \\
+  @@beamer:\textmd{@@users.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=538.48,y=204.47,s=18,l=19.44,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textmd{@@Manage@@beamer:}@@ multiple software versions @@beamer:\textmd{@@without@@beamer:}@@ \\
+  @@beamer:\textmd{@@conflicts.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=538.48,y=255.35,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Optimize software performance for the *HPC* \\
+  *architecture*.
+#+end_tb
+#+attr_latex: :options [x=538.48,y=306.23,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Ensure *system-wide consistency* across \\
+  applications.
+#+end_tb
+#+attr_latex: :options [x=538.48,y=357.11,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Simplify *maintenance and updates* without \\
+  affecting users.
+#+end_tb
+#+attr_latex: :options [x=538.48,y=407.99,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Control *software access* based on user \\
+  permissions or project needs.
+#+end_tb
+#+attr_latex: :options [x=538.48,y=458.87,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- *Centralize issue resolution* ensuring all users \\
+  benefit without needing individual workarounds.
+#+end_tb
+
+* Environment modules
+:PROPERTIES:
+:BEAMER_opt: pg=42
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g42}
+
+* Software on Snellius
+:PROPERTIES:
+:BEAMER_opt: pg=43
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g43}
+#+attr_latex: :options [x=62.96,y=317.14,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+Module
+#+end_tb
+#+attr_latex: :options [x=198.45,y=317.14,s=18,l=21.6,c=cFFFFFF,b]
+#+begin_tb
+Description
+#+end_tb
+#+attr_latex: :options [x=62.96,y=346.33,s=18,l=21.6]
+#+begin_tb
+2025
+#+end_tb
+#+attr_latex: :options [x=198.45,y=346.33,s=18,l=21.6]
+#+begin_tb
+*Production* stack and is fully supported
+#+end_tb
+#+attr_latex: :options [x=62.96,y=375.53,s=18,l=21.6]
+#+begin_tb
+2024
+#+end_tb
+#+attr_latex: :options [x=198.45,y=375.53,s=18,l=21.6]
+#+begin_tb
+*Previous production* stack, it only has limited support
+#+end_tb
+#+attr_latex: :options [x=62.95,y=404.73,s=18,l=21.6]
+#+begin_tb
+2023
+#+end_tb
+#+attr_latex: :options [x=198.43,y=404.73,s=18,l=21.6]
+#+begin_tb
+*Deprecated* and provided as-is without support
+#+end_tb
+#+attr_latex: :options [x=62.95,y=433.92,s=18,l=21.6]
+#+begin_tb
+EESSI
+#+end_tb
+#+attr_latex: :options [x=198.43,y=433.92,s=18,l=21.6]
+#+begin_tb
+Collaborative effort by multiple European partners in HPC community to build a *common* \\
+*stack of scientific software installations for HPC* systems and beyond.
+#+end_tb
+#+attr_latex: :options [x=58.57,y=142.14,s=18,l=19.44,f=cal]
+#+begin_tb
+SURF provides a managed and optimized software stack. We recommend using the provided software as much as \\
+possible.
+#+end_tb
+#+attr_latex: :options [x=58.6,y=195.08,s=18,l=21.6,f=cal,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- SURF does not guarantee that Conda software installed by users works properly and efficiently.
+#+end_tb
+#+attr_latex: :options [x=58.6,y=228.56,s=18,l=21.6,f=cal,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- @@beamer:\textmd{@@SURF does@@beamer:}@@ not offer support for locally installed Conda software@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=58.6,y=261.92,s=18,l=19.44,f=cal,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- We strongly advise *against mixing software from the module system with Conda environments*; \\
+  the two systems often conflict.
+#+end_tb
+
+* Lmod basic commands
+:PROPERTIES:
+:BEAMER_opt: pg=44
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g44}
+#+attr_latex: :options [x=65.51,y=129.98,s=16,l=19.2,c=cFFFFFF,b]
+#+begin_tb
+Command
+#+end_tb
+#+attr_latex: :options [x=399.53,y=129.98,s=16,l=19.2,c=cFFFFFF,b]
+#+begin_tb
+Description
+#+end_tb
+#+attr_latex: :options [x=65.51,y=159.26,s=18,l=21.6,f=mono,v]
+#+begin_tb
+#+begin_example
+module help
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=399.52,y=159.98,s=18,l=21.6]
+#+begin_tb
+Provides information about the command options.
+#+end_tb
+#+attr_latex: :options [x=65.51,y=189.86,s=18,l=21.6,f=mono,v]
+#+begin_tb
+#+begin_example
+module avail [<modulename>]
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=399.54,y=190.58,s=18,l=21.6]
+#+begin_tb
+Displays modules directly available in the system.
+#+end_tb
+#+attr_latex: :options [x=65.53,y=252.86,s=18,l=21.6,f=mono,v]
+#+begin_tb
+#+begin_example
+module spider [<modulename>]
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=399.54,y=221.18,s=18,l=21.6]
+#+begin_tb
+Reports every module on the system. In a hierarchical \\
+system, module avail lists only the modules you can load \\
+right away, whereas module spider also finds the ones \\
+behind other modules.
+#+end_tb
+#+attr_latex: :options [x=65.53,y=315.86,s=18,l=21.6,f=mono,v]
+#+begin_tb
+#+begin_example
+module list
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=399.54,y=316.58,s=18,l=21.6]
+#+begin_tb
+Shows the modules loaded in your environment.
+#+end_tb
+#+attr_latex: :options [x=65.53,y=346.46,s=18,l=21.6,f=mono,v]
+#+begin_tb
+#+begin_example
+module load <modulename>
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=399.56,y=346.69,s=18,l=21.6]
+#+begin_tb
+Loads =<modulename>= into your environment.
+#+end_tb
+#+attr_latex: :options [x=65.55,y=381.04,s=18,l=21.6,f=mono,v]
+#+begin_tb
+#+begin_example
+module unload <modulename>
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=399.58,y=381.27,s=18,l=21.6]
+#+begin_tb
+Removes =<modulename>= from your environment.
+#+end_tb
+#+attr_latex: :options [x=65.57,y=415.61,s=18,l=21.6,f=mono,v]
+#+begin_tb
+#+begin_example
+module purge
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=399.58,y=416.33,s=18,l=21.6]
+#+begin_tb
+Removes all modules from your environment.
+#+end_tb
+#+attr_latex: :options [x=65.57,y=446.21,s=18,l=21.6,f=mono,v]
+#+begin_tb
+#+begin_example
+module whatis <modulename>
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=399.59,y=446.45,s=18,l=21.6]
+#+begin_tb
+Shows information about =<modulename>=.
+#+end_tb
+#+attr_latex: :options [x=704.67,y=465.54,s=8,l=9.6,c=c177ABF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{@@Lmod:@@beamer:}@@ [[https://lmod.readthedocs.io/en/latest/010_user.html][@@beamer:\uline{@@https://lmod.readthedocs.io/en/latest/010_user.html@@beamer:}@@]]
+#+end_tb
+
+* Hands-on
+:PROPERTIES:
+:BEAMER_opt: pg=45,tx=71.1,ty=290.96,ts=66,tc=cFFFFFF
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g45}
+
+* Modules example
+:PROPERTIES:
+:BEAMER_opt: pg=46
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g46}
+#+attr_latex: :options [x=410.87,y=134.93,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Could you modify the initial script to prepare it as a template \\
+  for the next session with R???
+#+end_tb
+#+attr_latex: :options [x=424.91,y=184.13,s=16,l=17.28,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- You will need to add the needed modules and also include the call \\
+  to the command "Rscript"
+#+end_tb
+#+attr_latex: :options [x=438.83,y=230.69,s=16,l=19.2,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- Sample hint: Rscript -e "rnorm(1)"
+#+end_tb
+#+attr_latex: :options [x=410.87,y=261.65,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Explore the module environment to find the modules (module \\
+  avail, module load)
+#+end_tb
+#+attr_latex: :options [x=410.87,y=312.53,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Remember that you can submit this job with "@@beamer:\textbf{@@sbatch@@beamer:}@@ job.sh" \\
+  and check the status with "@@beamer:\textbf{@@squeue -u @@beamer:\textit{@@login_id@@beamer:}}@@"
+#+end_tb
+#+attr_latex: :options [x=410.87,y=363.41,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Can you see the output of the call?
+#+end_tb
+#+attr_latex: :options [x=56.7,y=138.41,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+#!/bin/bash
+#SBATCH --job-name="r_test"
+#SBATCH --nodes=1
+#SBATCH --ntasks=10
+#SBATCH --time=00:01:00
+#SBATCH --partition=rome
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=56.7,y=254.21,s=14,l=16.2,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+<< LOAD MODULES >>
+echo "START"
+<< CALL THE R SCRIPT >>
+echo "DONE"
+#+end_example
+#+end_tb
+
+* Parallel computation with threads (OpenMP)
+:PROPERTIES:
+:BEAMER_opt: pg=47
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g47}
+#+attr_latex: :options [x=410.87,y=134.93,s=18,l=21.6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Check the file "python.sh" in your home directory:
+#+end_tb
+#+attr_latex: :options [x=424.91,y=164.69,s=16,l=19.2,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- linux-cluster-computing/cluster/batch
+#+end_tb
+#+attr_latex: :options [x=410.87,y=195.65,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Run it through "@@beamer:\textbf{@@sbatch@@beamer:}@@ python.sh" and follow it in the queue \\
+  with "@@beamer:\textbf{@@squeue -u @@beamer:\textit{@@login_id@@beamer:}}@@"
+#+end_tb
+#+attr_latex: :options [x=410.87,y=246.53,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- If you needed to use some input file or you would generate an \\
+  output file, where would you put the copy commands for \\
+  scratch?
+#+end_tb
+#+attr_latex: :options [x=410.87,y=316.85,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Now try the same with "pi.sh", but first compile the code! \\
+  (you may run the script ./compilepi in the login node directly)
+#+end_tb
+#+attr_latex: :options [x=410.87,y=367.73,s=18,l=19.44,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Can you play around with the variable 'ncores' and see some \\
+  parallel efficiency?
+#+end_tb
+#+attr_latex: :options [x=56.71,y=122.01,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+#!/bin/bash
+#SBATCH --job-name="pi"
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=32
+#SBATCH --time=00:10:00
+#SBATCH --partition=rome
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=56.72,y=256.44,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+module load 2025
+module load GCC/14.2.0
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=56.72,y=306.85,s=14,l=16.8,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+echo "OpenMP parallelism"
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=56.72,y=340.45,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+for ncores in `seq 8 4 32`
+do
+#+end_example
+#+end_tb
+#+attr_latex: :options [x=56.72,y=374.06,s=14,l=16.81,c=cFFFFFF,f=mono,v]
+#+begin_tb
+#+begin_example
+  export OMP_NUM_THREADS=$ncores
+  echo "CPUS: " $OMP_NUM_THREADS
+  echo "CPUS: " $OMP_NUM_THREADS >&2
+  ./pi
+  echo "DONE"
+done
+#+end_example
+#+end_tb
+
+* Some additional information
+:PROPERTIES:
+:BEAMER_opt: pg=48
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g48}
+#+attr_latex: :options [x=48.44,y=164.75,s=24,l=28.8,c=c177ABF,b,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- [[https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660184/Snellius][_https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660184/Snellius_]]
+#+end_tb
+#+attr_latex: :options [x=48.44,y=240.59,s=24,l=28.8,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- More courses by SURF (for research and more):
+#+end_tb
+#+attr_latex: :options [x=62.48,y=278.51,s=24,l=28.8,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- EuroCC Netherlands Agenda
+#+end_tb
+#+attr_latex: :options [x=76.4,y=316.43,s=24,l=28.8,c=c177ABF,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- [[https://eurocc-netherlands.nl/calendar/category/training-en/][_https://eurocc-netherlands.nl/calendar/category/training-en/_]]
+#+end_tb
+#+attr_latex: :options [x=62.48,y=354.35,s=24,l=28.8,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- SURF Agenda
+#+end_tb
+#+attr_latex: :options [x=76.4,y=392.27,s=24,l=28.8,c=c177ABF,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- [[https://www.surf.nl/en/agenda][_https://www.surf.nl/en/agenda_]]
+#+end_tb
+#+attr_latex: :options [x=62.48,y=430.19,s=24,l=28.8,ind=21,bc=c070809,bf=arial]
+#+begin_tb
+- SURF training mailing list
+#+end_tb
+#+attr_latex: :options [x=76.4,y=468.11,s=24,l=28.8,c=c177ABF,ind=21,bc=c070809,bf=apt,bs=−]
+#+begin_tb
+- [[https://list.surf.nl/postorius/lists/training-announce.list.surf.nl/][_https://list.surf.nl/postorius/lists/training-announce.list.surf.nl/_]]
+#+end_tb
+
+* Abbreviations
+:PROPERTIES:
+:BEAMER_opt: pg=48
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g48}
+#+attr_latex: :options [x=56.69,y=140.02,s=16,l=19.2,p=6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- Arithmetic logic unit (ALU)
+- Advanced Micro Devices (AMD)
+- Control Data Corporation (CDC)
+- Computational fluid dynamics (CFD)
+- Central user administration (CUA)
+- Direct liquid cooling (DLC)
+- European Environment for Scientific \\
+  Software Installations (EESSI)
+- AMD server processor family (EPYC)
+- Hewlett Packard Enterprise (HPE)
+#+end_tb
+#+attr_latex: :options [x=500,y=140.02,s=16,l=19.2,p=6,ind=22.56,bc=cEE7628,bf=arial]
+#+begin_tb
+- International Business Machines (IBM)
+- Intel Xeon Phi Knights Landing (KNL)
+- Large Unified Modern Infrastructure (LUMI)
+- Stichting Academisch Rekencentrum Amsterdam (SARA)
+- System billing unit (SBU)
+- Silicon Graphics (SGI)
+- Solid-state drive (SSD)
+- Samenwerkende Universitaire Reken \\
+  Faciliteiten (SURF), the original name
+#+end_tb
+
+* Thank you!
+:PROPERTIES:
+:BEAMER_opt: pg=49,tx=65.39,ty=230.34,ts=36
+:END:
+#+beamer: \slidegraphics{figures/fundamentals-of-hpc/g49}
+
