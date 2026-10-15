@@ -1,0 +1,19 @@
+% Fonts and title position for the QCG-PilotJob deck.
+% The PowerPoint deck uses Calibri, which is not free to share; Carlito
+% has the same widths.  Helvetica maps to Liberation Sans, and the
+% Segoe UI symbols map to DejaVu Sans.
+% Ligatures=TeX turns the ASCII quotes and dashes of the source into
+% typographic ones; the code listings use Carlito without them, so they
+% keep quotes and hyphens as typed.
+\newfontfamily\fcal{Carlito}[Ligatures=TeX]
+\newfontfamily\fcalc{Carlito}
+\newfontfamily\farial{Liberation Sans}[Ligatures=TeX]
+\newfontfamily\fsym{DejaVu Sans}
+\setmonofont{Liberation Mono}
+\def\pptxbase{cal}
+\def\pptxcode{calc}
+\def\pptxtitlef{cal}
+\def\pptxtitlex{68.15}
+\def\pptxtitley{75.72}
+\def\pptxtitles{23.1}
+\input{figures/qcg-pilotjob-slides/colors.tex}

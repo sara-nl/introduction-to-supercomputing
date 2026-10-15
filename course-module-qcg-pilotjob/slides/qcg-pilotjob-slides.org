@@ -1,0 +1,1436 @@
+#+TITLE: Embarrassingly parallel workflows
+#+OPTIONS: H:1 ':t toc:nil num:nil title:nil ^:nil author:nil date:nil
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [t]
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: \input{pptx-style.tex}
+#+LATEX_HEADER: \input{qcg-pilotjob-slides-style.tex}
+
+# One heading per slide.  Text boxes sit at the position, size and colour
+# of the matching text in the PowerPoint deck; figures/*/gNN.tex
+# draws the shapes and pictures of slide NN.  Build with make.
+
+* Embarrassingly parallel workflows
+:PROPERTIES:
+:BEAMER_opt: pg=1,tx=56.85,ty=371.12,ts=49.75,tc=cFFFFFF,tw=407.94,tl=54.08
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g01}
+#+attr_latex: :options [x=56.63,y=500.1,s=15.9,l=19.08,c=cFFFFFF]
+#+begin_tb
+06.03.2026
+#+end_tb
+
+* Embarrassingly Parallel workflows and how to execute them
+:PROPERTIES:
+:BEAMER_opt: pg=2,tx=71.13,ty=101.89,ts=66.34,tc=cFFFFFF,tw=590.96,tl=63.46
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g02}
+
+* Embarrassingly parallel workflows
+:PROPERTIES:
+:BEAMER_opt: pg=3
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g03}
+#+attr_latex: :options [x=69,y=134.66,s=13.7,l=16.44,b]
+#+begin_tb
+What?
+#+end_tb
+#+attr_latex: :options [x=69,y=167.11,s=13.7,l=16.44,ind=16.06,bf=arial]
+#+begin_tb
+- Executing many independent small jobs simultaneously to use the hardware resource efficiently.
+#+end_tb
+#+attr_latex: :options [x=69,y=193.08,s=13.7,l=16.44,c=c070809,b]
+#+begin_tb
+When?
+#+end_tb
+#+attr_latex: :options [x=69,y=219.05,s=13.7,l=16.44,ind=22.52,bf=arial]
+#+begin_tb
+- It is not possible to combine multiple runs/tasks into a single application.
+#+end_tb
+#+attr_latex: :options [x=69,y=245.72,s=13.7,l=16.44,ind=22.52,bf=arial]
+#+begin_tb
+- Large parameter sweep based on the same application or workflow with dependent pipeline steps.
+#+end_tb
+#+attr_latex: :options [x=69,y=277.45,s=13.7,l=20.21,ind=22.52,bf=arial]
+#+begin_tb
+- Workflow involves runs that depend on independent software which does not scale
+
+beyond a certain number of cores.
+#+end_tb
+#+attr_latex: :options [x=69,y=324.32,s=13.7,l=16.44,c=c070809,b]
+#+begin_tb
+Why?
+#+end_tb
+#+attr_latex: :options [x=69,y=350.29,s=13.7,l=20.19,ind=22.52,bf=arial]
+#+begin_tb
+- Nodes are getting denser with respect to resources such as number of cores/threads, GPU cards,
+
+Memory.
+#+end_tb
+#+attr_latex: :options [x=69,y=396.45,s=13.7,l=20.18,ind=22.52,bf=arial]
+#+begin_tb
+- Applications do not necessarily scale even within a node: shared memory (OpenMP, MPI SHM,
+
+pthreads).
+#+end_tb
+#+attr_latex: :options [x=152.27,y=487.32,s=7.9,l=10.1]
+#+begin_tb
+@@beamer:@@1. Mathiyalagan, A., Manimaran, K., Muthu, K., Rajakantham, M., Density functional theory study on the electronic structures and spectral properties of 3,5-Dimethylanisole dye sensitizer for solar cell applications, Results in Chemistry,
+
+Volume 3, 2021
+#+end_tb
+#+attr_latex: :options [x=152.27,y=522.67,s=7.9,l=9.48,c=c222222]
+#+begin_tb
+@@beamer:@@2. Jumper, J., Evans, R., Pritzel, A. @@beamer:\textit{@@et al.@@beamer:}@@ Highly accurate protein structure prediction with AlphaFold. @@beamer:\textit{@@Nature@@beamer:}@@ *596*, 583-589 (2021)
+#+end_tb
+#+attr_latex: :options [x=792.52,y=98.91,s=12.3,l=14.76]
+#+begin_tb
+1
+#+end_tb
+#+attr_latex: :options [x=870.41,y=274.74,s=12.3,l=14.76]
+#+begin_tb
+2
+#+end_tb
+
+* How?
+:PROPERTIES:
+:BEAMER_opt: pg=4
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g04}
+#+attr_latex: :options [x=68.15,y=143.6,s=13.7,l=16.44,c=c070809,b]
+#+begin_tb
+Tools
+#+end_tb
+#+attr_latex: :options [x=68.15,y=171.73,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- Linux background processes (within a node) along with *numactl*.
+#+end_tb
+#+attr_latex: :options [x=85.56,y=200.58,s=13.7,l=16.44,ind=19.16,bf=sym,bs=‣]
+#+begin_tb
+- Supported on Snellius and requires prior knowledge of bash scripting and process placement
+#+end_tb
+#+attr_latex: :options [x=104.72,y=223.65,s=13.7,l=16.44,b]
+#+begin_tb
+@@beamer:\textmd{@@using@@beamer:}@@ numactl@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=85.56,y=257.54,s=13.7,l=16.44,ind=19.16,bf=sym,bs=‣]
+#+begin_tb
+- Provides maximum manual control if one knows what to do.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=286.39,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- SLURM arrays (to perform similar jobs on multiple allocations).
+#+end_tb
+#+attr_latex: :options [x=85.56,y=314.52,s=13.7,l=16.44,ind=19.16,bf=sym,bs=‣]
+#+begin_tb
+- Supported on Snellius and requires prior knowledge of SLURM array options.
+#+end_tb
+#+attr_latex: :options [x=85.56,y=343.37,s=13.7,l=16.44,ind=19.16,bf=sym,bs=‣]
+#+begin_tb
+- Has some limitations.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=371.47,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- Services for execution of many jobs inside a single allocation, e.g. QCG-PilotJob
+#+end_tb
+#+attr_latex: :options [x=87.32,y=395.28,s=13.7,l=16.44,c=c0000FF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{(}@@[[https://qcg-pilotjob.readthedocs.io/en/develop/][_https://qcg-pilotjob.readthedocs.io/en/develop/_]]@@beamer:\textcolor{c000000}{).}@@
+#+end_tb
+#+attr_latex: :options [x=85.56,y=424.13,s=13.7,l=16.44,ind=19.16,bf=sym,bs=‣]
+#+begin_tb
+- Supported on Snellius and requires prior knowledge of Python scripting.
+#+end_tb
+
+* How?
+:PROPERTIES:
+:BEAMER_opt: pg=5
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g05}
+#+attr_latex: :options [x=68.15,y=143.6,s=13.7,l=16.44,c=c070809,b]
+#+begin_tb
+Tools
+#+end_tb
+#+attr_latex: :options [x=68.15,y=171.73,s=13.7,l=16.44,c=cBFBFBF,ind=19.17,bc=c000000,bf=cal]
+#+begin_tb
+- Linux background processes (within a node) along with *numactl*.
+#+end_tb
+#+attr_latex: :options [x=85.56,y=200.58,s=13.7,l=16.44,c=cBFBFBF,ind=19.16,bc=c000000,bf=sym,bs=‣]
+#+begin_tb
+- Supported on Snellius and requires prior knowledge of bash scripting and process placement
+#+end_tb
+#+attr_latex: :options [x=104.72,y=223.65,s=13.7,l=16.44,c=cBFBFBF,b]
+#+begin_tb
+@@beamer:\textmd{@@using@@beamer:}@@ numactl@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=85.56,y=257.54,s=13.7,l=16.44,c=cBFBFBF,ind=19.16,bc=c000000,bf=sym,bs=‣]
+#+begin_tb
+- Provides maximum manual control if one knows what to do.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=286.39,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- SLURM arrays (to perform similar jobs on multiple allocations).
+#+end_tb
+#+attr_latex: :options [x=85.56,y=314.52,s=13.7,l=16.44,ind=19.16,bf=sym,bs=‣]
+#+begin_tb
+- Supported on Snellius and requires prior knowledge of SLURM array options.
+#+end_tb
+#+attr_latex: :options [x=85.56,y=343.37,s=13.7,l=16.44,ind=19.16,bf=sym,bs=‣]
+#+begin_tb
+- Has some limitations.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=371.47,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- Services for execution of many jobs inside a single allocation, e.g. QCG-PilotJob
+#+end_tb
+#+attr_latex: :options [x=87.32,y=395.28,s=13.7,l=16.44,c=c0000FF]
+#+begin_tb
+@@beamer:\textcolor{c000000}{(}@@[[https://qcg-pilotjob.readthedocs.io/en/develop/][_https://qcg-pilotjob.readthedocs.io/en/develop/_]]@@beamer:\textcolor{c000000}{).}@@
+#+end_tb
+#+attr_latex: :options [x=85.56,y=424.13,s=13.7,l=16.44,ind=19.16,bf=sym,bs=‣]
+#+begin_tb
+- Supported on Snellius and requires prior knowledge of Python scripting.
+#+end_tb
+
+* There are many more tools
+:PROPERTIES:
+:BEAMER_opt: pg=6
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g06}
+
+* SLURM arrays
+:PROPERTIES:
+:BEAMER_opt: pg=7,tx=68.15,ty=82.2,ts=31.01
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g07}
+
+* Limitations
+:PROPERTIES:
+:BEAMER_opt: pg=8
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g08}
+#+attr_latex: :options [x=68.15,y=144.32,s=13.7,l=16.44,c=c0D0D0D,ind=19.17,bc=c000000,bf=cal]
+#+begin_tb
+- SLURM job arrays offer a mechanism for submitting and managing *collections of similar jobs*.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=174.61,s=13.7,l=16.44,c=c0D0D0D,ind=19.17,bc=c000000,bf=cal]
+#+begin_tb
+- All jobs must have the *same initial options* (e.g. size, time limit, etc.).
+#+end_tb
+#+attr_latex: :options [x=68.15,y=204.9,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- The *max array size* depends on the settings defined in the SLURM configuration file. On Snellius it's
+#+end_tb
+#+attr_latex: :options [x=87.32,y=230.13,s=13.7,l=16.44,b]
+#+begin_tb
+30000@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=68.15,y=260.42,s=13.7,l=16.44,b,ind=19.17,bf=cal]
+#+begin_tb
+- @@beamer:\textmd{@@The@@beamer:}@@ allocation size @@beamer:\textmd{@@per instance@@beamer:}@@ cannot be below the minimum allocation @@beamer:\textmd{@@within SLURM. For@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=87.32,y=285.67,s=13.7,l=16.44]
+#+begin_tb
+instance, on Snellius it's 16 cores and 28 GiB of memory on the "rome" partition.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=315.96,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- One must *wait for each task* in the array to get allocated and finish.
+#+end_tb
+#+attr_latex: :options [x=91.86,y=358.31,s=12.3,l=13.68,c=cF2F2F2,i,code]
+#+begin_tb
+@@beamer:@@#!/bin/bash \\
+@@beamer:@@#SBATCH -N 1 \\
+@@beamer:@@#SBATCH -n 2 \\
+@@beamer:@@#SBATCH -p rome \\
+@@beamer:@@#SBATCH -t 1 \\
+hostname
+#+end_tb
+#+attr_latex: :options [x=386.91,y=393.89,s=12.2,l=14.64,c=cF2F2F2,code]
+#+begin_tb
+@@beamer:\$@@ sbatch --array=0-10 job.sh
+#+end_tb
+#+attr_latex: :options [x=269.3,y=350.34,s=15.9,l=19.08,c=cF2985E,b]
+#+begin_tb
+job.sh
+#+end_tb
+
+* Limitations
+:PROPERTIES:
+:BEAMER_opt: pg=9
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g09}
+#+attr_latex: :options [x=68.15,y=144.32,s=13.7,l=16.44,c=c0D0D0D,ind=19.17,bc=c000000,bf=cal]
+#+begin_tb
+- SLURM job arrays offer a mechanism for submitting and managing *collections of similar jobs*.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=174.61,s=13.7,l=16.44,c=c0D0D0D,ind=19.17,bc=c000000,bf=cal]
+#+begin_tb
+- All jobs must have the *same initial options* (e.g. size, time limit, etc.).
+#+end_tb
+#+attr_latex: :options [x=68.15,y=204.9,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- The *max array size* depends on the settings defined in the SLURM configuration file. On Snellius it's
+#+end_tb
+#+attr_latex: :options [x=87.32,y=230.13,s=13.7,l=16.44,b]
+#+begin_tb
+30000@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=68.15,y=260.42,s=13.7,l=16.44,b,ind=19.17,bf=cal]
+#+begin_tb
+- @@beamer:\textmd{@@The@@beamer:}@@ allocation size @@beamer:\textmd{@@per instance@@beamer:}@@ cannot be below the minimum allocation @@beamer:\textmd{@@within SLURM. For@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=87.32,y=285.67,s=13.7,l=16.44]
+#+begin_tb
+instance, on Snellius it's 16 cores and 28 GiB of memory on the "rome" partition.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=315.96,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- One must *wait for each task* in the array to get allocated and finish.
+#+end_tb
+#+attr_latex: :options [x=91.86,y=358.31,s=12.3,l=13.68,c=cF2F2F2,i,code]
+#+begin_tb
+@@beamer:@@#!/bin/bash \\
+@@beamer:@@#SBATCH -N 1 \\
+@@beamer:@@#SBATCH -n 2 \\
+@@beamer:@@#SBATCH -p rome \\
+@@beamer:@@#SBATCH -t 1 \\
+hostname
+#+end_tb
+#+attr_latex: :options [x=386.91,y=393.89,s=12.2,l=14.64,c=cF2F2F2,code]
+#+begin_tb
+@@beamer:\$@@ sbatch --array=0-10 job.sh
+#+end_tb
+#+attr_latex: :options [x=568.8,y=479.87,s=13.7,l=16.44]
+#+begin_tb
+Will create 11 tasks!
+#+end_tb
+#+attr_latex: :options [x=269.3,y=350.34,s=15.9,l=19.08,c=cF2985E,b]
+#+begin_tb
+job.sh
+#+end_tb
+
+* Ways of control
+:PROPERTIES:
+:BEAMER_opt: pg=10
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g10}
+#+attr_latex: :options [x=68.15,y=144.32,s=13.7,l=16.44,c=c0D0D0D,ind=19.17,bc=c000000,bf=cal]
+#+begin_tb
+- Jobs which are part of a job array will have the environment variable *SLURM_ARRAY_TASK_ID* set
+#+end_tb
+#+attr_latex: :options [x=87.32,y=169.57,s=13.7,l=16.44,c=c0D0D0D]
+#+begin_tb
+to its array index value.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=199.86,s=13.7,l=16.44,b,ind=19.17,bf=cal]
+#+begin_tb
+- @@beamer:\textmd{@@A@@beamer:}@@ maximum number of simultaneously running tasks @@beamer:\textmd{@@from the job array may be specified@@beamer:}@@ using a
+#+end_tb
+#+attr_latex: :options [x=87.32,y=225.09,s=13.7,l=16.44,b]
+#+begin_tb
+"%" separator@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=177.07,y=264.86,s=12.3,l=14.4,c=cF2F2F2,code]
+#+begin_tb
+@@beamer:\$@@ cat job.sh \\
+@@beamer:@@#!/bin/bash \\
+@@beamer:@@#SBATCH -N 1 \\
+@@beamer:@@#SBATCH -n 2 \\
+@@beamer:@@#SBATCH -p rome \\
+@@beamer:@@#SBATCH -t 1 \\
+echo @@beamer:"@@SLURM_ARRAY_TASK_ID: @@beamer:\$@@SLURM_ARRAY_TASK_ID@@beamer:"@@ \\
+hostname
+#+end_tb
+#+attr_latex: :options [x=177.07,y=394.66,s=12.3,l=14.42,c=cF2F2F2,code]
+#+begin_tb
+@@beamer:\$@@ sbatch --array=0-10 job.sh \\
+... \\
+@@beamer:\$@@ sbatch --array=0-10%2 job.sh \\
+...
+#+end_tb
+
+* Ways of control
+:PROPERTIES:
+:BEAMER_opt: pg=11
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g11}
+#+attr_latex: :options [x=68.15,y=144.32,s=13.7,l=16.44,c=c0D0D0D,ind=19.17,bc=c000000,bf=cal]
+#+begin_tb
+- Jobs which are part of a job array will have the environment variable *SLURM_ARRAY_TASK_ID* set
+#+end_tb
+#+attr_latex: :options [x=87.32,y=169.57,s=13.7,l=16.44,c=c0D0D0D]
+#+begin_tb
+to its array index value
+#+end_tb
+#+attr_latex: :options [x=68.15,y=199.86,s=13.7,l=16.44,b,ind=19.17,bf=cal]
+#+begin_tb
+- @@beamer:\textmd{@@A@@beamer:}@@ maximum number of simultaneously running tasks @@beamer:\textmd{@@from the job array may be specified@@beamer:}@@ using a
+#+end_tb
+#+attr_latex: :options [x=87.32,y=225.09,s=13.7,l=16.44,b]
+#+begin_tb
+"%" separator@@beamer:\textmd{@@.@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=177.07,y=264.86,s=12.3,l=14.4,c=cF2F2F2,code]
+#+begin_tb
+@@beamer:\$@@ cat job.sh \\
+@@beamer:@@#!/bin/bash \\
+@@beamer:@@#SBATCH -N 1 \\
+@@beamer:@@#SBATCH -n 2 \\
+@@beamer:@@#SBATCH -p rome \\
+@@beamer:@@#SBATCH -t 1 \\
+echo @@beamer:"@@SLURM_ARRAY_TASK_ID: @@beamer:\$@@SLURM_ARRAY_TASK_ID@@beamer:"@@ \\
+hostname
+#+end_tb
+#+attr_latex: :options [x=177.07,y=394.66,s=12.3,l=14.42,c=cF2F2F2,code]
+#+begin_tb
+@@beamer:\$@@ sbatch --array=0-10 job.sh \\
+... \\
+@@beamer:\$@@ sbatch --array=0-10%2 job.sh \\
+...
+#+end_tb
+#+attr_latex: :options [x=397.07,y=487.59,s=13.7,l=16.44]
+#+begin_tb
+Will tell SLURM to submit at most 2
+#+end_tb
+#+attr_latex: :options [x=433.51,y=504.89,s=13.7,l=16.44]
+#+begin_tb
+tasks at the same time
+#+end_tb
+#+attr_latex: :options [x=651.4,y=416.26,s=13.7,l=16.44]
+#+begin_tb
+Returns a task ID
+#+end_tb
+
+* Ways of control
+:PROPERTIES:
+:BEAMER_opt: pg=12
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g12}
+#+attr_latex: :options [x=68.15,y=147.2,s=15.9,l=19.08,b]
+#+begin_tb
+Useful environment variables
+#+end_tb
+#+attr_latex: :options [x=68.15,y=178.21,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- *SLURM_ARRAY_JOB_ID* is the first job ID of the array.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=208.5,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- Each task finds its array index in *SLURM_ARRAY_TASK_ID*.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=238.79,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- *SLURM_ARRAY_TASK_COUNT* is the number of tasks in the job array.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=269.08,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- The highest index is in *SLURM_ARRAY_TASK_MAX*.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=299.37,s=13.7,l=16.44,ind=19.17,bf=cal]
+#+begin_tb
+- *SLURM_ARRAY_TASK_MIN* gives the lowest index.
+#+end_tb
+
+* Ways of control
+:PROPERTIES:
+:BEAMER_opt: pg=13
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g13}
+#+attr_latex: :options [x=68.15,y=147.2,s=15.9,l=19.08,b]
+#+begin_tb
+File names
+#+end_tb
+#+attr_latex: :options [x=68.15,y=178.21,s=13.7,l=16.44]
+#+begin_tb
+Two additional options are available to specify a job's *stdin*, *stdout*, and *stderr* file names@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=68.15,y=208.5,s=13.7,l=16.44]
+#+begin_tb
+@@beamer:@@-
+#+end_tb
+#+attr_latex: :options [x=90.67,y=208.5,s=13.7,l=16.44]
+#+begin_tb
+*%A* will be replaced by the value of *SLURM_ARRAY_JOB_ID*
+#+end_tb
+#+attr_latex: :options [x=68.15,y=238.79,s=13.7,l=16.44]
+#+begin_tb
+@@beamer:@@-
+#+end_tb
+#+attr_latex: :options [x=90.67,y=238.79,s=13.7,l=16.44]
+#+begin_tb
+*%a* becomes the task index, *SLURM_ARRAY_TASK_ID*
+#+end_tb
+#+attr_latex: :options [x=133.1,y=305.06,s=12.3,l=13.68,c=cF2F2F2,code]
+#+begin_tb
+@@beamer:@@#!/bin/bash \\
+... \\
+@@beamer:@@#SBATCH --output slurm-%A_%a.out \\
+...
+#+end_tb
+
+* Hands-on
+:PROPERTIES:
+:BEAMER_opt: pg=14,tx=71.13,ty=292.27,ts=66.34,tc=cFFFFFF
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g14}
+
+* Hands-on
+:PROPERTIES:
+:BEAMER_opt: pg=15
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g15}
+#+attr_latex: :options [x=69,y=137.89,s=18,l=21.6,b]
+#+begin_tb
+Clone the repository
+#+end_tb
+#+attr_latex: :options [x=69,y=161.7,s=15.9,l=19.08,c=c0000FF,ind=14.2,bc=c000000,bf=cal]
+#+begin_tb
+- https://github.com/sara-nl/introduction-to-supercomputing
+#+end_tb
+#+attr_latex: :options [x=110.66,y=325.19,s=15.9,l=18.75,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\$@@ cd ~ \\
+@@beamer:\$@@ git clone <repository_url.git> \\
+@@beamer:\$@@ cd introduction-to-supercomputing \\
+@@beamer:\$@@ cd course-module-qcg-pilotjob
+#+end_tb
+
+* Hands-on #1
+:PROPERTIES:
+:BEAMER_opt: pg=16
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g16}
+#+attr_latex: :options [x=69,y=137.89,s=18,l=21.6,b]
+#+begin_tb
+Task
+#+end_tb
+#+attr_latex: :options [x=69,y=161.7,s=15.9,l=17.31,b,ind=14.2,bf=cal]
+#+begin_tb
+- @@beamer:\textmd{@@Submit a job array and print@@beamer:}@@ hostname, TMPDIR, \\
+  SLURM_ARRAY_JOB_ID
+#+end_tb
+#+attr_latex: :options [x=69,y=227.32,s=15.9,l=23.79,b,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont @@Steps@@beamer:}@@
+- @@beamer:\textmd{@@Go to@@beamer:}@@ hands-on/example_01
+#+end_tb
+#+attr_latex: :options [x=69,y=274.92,s=15.9,l=23.06,ind=14.2,bf=cal]
+#+begin_tb
+- Take a look at the job script *array_job.sh*
+- Submit the SLURM job script, check the SLURM log file
+#+end_tb
+#+attr_latex: :options [x=69,y=348.46,s=18,l=21.6,b]
+#+begin_tb
+Questions
+#+end_tb
+#+attr_latex: :options [x=69,y=372.26,s=15.9,l=23.07,ind=14.2,bf=cal]
+#+begin_tb
+- How many output files were created?
+- Compare the host names.
+#+end_tb
+#+attr_latex: :options [x=69,y=419.14,s=15.9,l=19.08,ind=14.2,bf=cal]
+#+begin_tb
+- Note the names of *TMPDIR* that the jobs report.
+#+end_tb
+#+attr_latex: :options [x=503.03,y=182.14,s=13.7,l=13.68,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@#!/bin/bash \\
+@@beamer:@@#SBATCH -N 1 \\
+@@beamer:@@#SBATCH -n 1 \\
+@@beamer:@@#SBATCH -p rome \\
+@@beamer:@@#SBATCH -t 10 \\
+@@beamer:@@#SBATCH --array 0-11%3
+#+end_tb
+#+attr_latex: :options [x=503.03,y=280.2,s=13.7,l=13.71,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}@@Running on @@beamer:\textcolor{c89DDFF}{"}@@ \\
+@@beamer:\textcolor{cFFCB6B}{@@hostname@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}@@TMPDIR @@beamer:\textcolor{cEEFFFF}{\$@@TMPDIR@@beamer:}\textcolor{c89DDFF}{"}@@
+#+end_tb
+#+attr_latex: :options [x=503.03,y=335.72,s=13.7,l=13.71,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}\textcolor{cC3E88D}{@@SLURM_ARRAY_JOB_ID@@beamer:} \$@@SLURM_ARRAY_JOB_ID@@beamer:\textcolor{c89DDFF}{"}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}\textcolor{cC3E88D}{@@SLURM_ARRAY_TASK_ID@@beamer:} \$@@SLURM_ARRAY_TASK_ID@@beamer:\textcolor{c89DDFF}{"}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}\textcolor{cC3E88D}{@@SLURM_ARRAY_TASK_COUNT@@beamer:} \$@@SLURM_ARRAY_TASK_COUNT@@beamer:\textcolor{c89DDFF}{"}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}\textcolor{cC3E88D}{@@SLURM_ARRAY_TASK_MAX@@beamer:} \$@@SLURM_ARRAY_TASK_MAX@@beamer:\textcolor{c89DDFF}{"}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}\textcolor{cC3E88D}{@@SLURM_ARRAY_TASK_MIN@@beamer:} \$@@SLURM_ARRAY_TASK_MIN@@beamer:\textcolor{c89DDFF}{"}@@
+#+end_tb
+
+* Hands-on #2
+:PROPERTIES:
+:BEAMER_opt: pg=17
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g17}
+#+attr_latex: :options [x=69,y=136.45,s=15.9,l=21.63,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont \textbf{@@Task@@beamer:}}@@
+- Compute the average of one column in 1000 CSV files
+- Aggregate the results in one CSV file.
+#+end_tb
+#+attr_latex: :options [x=69,y=225.88,s=15.9,l=20.91,p=0.72,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont \textbf{@@Steps@@beamer:}}@@
+- Go to *hands-on/example_02*
+- Take a look at the job script *array_job.sh*
+- Run *prepare_input.sh*
+- Submit the SLURM job script
+- Run *aggregate.sh* when all jobs are finished
+#+end_tb
+#+attr_latex: :options [x=69,y=379.46,s=15.9,l=15.87,p=5.78,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.7}\selectfont \textbf{@@Questions@@beamer:}}@@
+- What is the total execution time and SBU spent on this \\
+  task?
+#+end_tb
+#+attr_latex: :options [x=502.16,y=126.89,s=13.7,l=13.7,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@#!/bin/bash \\
+@@beamer:@@#SBATCH -N 1 \\
+@@beamer:@@#SBATCH -n 1 \\
+@@beamer:@@#SBATCH -p rome \\
+@@beamer:@@#SBATCH -t 10 \\
+@@beamer:@@#SBATCH --array 0-999%10
+#+end_tb
+#+attr_latex: :options [x=502.16,y=224.99,s=13.7,l=13.68,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{cFFCB6B}{@@module@@beamer:}@@ load @@beamer:\textcolor{cF78C6C}{@@2024@@beamer:}@@ \\
+@@beamer:\textcolor{cFFCB6B}{@@module@@beamer:}@@ load Python/3.12.3-GCCcore-13.3.0
+#+end_tb
+#+attr_latex: :options [x=502.16,y=266.8,s=13.7,l=13.7,c=c546E7A,code]
+#+begin_tb
+@@beamer:\textit{@@# copy input data and scripts to working directory@@beamer:}@@ \\
+@@beamer:\textcolor{cFFCB6B}{@@cp@@beamer:} \textcolor{cC3E88D}{@@-r@@beamer:} \textcolor{cEEFFFF}{\$@@SLURM_SUBMIT_DIR@@beamer:}\textcolor{cC3E88D}{@@/input_mod@@beamer:} \textcolor{cEEFFFF}{\$@@TMPDIR@@beamer:}\textcolor{cC3E88D}{@@/@@beamer:}@@ \\
+@@beamer:\textcolor{cFFCB6B}{@@cp@@beamer:} \textcolor{cC3E88D}{@@-r@@beamer:} \textcolor{cEEFFFF}{\$@@SLURM_SUBMIT_DIR@@beamer:}\textcolor{cC3E88D}{@@/average.py@@beamer:} \textcolor{cEEFFFF}{\$@@TMPDIR@@beamer:}\textcolor{cC3E88D}{@@/@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=502.16,y=323.06,s=13.7,l=16.44,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c82AAFF}{@@cd@@beamer:} \$@@TMPDIR
+#+end_tb
+#+attr_latex: :options [x=502.16,y=351.19,s=13.7,l=16.44,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}@@TMPDIR = @@beamer:\textcolor{cEEFFFF}{\$@@TMPDIR@@beamer:}\textcolor{c89DDFF}{"}@@
+#+end_tb
+#+attr_latex: :options [x=502.16,y=379.29,s=13.7,l=13.7,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c546E7A}{\textit{@@# average data@@beamer:}}@@ \\
+input_file_path@@beamer:\textcolor{c89DDFF}{@@=@@beamer:}\textcolor{cFFCB6B}{@@input_mod/@@beamer:\$}\textcolor{cC3E88D}{@@{SLURM_ARRAY_TASK_ID}@@beamer:}\textcolor{cFFCB6B}{@@_*@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@echo@@beamer:} \textcolor{c89DDFF}{"}\textcolor{cC3E88D}{@@Analyzing file@@beamer::} \$@@input_file_path@@beamer:\textcolor{c89DDFF}{"}@@ \\
+@@beamer:\textcolor{cFFCB6B}{@@python3@@beamer:} \textcolor{cC3E88D}{@@average.py@@beamer:} \$@@input_file_path
+#+end_tb
+
+* QCG-PilotJob
+:PROPERTIES:
+:BEAMER_opt: pg=18,tx=68.15,ty=82.2,ts=31.01
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g18}
+
+* QCGPilot-Job
+:PROPERTIES:
+:BEAMER_opt: pg=19
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g19}
+#+attr_latex: :options [x=68.15,y=140,s=15.9,l=23.79,ind=22.52,bf=arial]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont \textcolor{c070809}{\textbf{@@Job manager inside SLURM@@beamer:}}}@@
+- Submits jobs within a single large allocation across multiple nodes.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=187.6,s=15.9,l=17.31,p=5.76,ind=22.52,bf=arial]
+#+begin_tb
+- Does not have to wait for small individual allocations like in SLURM arrays.
+- Optimizes resources for each job based on requirements such that the queue is \\
+  always full.
+- Possibility of restarting failed/timed out jobs.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=280.63,s=15.9,l=25.22,ind=22.52,bf=arial]
+#+begin_tb
+- One can also specify complex result-based job dependencies.
+
+@@beamer:{\fontsize{18}{21.6}\selectfont \textcolor{c070809}{\textbf{@@Some caveats and drawbacks@@beamer:}}}@@
+#+end_tb
+#+attr_latex: :options [x=68.15,y=329.66,s=15.9,l=17.3,p=5.79,ind=22.52,bf=arial]
+#+begin_tb
+- One needs to estimate, the total time of all the jobs combined.
+- Job/system state files get produced in the submission directory.
+- Might bring some complexity into execution of a Singularity containers with embedded \\
+  MPI-based codes.
+- When problems arise, the log files may say little.
+#+end_tb
+
+* Workflow
+:PROPERTIES:
+:BEAMER_opt: pg=20
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g20}
+#+attr_latex: :options [x=111.9,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+SLURM job script
+#+end_tb
+#+attr_latex: :options [x=764.66,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+Output
+#+end_tb
+#+attr_latex: :options [x=545.09,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+Executable
+#+end_tb
+#+attr_latex: :options [x=331.6,y=264.49,s=20.2,l=19.46,c=c070809,b]
+#+begin_tb
+QCG-PilotJob \\
+python script
+#+end_tb
+#+attr_latex: :options [x=82.13,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+Describes resources, loads
+#+end_tb
+#+attr_latex: :options [x=82.38,y=354.31,s=15.9,l=17.31]
+#+begin_tb
+the QCG-PilotJob module
+
+and runs the QCG-PilotJob
+#+end_tb
+#+attr_latex: :options [x=125.08,y=388.92,s=15.9,l=19.08]
+#+begin_tb
+python script
+#+end_tb
+#+attr_latex: :options [x=281,y=337.01,s=15.9,l=17.3]
+#+begin_tb
+Invokes the QCG-PilotJob
+
+Manager that aggregates all
+#+end_tb
+#+attr_latex: :options [x=287.75,y=371.62,s=15.9,l=17.3]
+#+begin_tb
+your jobs along with
+
+resources and conditions \\
+based on which jobs need
+#+end_tb
+#+attr_latex: :options [x=327.5,y=423.53,s=15.9,l=19.08]
+#+begin_tb
+to be invoked
+#+end_tb
+#+attr_latex: :options [x=487.66,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+This is the main application
+#+end_tb
+#+attr_latex: :options [x=490.62,y=354.31,s=15.9,l=19.08]
+#+begin_tb
+that the jobs execute
+#+end_tb
+#+attr_latex: :options [x=709.62,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+Job output with QCG-
+#+end_tb
+#+attr_latex: :options [x=728.12,y=354.31,s=15.9,l=19.08]
+#+begin_tb
+PilotJob metrics
+#+end_tb
+
+* QCGPilot-Job: Set up the environment
+:PROPERTIES:
+:BEAMER_opt: pg=21
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g21}
+#+attr_latex: :options [x=68.15,y=138.56,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- The *QCG-PilotJob* package is available as a module in the *2024* environment.
+#+end_tb
+#+attr_latex: :options [x=68.15,y=168.13,s=15.9,l=17.3,ind=22.02,bf=cal]
+#+begin_tb
+- Note that the environment from the login node is @@beamer:\textbf{\textit{@@not transferred@@beamer:}}@@ to the compute \\
+  nodes, unless defined in, e.g., the *.bashrc* file. Thus, you have to re-load the QCG- \\
+  PilotJob package in your job script.
+#+end_tb
+#+attr_latex: :options [x=154.28,y=325.17,s=15.9,l=18.74,c=cDDDDDD,code]
+#+begin_tb
+@@beamer:\$@@ module purge \\
+@@beamer:\$@@ module load 2024 \\
+@@beamer:\$@@ module load QCG-PilotJob/0.14.1-gfbf-2024a
+#+end_tb
+
+* Workflow
+:PROPERTIES:
+:BEAMER_opt: pg=22
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g22}
+#+attr_latex: :options [x=111.9,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+SLURM job script
+#+end_tb
+#+attr_latex: :options [x=764.66,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+Output
+#+end_tb
+#+attr_latex: :options [x=545.09,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+Executable
+#+end_tb
+#+attr_latex: :options [x=331.6,y=264.49,s=20.2,l=19.46,c=c7F7F7F,b]
+#+begin_tb
+QCG-PilotJob \\
+python script
+#+end_tb
+#+attr_latex: :options [x=82.13,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+Describes resources, loads
+#+end_tb
+#+attr_latex: :options [x=82.38,y=354.31,s=15.9,l=17.31]
+#+begin_tb
+the QCG-PilotJob module
+
+and runs the QCG-PilotJob
+#+end_tb
+#+attr_latex: :options [x=125.08,y=388.92,s=15.9,l=19.08]
+#+begin_tb
+python script
+#+end_tb
+#+attr_latex: :options [x=281,y=337.01,s=15.9,l=17.3]
+#+begin_tb
+Invokes the QCG-PilotJob
+
+Manager that aggregates all
+#+end_tb
+#+attr_latex: :options [x=287.75,y=371.62,s=15.9,l=17.3]
+#+begin_tb
+your jobs along with
+
+resources and conditions \\
+based on which jobs need
+#+end_tb
+#+attr_latex: :options [x=327.5,y=423.53,s=15.9,l=19.08]
+#+begin_tb
+to be invoked
+#+end_tb
+#+attr_latex: :options [x=487.66,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+This is the main application
+#+end_tb
+#+attr_latex: :options [x=490.62,y=354.31,s=15.9,l=19.08]
+#+begin_tb
+that the jobs execute
+#+end_tb
+#+attr_latex: :options [x=709.62,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+Job output with QCG-
+#+end_tb
+#+attr_latex: :options [x=728.12,y=354.31,s=15.9,l=19.08]
+#+begin_tb
+PilotJob metrics
+#+end_tb
+
+* QCGPilot-Job: SLURM job script
+:PROPERTIES:
+:BEAMER_opt: pg=23
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g23}
+#+attr_latex: :options [x=207.31,y=199.09,s=15.9,l=19.08,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@#!/bin/bash
+#+end_tb
+#+attr_latex: :options [x=207.31,y=237.33,s=15.9,l=18.75,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@#SBATCH -N 1 \\
+@@beamer:@@#SBATCH -n 16 \\
+@@beamer:@@#SBATCH -p rome \\
+@@beamer:@@#SBATCH -t 10
+#+end_tb
+#+attr_latex: :options [x=207.31,y=333.24,s=15.9,l=19.46,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{cFFCB6B}{@@module@@beamer:}@@ load @@beamer:\textcolor{cF78C6C}{@@2024@@beamer:}@@ \\
+@@beamer:\textcolor{cFFCB6B}{@@module@@beamer:}@@ load QCG-PilotJob/0.14.1-gfbf-2024a
+#+end_tb
+#+attr_latex: :options [x=207.31,y=390.91,s=15.9,l=19.08,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{cFFCB6B}{@@python@@beamer:}@@ test.py
+#+end_tb
+#+attr_latex: :options [x=703.86,y=147.28,s=23.8,l=28.56,c=cF2985E,b]
+#+begin_tb
+run.sh
+#+end_tb
+
+* Workflow
+:PROPERTIES:
+:BEAMER_opt: pg=24
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g24}
+#+attr_latex: :options [x=111.9,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+SLURM job script
+#+end_tb
+#+attr_latex: :options [x=764.66,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+Output
+#+end_tb
+#+attr_latex: :options [x=545.09,y=274.1,s=20.2,l=24.24,c=cFFFFFF,b]
+#+begin_tb
+Executable
+#+end_tb
+#+attr_latex: :options [x=331.6,y=264.49,s=20.2,l=19.46,c=c070809,b]
+#+begin_tb
+QCG-PilotJob \\
+python script
+#+end_tb
+#+attr_latex: :options [x=82.13,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+Describes resources, loads
+#+end_tb
+#+attr_latex: :options [x=82.38,y=354.31,s=15.9,l=17.31]
+#+begin_tb
+the QCG-PilotJob module
+
+and runs the QCG-PilotJob
+#+end_tb
+#+attr_latex: :options [x=125.08,y=388.92,s=15.9,l=19.08]
+#+begin_tb
+python script
+#+end_tb
+#+attr_latex: :options [x=281,y=337.01,s=15.9,l=17.3]
+#+begin_tb
+Invokes the QCG-PilotJob
+
+Manager that aggregates all
+#+end_tb
+#+attr_latex: :options [x=287.75,y=371.62,s=15.9,l=17.3]
+#+begin_tb
+your jobs along with
+
+resources and conditions \\
+based on which jobs need
+#+end_tb
+#+attr_latex: :options [x=327.5,y=423.53,s=15.9,l=19.08]
+#+begin_tb
+to be invoked
+#+end_tb
+#+attr_latex: :options [x=487.66,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+This is the main application
+#+end_tb
+#+attr_latex: :options [x=490.62,y=354.31,s=15.9,l=19.08]
+#+begin_tb
+that the jobs execute
+#+end_tb
+#+attr_latex: :options [x=709.62,y=337.01,s=15.9,l=19.08]
+#+begin_tb
+Job output with QCG-
+#+end_tb
+#+attr_latex: :options [x=728.12,y=354.31,s=15.9,l=19.08]
+#+begin_tb
+PilotJob metrics
+#+end_tb
+
+* QCGPilot-Job: Python script
+:PROPERTIES:
+:BEAMER_opt: pg=25
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g25}
+#+attr_latex: :options [x=68.15,y=138.56,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- Working with *QCG-PilotJob* takes a few mandatory steps@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=98.17,y=168.13,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- Creating an instance of the *QCG-PilotJob Manager*
+#+end_tb
+#+attr_latex: :options [x=128.18,y=196.96,s=15.9,l=19.08,ind=22.03,bf=cal]
+#+begin_tb
+- creation of a class object
+#+end_tb
+#+attr_latex: :options [x=98.17,y=226.53,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- Waiting for all submitted jobs to finish
+#+end_tb
+#+attr_latex: :options [x=128.18,y=256.1,s=15.9,l=19.08,ind=22.03,bf=cal]
+#+begin_tb
+- will wait until some or all submitted to the *QCG-PilotJob Manager* jobs finish
+#+end_tb
+#+attr_latex: :options [x=98.17,y=284.95,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- Calling for the *finish()* method at the end of the Python script
+#+end_tb
+#+attr_latex: :options [x=128.18,y=314.52,s=15.9,l=17.3,ind=22.03,bf=cal]
+#+begin_tb
+- this method terminates the background thread in which the instance of a \\
+  *QCG-PilotJob Manager* has been run
+#+end_tb
+
+* QCGPilot-Job: Python script
+:PROPERTIES:
+:BEAMER_opt: pg=26
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g26}
+#+attr_latex: :options [x=207.31,y=177.96,s=15.9,l=19.08,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c89DDFF}{\textit{@@from@@beamer:}}@@ qcg@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@pilotjob@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@api@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@manager @@beamer:\textcolor{c89DDFF}{\textit{@@import@@beamer:}}@@ LocalManager
+#+end_tb
+#+attr_latex: :options [x=207.31,y=216.2,s=15.9,l=18.75,c=cEEFFFF,code]
+#+begin_tb
+manager @@beamer:\textcolor{cC792EA}{@@=@@beamer:}@@ LocalManager@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:'}\textcolor{cC3E88D}{@@available resources@@beamer::} \textcolor{c89DDFF}{'@@,@@beamer:}@@ manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@resources@@beamer:\textcolor{c89DDFF}{@@())@@beamer:}@@ \\
+manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@wait4all@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@finish@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=189.31,y=404.57,s=18,l=19.46,c=cDDDDDD,code]
+#+begin_tb
+available resources: {@@beamer:'@@total_nodes@@beamer:'@@: 1, @@beamer:'@@total_cores@@beamer:'@@: 96, @@beamer:'@@used_cores@@beamer:'@@: 0,
+
+@@beamer:'@@free_cores@@beamer:'@@: 96}
+#+end_tb
+#+attr_latex: :options [x=711.58,y=140.1,s=20.2,l=24.24,c=cF2985E,b]
+#+begin_tb
+test.py
+#+end_tb
+#+attr_latex: :options [x=636.18,y=369.71,s=20.2,l=24.24,c=cF2985E,b]
+#+begin_tb
+Example output
+#+end_tb
+
+* QCGPilot-Job: Python script
+:PROPERTIES:
+:BEAMER_opt: pg=27
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g27}
+#+attr_latex: :options [x=207.31,y=177.96,s=15.9,l=19.08,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c89DDFF}{\textit{@@from@@beamer:}}@@ qcg@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@pilotjob@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@api@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@manager @@beamer:\textcolor{c89DDFF}{\textit{@@import@@beamer:}}@@ LocalManager
+#+end_tb
+#+attr_latex: :options [x=207.31,y=216.2,s=15.9,l=18.75,c=cEEFFFF,code]
+#+begin_tb
+manager @@beamer:\textcolor{cC792EA}{@@=@@beamer:}@@ LocalManager@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:'}\textcolor{cC3E88D}{@@available resources@@beamer::} \textcolor{c89DDFF}{'@@,@@beamer:}@@ manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@resources@@beamer:\textcolor{c89DDFF}{@@())@@beamer:}@@ \\
+manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@wait4all@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@finish@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=189.31,y=404.57,s=18,l=19.46,c=cDDDDDD,code]
+#+begin_tb
+available resources: {@@beamer:'@@total_nodes@@beamer:'@@: 1, @@beamer:'@@total_cores@@beamer:'@@: 96, @@beamer:'@@used_cores@@beamer:'@@: 0,
+
+@@beamer:'@@free_cores@@beamer:'@@: 96}
+#+end_tb
+#+attr_latex: :options [x=13.58,y=228.98,s=18,l=21.6,b]
+#+begin_tb
+Wait for all jobs to
+#+end_tb
+#+attr_latex: :options [x=62.47,y=250.63,s=18,l=21.6,b]
+#+begin_tb
+finish
+#+end_tb
+#+attr_latex: :options [x=32.1,y=321.07,s=18,l=21.6,b]
+#+begin_tb
+Finalize the
+#+end_tb
+#+attr_latex: :options [x=37.99,y=342.72,s=18,l=21.6,b]
+#+begin_tb
+execution
+#+end_tb
+#+attr_latex: :options [x=13.41,y=167.14,s=18,l=21.6,b]
+#+begin_tb
+Create an object
+#+end_tb
+#+attr_latex: :options [x=711.58,y=140.1,s=20.2,l=24.24,c=cF2985E,b]
+#+begin_tb
+test.py
+#+end_tb
+#+attr_latex: :options [x=636.18,y=369.71,s=20.2,l=24.24,c=cF2985E,b]
+#+begin_tb
+Example output
+#+end_tb
+
+* QCGPilot-Job: Python script
+:PROPERTIES:
+:BEAMER_opt: pg=28
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g28}
+#+attr_latex: :options [x=786.94,y=482.25,s=18,l=21.62,b]
+#+begin_tb
+Total number of \\
+nodes and cores
+
+within an allocation
+#+end_tb
+#+attr_latex: :options [x=817.03,y=374,s=18,l=21.6,b]
+#+begin_tb
+Available cores
+#+end_tb
+#+attr_latex: :options [x=207.31,y=177.96,s=15.9,l=19.08,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c89DDFF}{\textit{@@from@@beamer:}}@@ qcg@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@pilotjob@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@api@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@manager @@beamer:\textcolor{c89DDFF}{\textit{@@import@@beamer:}}@@ LocalManager
+#+end_tb
+#+attr_latex: :options [x=207.31,y=216.2,s=15.9,l=18.75,c=cEEFFFF,code]
+#+begin_tb
+manager @@beamer:\textcolor{cC792EA}{@@=@@beamer:}@@ LocalManager@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:'}\textcolor{cC3E88D}{@@available resources@@beamer::} \textcolor{c89DDFF}{'@@,@@beamer:}@@ manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@resources@@beamer:\textcolor{c89DDFF}{@@())@@beamer:}@@ \\
+manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@wait4all@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@finish@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=189.31,y=404.57,s=18,l=19.46,c=cDDDDDD,code]
+#+begin_tb
+available resources: {@@beamer:'@@total_nodes@@beamer:'@@: 1, @@beamer:'@@total_cores@@beamer:'@@: 96, @@beamer:'@@used_cores@@beamer:'@@: 0,
+
+@@beamer:'@@free_cores@@beamer:'@@: 96}
+#+end_tb
+#+attr_latex: :options [x=13.58,y=228.98,s=18,l=21.6,b]
+#+begin_tb
+Wait for all jobs to
+#+end_tb
+#+attr_latex: :options [x=62.47,y=250.63,s=18,l=21.6,b]
+#+begin_tb
+finish
+#+end_tb
+#+attr_latex: :options [x=32.1,y=321.07,s=18,l=21.6,b]
+#+begin_tb
+Finalize the
+#+end_tb
+#+attr_latex: :options [x=37.99,y=342.72,s=18,l=21.6,b]
+#+begin_tb
+execution
+#+end_tb
+#+attr_latex: :options [x=13.41,y=167.14,s=18,l=21.6,b]
+#+begin_tb
+Create an object
+#+end_tb
+#+attr_latex: :options [x=711.58,y=140.1,s=20.2,l=24.24,c=cF2985E,b]
+#+begin_tb
+test.py
+#+end_tb
+#+attr_latex: :options [x=636.18,y=369.71,s=20.2,l=24.24,c=cF2985E,b]
+#+begin_tb
+Example output
+#+end_tb
+
+* QCGPilot-Job: Create jobs
+:PROPERTIES:
+:BEAMER_opt: pg=29
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g29}
+#+attr_latex: :options [x=68.15,y=138.56,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- To execute multiple jobs within a single SLURM allocation we need to@@beamer::@@
+#+end_tb
+#+attr_latex: :options [x=98.17,y=168.13,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- Create an object of the *Jobs* class
+#+end_tb
+#+attr_latex: :options [x=98.17,y=196.96,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- Populate it with some parameters (describe jobs)
+#+end_tb
+#+attr_latex: :options [x=98.17,y=226.53,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- Submit the created object to the *QCG-PilotJob Manager*
+#+end_tb
+#+attr_latex: :options [x=110.66,y=286.73,s=15.9,l=18.75,c=cEEFFFF,code]
+#+begin_tb
+... \\
+@@beamer:\textcolor{c89DDFF}{\textit{@@from@@beamer:}}@@ qcg@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@pilotjob@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@api@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@job @@beamer:\textcolor{c89DDFF}{\textit{@@import@@beamer:}}@@ Jobs
+#+end_tb
+#+attr_latex: :options [x=110.66,y=344.43,s=15.9,l=18.74,c=cEEFFFF,code]
+#+begin_tb
+jobs @@beamer:\textcolor{cC792EA}{@@=@@beamer:}@@ Jobs@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+jobs@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@add@@beamer:\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cFF5370}{@@...@@beamer:}\textcolor{c89DDFF}{@@)@@beamer:}@@ \\
+jobs_ids = manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@submit@@beamer:\textcolor{c89DDFF}{@@(@@beamer:}@@jobs@@beamer:\textcolor{c89DDFF}{@@)@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:'}\textcolor{cC3E88D}{@@submited jobs@@beamer::} \textcolor{c89DDFF}{'@@,@@beamer:} \textcolor{cB2CCD6}{@@str@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}@@job_ids@@beamer:\textcolor{c89DDFF}{@@))@@beamer:}@@ \\
+@@beamer:\textcolor{cFFFFFF}{@@...@@beamer:}@@
+#+end_tb
+
+* QCGPilot-Job: Job description (main parameters)
+:PROPERTIES:
+:BEAMER_opt: pg=30
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g30}
+#+attr_latex: :options [x=68.15,y=161.78,s=15.9,l=23.06,ind=22.02,bf=cal]
+#+begin_tb
+- *name* - the job name
+- *exec* - path to the executable program
+#+end_tb
+#+attr_latex: :options [x=68.15,y=208.65,s=15.9,l=23.06,p=0.03,ind=22.02,bf=cal]
+#+begin_tb
+- *args* - arguments for the program
+- *script* - bash script content
+- *stdin* - path to a file whose content goes to the standard input stream
+- *stdout* - file that receives the standard output
+- *stderr* - where the error stream is saved
+- *modules* - list of modules to load before the job starts
+- *numCores* - number of required cores
+- *numNodes* - how many nodes the job needs
+- *iteration* - iterations definition
+#+end_tb
+#+attr_latex: :options [x=68.15,y=418.49,s=15.9,l=19.08,ind=22.02,bf=cal]
+#+begin_tb
+- *model* - model of execution
+#+end_tb
+
+* QCGPilot-Job: Job description (main parameters)
+:PROPERTIES:
+:BEAMER_opt: pg=31
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g31}
+#+attr_latex: :options [x=68.15,y=161.78,s=15.9,l=23.06,ind=22.02,bc=cE7303A,bf=cal]
+#+begin_tb
+- @@beamer:\textcolor{cE7303A}{\textbf{@@name@@beamer:}}@@ - the job name
+- @@beamer:\textcolor{cE7303A}{\textbf{@@exec@@beamer:}}@@ - path to the executable program
+#+end_tb
+#+attr_latex: :options [x=68.15,y=208.65,s=15.9,l=23.06,p=0.03,ind=22.02,bc=cE7303A,bf=cal]
+#+begin_tb
+- @@beamer:\textcolor{cE7303A}{\textbf{@@args@@beamer:}}@@ - arguments for the program
+- *script* - bash script content
+- *stdin* - path to a file whose content goes to the standard input stream
+- *stdout* - file that receives the standard output
+- *stderr* - where the error stream is saved
+- *modules* - list of modules to load before the job starts
+- *numCores* - number of required cores
+- *numNodes* - how many nodes the job needs
+- *iteration* - iterations definition
+#+end_tb
+#+attr_latex: :options [x=68.15,y=418.49,s=15.9,l=19.08,c=c7B2882,ind=22.02,bf=cal]
+#+begin_tb
+- *model* - model of execution
+#+end_tb
+
+* QCGPilot-Job: execution models
+:PROPERTIES:
+:BEAMER_opt: pg=32
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g32}
+#+attr_latex: :options [x=68.15,y=208.4,s=15.9,l=23.07,ind=22.02,bc=c2CA055,bf=cal]
+#+begin_tb
+- *default* - only a single process is launched within the allocation
+- *threads* - is designed for running OpenMP tasks on a single node
+#+end_tb
+#+attr_latex: :options [x=68.15,y=255.28,s=15.9,l=23.06,ind=22.02,bc=c2CA055,bf=cal]
+#+begin_tb
+- *openmpi* - the processes are started with the mpirun command
+- *intelmpi* - same but for Intel MPI
+- *srunmpi* - the processes are started with the srun command
+#+end_tb
+#+attr_latex: :options [x=68.15,y=348.31,s=15.9,l=23.06,c=c0000FF,b]
+#+begin_tb
+@@beamer:\textcolor{c000000}{\textmd{@@Read more about execution models in the official docs@@beamer::}}@@ \\
+[[https://qcg-pilotjob.readthedocs.io/en/develop/execution_models.html][@@beamer:\uline{@@https://qcg-pilotjob.readthedocs.io/en/develop/execution_models.html@@beamer:}@@]]
+#+end_tb
+
+* QCGPilot-Job: Calling for an executable
+:PROPERTIES:
+:BEAMER_opt: pg=33
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g33}
+#+attr_latex: :options [x=207.31,y=149.59,s=15.9,l=18.74,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c89DDFF}{\textit{@@from@@beamer:}}@@ qcg@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@pilotjob@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@api@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@manager @@beamer:\textcolor{c89DDFF}{\textit{@@import@@beamer:}}@@ LocalManager \\
+@@beamer:\textcolor{c89DDFF}{\textit{@@from@@beamer:}}@@ qcg@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@pilotjob@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@api@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@job @@beamer:\textcolor{c89DDFF}{\textit{@@import@@beamer:}}@@ Jobs
+#+end_tb
+#+attr_latex: :options [x=207.31,y=207.29,s=15.9,l=18.74,c=cEEFFFF,code]
+#+begin_tb
+manager @@beamer:\textcolor{cC792EA}{@@=@@beamer:}@@ LocalManager@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+jobs @@beamer:\textcolor{cC792EA}{@@=@@beamer:}@@ Jobs@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=207.31,y=264.98,s=15.9,l=19.08,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{cEEFFFF}{@@jobs@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@add@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cFF5370}{@@script@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@echo @@beamer:"@@job @@beamer:\$\textcolor{cF78C6C}{@@{it}@@beamer:}@@ executed at `date` @ `hostname`@@beamer:"\textcolor{c89DDFF}{'@@,@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=239.96,y=283.73,s=15.9,l=19.46,c=cFF5370,code]
+#+begin_tb
+name@@beamer:\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}\textcolor{cC3E88D}{@@test_job@@beamer:}\textcolor{c89DDFF}{'@@,@@beamer:}@@ \\
+stdout@@beamer:\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}\textcolor{cC3E88D}{@@job.out.@@beamer:\$}\textcolor{cF78C6C}{@@{it}@@beamer:}\textcolor{c89DDFF}{'@@,@@beamer:}@@ \\
+iteration@@beamer:\textcolor{cC792EA}{@@=@@beamer:}\textcolor{cF78C6C}{@@4@@beamer:}\textcolor{c89DDFF}{@@)@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=207.31,y=360.89,s=15.9,l=18.74,c=cEEFFFF,code]
+#+begin_tb
+job_names @@beamer:\textcolor{cC792EA}{@@=@@beamer:}@@ manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@submit@@beamer:\textcolor{c89DDFF}{@@(@@beamer:}@@jobs@@beamer:\textcolor{c89DDFF}{@@)@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:'}\textcolor{cC3E88D}{@@submited job names@@beamer::} \textcolor{c89DDFF}{'@@,@@beamer:} \textcolor{cB2CCD6}{@@str@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}@@job_names@@beamer:\textcolor{c89DDFF}{@@))@@beamer:}@@ \\
+job_status @@beamer:\textcolor{cC792EA}{@@=@@beamer:}@@ manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@status@@beamer:\textcolor{c89DDFF}{@@(@@beamer:}@@job_names@@beamer:\textcolor{c89DDFF}{@@)@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:'}\textcolor{cC3E88D}{@@job status@@beamer::} \textcolor{c89DDFF}{'@@,@@beamer:}@@ job_status@@beamer:\textcolor{c89DDFF}{@@)@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=207.31,y=456.8,s=15.9,l=19.46,c=cEEFFFF,code]
+#+begin_tb
+manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@wait4all@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+manager@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@finish@@beamer:\textcolor{c89DDFF}{@@()@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=703.86,y=120.64,s=20.2,l=24.24,c=cF2985E,b]
+#+begin_tb
+test.py
+#+end_tb
+
+* Hands-on
+:PROPERTIES:
+:BEAMER_opt: pg=34,tx=71.13,ty=292.27,ts=66.34,tc=cFFFFFF
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g34}
+
+* Hands-on #3
+:PROPERTIES:
+:BEAMER_opt: pg=35
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g35}
+#+attr_latex: :options [x=69,y=137.89,s=18,l=21.6,b]
+#+begin_tb
+Task
+#+end_tb
+#+attr_latex: :options [x=69,y=161.7,s=15.9,l=17.3,ind=14.2,bf=cal]
+#+begin_tb
+- Execute *512 independent short jobs* on two nodes on the \\
+  "rome" partition. Each node in that partition \\
+  has 128 cores.
+#+end_tb
+#+attr_latex: :options [x=69,y=244.63,s=15.9,l=23.78,b,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont @@Steps@@beamer:}@@
+- @@beamer:\textmd{@@Go to@@beamer:}@@ hands-on/example_03
+#+end_tb
+#+attr_latex: :options [x=69,y=292.22,s=15.9,l=23.07,ind=14.2,bf=cal]
+#+begin_tb
+- Take a look at *qcg_job.py* and *qcg_job.sh*
+- Submit the SLURM job script, check the results
+#+end_tb
+#+attr_latex: :options [x=69,y=365.78,s=15.9,l=23.09,p=0.35,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont \textbf{@@Questions@@beamer:}}@@
+- What host names are reported?
+- List the additional files and directories that appear.
+#+end_tb
+#+attr_latex: :options [x=542.11,y=122.05,s=12.3,l=14.43,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c89DDFF}{\textit{@@from@@beamer:}}@@ qcg@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@pilotjob@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@api@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@job @@beamer:\textcolor{c89DDFF}{\textit{@@import@@beamer:}}@@ Jobs \\
+@@beamer:\textcolor{c89DDFF}{\textit{@@from@@beamer:}}@@ qcg@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@pilotjob@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@api@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@manager @@beamer:\textcolor{c89DDFF}{\textit{@@import@@beamer:}}@@ LocalManager
+#+end_tb
+#+attr_latex: :options [x=542.11,y=165.33,s=12.2,l=14.4,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@# create the QCG manager and the Jobs object \\
+@@beamer:\textcolor{cEEFFFF}{@@manager@@beamer:} \textcolor{cC792EA}{@@=@@beamer:} \textcolor{cEEFFFF}{@@LocalManager@@beamer:}\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+@@beamer:\textcolor{cEEFFFF}{@@jobs@@beamer:} \textcolor{cC792EA}{@@=@@beamer:} \textcolor{cEEFFFF}{@@Jobs@@beamer:}\textcolor{c89DDFF}{@@()@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=542.11,y=223,s=12.3,l=14.43,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@# create 512 independent jobs \\
+@@beamer:\textcolor{c89DDFF}{@@for@@beamer:} \textcolor{cEEFFFF}{@@job@@beamer:} \textcolor{c89DDFF}{@@in@@beamer:} \textcolor{c82AAFF}{@@range@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cF78C6C}{@@512@@beamer:}\textcolor{c89DDFF}{@@):@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=553.11,y=251.85,s=12.3,l=14.43,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c546E7A}{\textit{@@# define a job@@beamer:}}@@ \\
+jobs@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@add@@beamer:\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cFF5370}{@@name@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{"}\textcolor{cC3E88D}{@@job_@@beamer:}\textcolor{cF78C6C}{@@{}@@beamer:}\textcolor{c89DDFF}{"@@.@@beamer:}@@format@@beamer:\textcolor{c89DDFF}{@@(@@beamer:}@@job@@beamer:\textcolor{c89DDFF}{@@),@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=577.89,y=280.7,s=12.2,l=14.4,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{cFF5370}{@@exec@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@hostname@@beamer:\textcolor{c89DDFF}{'@@,@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@stdout@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@output/job.@@beamer:\textcolor{cF78C6C}{@@{}@@beamer:}@@.out@@beamer:\textcolor{c89DDFF}{'@@.@@beamer:}\textcolor{cEEFFFF}{@@format@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cEEFFFF}{@@job@@beamer:}\textcolor{c89DDFF}{@@),@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@stderr@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@output/job.@@beamer:\textcolor{cF78C6C}{@@{}@@beamer:}@@.err@@beamer:\textcolor{c89DDFF}{'@@.@@beamer:}\textcolor{cEEFFFF}{@@format@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cEEFFFF}{@@job@@beamer:}\textcolor{c89DDFF}{@@),@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@model@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@default@@beamer:\textcolor{c89DDFF}{'@@,@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@numCores@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{@@{ @@beamer:"}@@exact@@beamer:\textcolor{c89DDFF}{"@@ :@@beamer:} \textcolor{cF78C6C}{@@1@@beamer:}\textcolor{c89DDFF}{@@},@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@iteration@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{cF78C6C}{@@1@@beamer:}\textcolor{c89DDFF}{@@)@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=542.11,y=381.65,s=12.3,l=14.42,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:"}@@-- submit jobs --@@beamer:\textcolor{c89DDFF}{"@@)@@beamer:}@@ \\
+@@beamer:\textcolor{cEEFFFF}{@@manager@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@submit@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cEEFFFF}{@@jobs@@beamer:}\textcolor{c89DDFF}{@@)@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:"}@@-- wait for all jobs --@@beamer:\textcolor{c89DDFF}{"@@)@@beamer:}@@ \\
+@@beamer:\textcolor{cEEFFFF}{@@manager@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@wait4all@@beamer:}\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+@@beamer:\textcolor{cEEFFFF}{@@manager@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@finish@@beamer:}\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:"}@@-- finished@@beamer:\textcolor{c89DDFF}{"@@)@@beamer:}@@
+#+end_tb
+
+* Hands-on #4
+:PROPERTIES:
+:BEAMER_opt: pg=36
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g36}
+#+attr_latex: :options [x=69,y=136.45,s=15.9,l=21.63,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont \textbf{@@Task@@beamer:}}@@
+- Do the task of Hands-on #2 with QCG-PilotJob.
+- Aggregate the results in one CSV file.
+#+end_tb
+#+attr_latex: :options [x=69,y=225.88,s=15.9,l=20.91,p=0.71,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont \textbf{@@Steps@@beamer:}}@@
+- Go to *hands-on/example_04*
+- Take a look at *README.md*, *qcg_job_v0.py* and *qcg_job.sh*
+- Extract the input data (*input.tar.gz*)
+- Submit the SLURM job script, check the results
+#+end_tb
+#+attr_latex: :options [x=69,y=357.84,s=15.9,l=15.87,p=5.76,ind=14.2,bf=cal]
+#+begin_tb
+@@beamer:{\fontsize{18}{21.6}\selectfont \textbf{@@Steps@@beamer:}}@@
+- The @@beamer:\textbf{@@*v0@@beamer:}@@ script has a problem. Can you spot it?
+- Execute *qcg_job_v1.py*, compare results with the results \\
+  from *qcg_job_v0.py*
+#+end_tb
+#+attr_latex: :options [x=542.11,y=65.62,s=12.3,l=14.76,c=cEEFFFF,code]
+#+begin_tb
+job_names @@beamer:\textcolor{cC792EA}{@@=@@beamer:} \textcolor{c89DDFF}{@@[]@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=542.11,y=94.47,s=12.3,l=14.42,c=c546E7A,code]
+#+begin_tb
+@@beamer:\textit{@@# scan input directory for CVS files@@beamer:}@@ \\
+@@beamer:\textcolor{c89DDFF}{\textit{@@for@@beamer:}} \textcolor{cEEFFFF}{@@filename@@beamer:} \textcolor{c89DDFF}{\textit{@@in@@beamer:}} \textcolor{cEEFFFF}{@@glob@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cEEFFFF}{@@os@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@path@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@join@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:"}\textcolor{cC3E88D}{@@input/*.csv@@beamer:}\textcolor{c89DDFF}{"@@),@@beamer:} \textcolor{cFF5370}{@@recursive@@beamer:} \textcolor{cC792EA}{@@=@@beamer:} \textcolor{cF78C6C}{@@False@@beamer:}\textcolor{c89DDFF}{@@):@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=553.11,y=123.32,s=12.3,l=14.42,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@# determine the job name and append it to the list \\
+@@beamer:\textcolor{cEEFFFF}{@@job_names@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@append@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cEEFFFF}{@@os@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@path@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@basename@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cEEFFFF}{@@filename@@beamer:}\textcolor{c89DDFF}{@@))@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=542.11,y=166.59,s=12.2,l=14.4,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@# create the QCG manager and the Jobs object \\
+@@beamer:\textcolor{cEEFFFF}{@@manager@@beamer:} \textcolor{cC792EA}{@@=@@beamer:} \textcolor{cEEFFFF}{@@LocalManager@@beamer:}\textcolor{c89DDFF}{@@()@@beamer:}@@ \\
+@@beamer:\textcolor{cEEFFFF}{@@jobs@@beamer:} \textcolor{cC792EA}{@@=@@beamer:} \textcolor{cEEFFFF}{@@Jobs@@beamer:}\textcolor{c89DDFF}{@@()@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=542.11,y=224.27,s=12.3,l=14.42,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@# loop over all files and populate the list of jobs \\
+@@beamer:\textcolor{c89DDFF}{@@for@@beamer:} \textcolor{cC3E88D}{@@jname@@beamer:} \textcolor{c89DDFF}{@@in@@beamer:} \textcolor{cC3E88D}{@@job_names@@beamer:}\textcolor{c89DDFF}{@@:@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=553.11,y=253.12,s=12.3,l=14.42,c=cEEFFFF,code]
+#+begin_tb
+@@beamer:\textcolor{c82AAFF}{@@print@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:"}\textcolor{cC3E88D}{@@submit@@beamer:} \textcolor{cF78C6C}{@@{}@@beamer:}\textcolor{c89DDFF}{"@@.@@beamer:}@@format@@beamer:\textcolor{c89DDFF}{@@(@@beamer:}@@jname@@beamer:\textcolor{c89DDFF}{@@))@@beamer:}@@ \\
+jobs@@beamer:\textcolor{c89DDFF}{@@.@@beamer:}@@add@@beamer:\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cFF5370}{@@name@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}@@jname@@beamer:\textcolor{c89DDFF}{@@,@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=577.89,y=281.97,s=12.3,l=14.42,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{cFF5370}{@@exec@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@python3@@beamer:\textcolor{c89DDFF}{'@@,@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@args@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{@@[@@beamer:"}@@average.py@@beamer:\textcolor{c89DDFF}{"@@,@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=572.38,y=310.82,s=12.2,l=14.4,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{cEEFFFF}{@@os@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@path@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@join@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:"}@@input@@beamer:\textcolor{c89DDFF}{"@@,@@beamer:} \textcolor{cEEFFFF}{@@jname@@beamer:}\textcolor{c89DDFF}{@@)],@@beamer:}@@
+
+@@beamer:\textcolor{cFF5370}{@@stdout@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@average_@@beamer:\textcolor{cF78C6C}{@@{}@@beamer:}\textcolor{c89DDFF}{'@@.@@beamer:}\textcolor{cEEFFFF}{@@format@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cEEFFFF}{@@jname@@beamer:}\textcolor{c89DDFF}{@@),@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@stderr@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@job.@@beamer:\textcolor{cF78C6C}{@@{}@@beamer:}@@.err@@beamer:\textcolor{c89DDFF}{'@@.@@beamer:}\textcolor{cEEFFFF}{@@format@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cEEFFFF}{@@jname@@beamer:}\textcolor{c89DDFF}{@@),@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@modules@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{@@[@@beamer:}@@
+
+@@beamer:\textcolor{c89DDFF}{"}@@2024@@beamer:\textcolor{c89DDFF}{"@@, @@beamer:"}@@Python/3.12.3-GCCcore-13.3.0@@beamer:\textcolor{c89DDFF}{"@@],@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=577.89,y=382.92,s=12.3,l=14.42,c=cFF5370,code]
+#+begin_tb
+iteration@@beamer:\textcolor{cC792EA}{@@=@@beamer:}\textcolor{cF78C6C}{@@1@@beamer:}@@ \\
+@@beamer:\textcolor{c89DDFF}{@@)@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=542.11,y=426.19,s=12.3,l=14.42,c=c546E7A,i,code]
+#+begin_tb
+@@beamer:@@# add a job for the aggregation of the results \\
+@@beamer:\textcolor{cEEFFFF}{@@jobs@@beamer:}\textcolor{c89DDFF}{@@.@@beamer:}\textcolor{cEEFFFF}{@@add@@beamer:}\textcolor{c89DDFF}{@@(@@beamer:}\textcolor{cFF5370}{@@name@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{"}\textcolor{cC3E88D}{@@aggregate@@beamer:}\textcolor{c89DDFF}{"@@,@@beamer:}@@
+#+end_tb
+#+attr_latex: :options [x=566.86,y=455.04,s=12.3,l=14.42,c=cC3E88D,code]
+#+begin_tb
+@@beamer:\textcolor{cFF5370}{@@script@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@cat average_*.csv | sort@@beamer:\textcolor{c89DDFF}{'@@,@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@stdout@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@result.csv@@beamer:\textcolor{c89DDFF}{'@@,@@beamer:}@@ \\
+@@beamer:\textcolor{cFF5370}{@@stderr@@beamer:}\textcolor{cC792EA}{@@=@@beamer:}\textcolor{c89DDFF}{'}@@aggregate.err@@beamer:\textcolor{c89DDFF}{'@@)@@beamer:}@@
+#+end_tb
+
+* Abbreviations
+:PROPERTIES:
+:BEAMER_opt: pg=30
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g30}
+#+attr_latex: :options [x=68.15,y=161.78,s=15.9,l=23.06,ind=22.02,bf=cal]
+#+begin_tb
+- Message Passing Interface (MPI)
+- Shared memory (SHM)
+- System billing unit (SBU)
+#+end_tb
+
+* Have fun! :)
+:PROPERTIES:
+:BEAMER_opt: pg=37,tx=642.26,ty=464.8,ts=23.81
+:END:
+#+beamer: \slidegraphics{figures/qcg-pilotjob-slides/g37}
+
