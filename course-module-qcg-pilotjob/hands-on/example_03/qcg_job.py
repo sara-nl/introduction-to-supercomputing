@@ -1,5 +1,9 @@
+import os
 from qcg.pilotjob.api.job import Jobs
 from qcg.pilotjob.api.manager import LocalManager
+
+# the jobs write into output/, which git does not track
+os.makedirs("output", exist_ok=True)
 
 # create the QCG manager and the Jobs object
 manager = LocalManager() 

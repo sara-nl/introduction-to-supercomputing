@@ -1,6 +1,6 @@
 # Average algorithm
 
-Compute the average of one column in several CSV files. Aggregate the results in one output CSV file `results.csv`. This example is same as `example_02` from this hands-on.
+Compute the average of one column in several CSV files. Aggregate the results in one output CSV file `result.csv`. This example is same as `example_02` from this hands-on.
 
 ## Usage
 1. Extract input data from the tarball
@@ -19,6 +19,15 @@ sbatch qcg_job.sh
 
 5. Compare `qcg_job_v0.py` to `qcg_job_v1.py`, `qcg_job_v2.py`, `qcg_job_v3.py` and `qcg_job_v4.py`.
 
+The final version, `qcg_job_v4.py`, checks that every selected average task
+succeeds before submitting aggregation. It writes the selected output filenames
+to `selected.json` in its own `qcg-averages-*` directory under the job's `$TMPDIR`; after the job that directory is gone, and the file is inside the archive the job leaves in `results/`. The aggregation job runs
+`aggregate.py` with that directory as its only argument, so selecting all 1000
+inputs does not create a shell command containing every output path. The helper
+reads only the listed files, requires one finite mean for each selected dataset,
+and sorts the rows into `result.csv`. A missing or malformed output makes the
+aggregation task fail; unrelated CSV files are excluded.
+
 6. Estimate the total execution time and SBUs spent on this task.
 
 The required SBUs can be estimated with the `sacct` tool:
@@ -36,4 +45,4 @@ The raw CPU time in this example is 7232 seconds. It can be converted to SBUs:
 ```
 
 ## Data source
-https://www.ncdc.noaa.gov/ghcnd-data-access
+https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily
