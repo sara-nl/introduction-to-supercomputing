@@ -23,4 +23,4 @@ sbatch array_job.sh
 5. How much time did it take to finish the job? How many SBUs were spent?
 
 ## Data source
-https://www.ncdc.noaa.gov/ghcnd-data-access
+https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily

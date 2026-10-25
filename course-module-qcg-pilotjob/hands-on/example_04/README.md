@@ -36,4 +36,4 @@ The raw CPU time in this example is 7232 seconds. It can be converted to SBUs:
 ```
 
 ## Data source
-https://www.ncdc.noaa.gov/ghcnd-data-access
+https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily
