@@ -1,0 +1,15 @@
+performance-analysis.tex
+performance-analysis.pdf
+*.xdv
+*.vrb
+
+_minted*/
+*.log
+*.aux
+*.nav
+*.snm
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.map
