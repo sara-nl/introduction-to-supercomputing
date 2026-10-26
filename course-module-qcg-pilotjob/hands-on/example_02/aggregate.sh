@@ -11,9 +11,9 @@ fi
 echo "Job ID $job_id"
 
 result_file_name="result.csv"
-echo "" > $result_file_name
+: > $result_file_name
 
-for slurm_file in slurm-$job_id_*.out
+for slurm_file in slurm-${job_id}_*.out
 do
   # echo $slurm_file
   csv_file_name=$(cat $slurm_file | grep "Analyzing file" | sed 's/Analyzing file: //g')

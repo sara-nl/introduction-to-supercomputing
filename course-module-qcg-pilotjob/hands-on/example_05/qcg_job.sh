@@ -6,6 +6,7 @@
 #SBATCH --output=qcg.%j.out
 #SBATCH --error=qcg.%j.err
 
+# QCG-PilotJob is installed in the 2024 stack only (toolchain gfbf-2024a)
 module load 2024
 module load QCG-PilotJob/0.14.1-gfbf-2024a
 

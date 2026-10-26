@@ -75,6 +75,14 @@ int main(int argc, char **argv) {
     // Print the elapsed time
     printf("Time taken for matrix multiplication: %g seconds\n", elapsed_time);
 
+    double checksum = 0.0;
+    for (size_t i = 0; i < n; i++) {
+        for (size_t j = 0; j < n; j++) {
+            checksum += C[i][j];
+        }
+    }
+    printf("Matrix checksum: %.17g\n", checksum);
+
     // Free the allocated memory
     for (size_t i = 0; i < n; i++) {
         free(A[i]);

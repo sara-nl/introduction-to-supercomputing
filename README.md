@@ -25,3 +25,6 @@ We hope you find the training useful, and we welcome any feedback to help us imp
 **Modules:**  
 - Performance analysis
 - Slurm hybrid jobs
+
+> [!NOTE]
+> The course uses Snellius, but the hands-on sessions also run on a small Slurm cluster built from SURF Research Cloud (SRC) workspaces with the European Environment for Scientific Software Installations (EESSI) 2025.06. Notes like this one in each module list the differences. The cluster provides familiar interfaces: `module load 2025` loads EESSI 2025.06, the partition `rome` exists, Slurm supplies `$TMPDIR` for job temporary files, and `sacct` and `seff` work. Inspect the class nodes with `sinfo -o '%n %c %m %G'` and use each module's SRC resource overrides before submitting; the Snellius task, thread and memory requests can exceed a small workspace. The performance analysis slides use `--constraint=hwperf`, the Energy Aware Runtime and AMD uProf on Snellius. On SRC, check which PAPI or `perf` counters the workspace exposes before choosing a profiling exercise. Your trainer provides the cluster address and the course's sign-up or enrolment instructions.
