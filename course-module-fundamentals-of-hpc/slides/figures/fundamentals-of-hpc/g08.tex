@@ -1,0 +1,35 @@
+% Three ways of making a computer larger. Drawn in place of the stacked
+% PowerPoint slices, which shared one anchor and could not be edited.
+\begin{tikzpicture}[remember picture, overlay, x=1bp, y=-1bp,
+  shift={(current page.north west)}]
+\path[fill=cFFFFFF] (0,0) rectangle (960,540);
+\path[fill=cEE7628,even odd rule] (57.18,55.73) ..controls(57.96,55.73)and(58.6,56.37)..(58.6,57.15) --(58.6,85.5) ..controls(58.6,86.28)and(57.96,86.91)..(57.18,86.91) ..controls(56.4,86.91)and(55.76,86.28)..(55.76,85.5) --(55.76,57.15) ..controls(55.76,56.37)and(56.4,55.73)..(57.18,55.73);
+\node[anchor=north west, inner sep=0pt] at (56.69,477.21) {\includegraphics[width=73.42bp, height=37.42bp]{figures/fundamentals-of-hpc/p03-1.png}};
+
+\fill[cFCE4D4, rounded corners=10bp] (88,128) rectangle (900,228);
+\fill[cEA7600, rounded corners=8bp] (104,146) rectangle (400,210);
+\node[anchor=center, text=white] at (252,178)
+  {\fcal\bfseries\fontsize{16bp}{19bp}\selectfont One big node};
+\node[anchor=north west, text=c404040, align=left] at (420,152)
+  {\fcal\fontsize{15bp}{20bp}\selectfont
+   Many CPUs, cores, or accelerators in one machine.\\
+   One operating system, one memory.};
+
+\fill[cCAE6F9, rounded corners=10bp] (88,244) rectangle (900,344);
+\fill[c325F8B, rounded corners=8bp] (104,262) rectangle (400,326);
+\node[anchor=center, text=white] at (252,294)
+  {\fcal\bfseries\fontsize{15bp}{18bp}\selectfont Several nodes, shared memory};
+\node[anchor=north west, text=c404040, align=left] at (420,268)
+  {\fcal\fontsize{15bp}{20bp}\selectfont
+   Separate operating systems.\\
+   Software makes the memory look shared.};
+
+\fill[cCDDFD1, rounded corners=10bp] (88,360) rectangle (900,456);
+\fill[c2CA055, rounded corners=8bp] (104,378) rectangle (400,442);
+\node[anchor=center, text=white] at (252,410)
+  {\fcal\bfseries\fontsize{16bp}{19bp}\selectfont Many nodes};
+\node[anchor=north west, text=c404040, align=left] at (420,376)
+  {\fcal\fontsize{15bp}{20bp}\selectfont
+   Each node has its own system and memory.\\
+   The nodes exchange messages over a network.};
+\end{tikzpicture}

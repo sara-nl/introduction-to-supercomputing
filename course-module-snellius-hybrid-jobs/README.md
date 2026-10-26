@@ -5,7 +5,7 @@
 ### About the course module and hands-on session
 
 > [!NOTE]
-> The materials for this course module have been adapted from *Introducción a la Supercomputación* by **José Luis Bosque, Borja Pérez, Ramón Beivide,** and **Carmen Martínez** of the Universidad de Cantabria. This adaptation was carried out by the EuroCC NL team at SURF. For more information about the EuroCC2 project, please visit [EuroCC2](https://www.eurocc-access.eu/about-us/the-projects/). The EuroCC NL team expresses gratitude to the original authors for their contributions to these materials.
+> The materials for this course module have been adapted from *Introducción a la Supercomputación* by **José Luis Bosque, Borja Pérez, Ramón Beivide,** and **Carmen Martínez** of the Universidad de Cantabria. This adaptation was carried out by the EuroCC NL team at SURF. For more information about the EuroCC2 project, please visit [EuroCC2](https://www.eurohpc-ju.europa.eu/research-innovation/our-projects/eurocc-2_en). The EuroCC NL team expresses gratitude to the original authors for their contributions to these materials.
 
 In this session, we will dive deeper into the Slurm resource manager, focusing on understanding key parameters for efficient parallel job scheduling, including threads, cores, sockets, nodes, and processes. Our goal is to connect to the Snellius supercomputer and explore hybrid job execution, which leverages both shared-memory (OpenMP) and distributed-memory (MPI) parallelism.
 
@@ -26,16 +26,33 @@ You can find the materials and example codes in the linked repository. This docu
 
 ### Snellius supercomputer
 
-We will work with a small subset of the Snellius supercomputer, a powerful system with a total computational performance of 37.9 petaFLOPS. Snellius consists of over 1,500 compute nodes interconnected via a high-speed InfiniBand network. The system is equipped with a variety of processors and GPUs, including AMD Genoa CPUs and NVIDIA H100 GPUs, optimized for tasks ranging from high-performance scientific computing to AI workloads.
+We will work with a small subset of the Snellius supercomputer, a system whose theoretical peak performance reached about 38 petaFLOPS with the 2024 expansion. Snellius consists of over 1,500 compute nodes interconnected via a high-speed InfiniBand network. The system is equipped with a variety of processors and GPUs, including AMD Genoa CPUs and NVIDIA H100 GPUs, optimized for tasks ranging from high-performance scientific computing to AI workloads.
 
 Snellius features a range of node types:
 
-- **Thin nodes**: 1,263 nodes with AMD Rome or Genoa CPUs, each containing either 128 or 192 CPU cores, for a total of over 208,000 cores.
-- **Fat nodes**: 120 nodes, each with 1 TiB or 1.5 TiB of RAM, intended for memory-intensive jobs.
-- **High-memory nodes**: 4 nodes with up to 64 GiB of RAM, intended for extremely memory-intensive jobs.
-- **GPU nodes**: 160 nodes equipped with 4 NVIDIA A100 or H100 GPUs per node, designed for massively parallel computations such as machine learning and molecular dynamics.
+- **CPU nodes**: partition `rome` with 521 nodes of 128 AMD Rome cores, and partition `genoa` with 737 nodes of 192 AMD Genoa cores, for a total of 208,192 cores (`sinfo -s`, 2026-10-25).
+- **Fat nodes**: partitions `fat_rome` and `fat_genoa`, 120 nodes, each with 1 TiB or 1.5 TiB of RAM, intended for memory-intensive jobs.
+- **High-memory nodes**: partitions `himem_4tb` and `himem_8tb`, 4 nodes with 4 TiB or 8 TiB of RAM, intended for extremely memory-intensive jobs.
+- **GPU nodes**: partition `gpu_a100` with 63 nodes of 4 NVIDIA A100 GPUs (and 4 more A100 nodes split into MIG slices in `gpu_mig`), and partition `gpu_h100` with 88 nodes of 4 NVIDIA H100 GPUs, designed for massively parallel computations such as machine learning and molecular dynamics.
 
-The front-end nodes of the cluster are accessed via `snellius.surf.nl`, and all job submissions and resource management are handled through Slurm. For additional details on the system, you can refer to the [SURF User Knowledge Base](https://servicedesk.surf.nl/wiki/display/WIKI/Snellius) or explore the [Snellius virtual tour](https://visualization.surf.nl/snellius-virtual-tour/) for a more interactive overview.
+The front-end nodes of the cluster are accessed via `snellius.surf.nl`, and all job submissions and resource management are handled through Slurm. For additional details on the system, you can refer to the [SURF User Knowledge Base](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660184/Snellius) or explore the [Snellius virtual tour](https://visualization.surf.nl/snellius-virtual-tour/) for a more interactive overview.
+
+> [!NOTE]
+> On an SRC cluster, the compute nodes are three cloud workspaces with a few cores each (`sinfo -o '%n %c %m'`), connected by Ethernet instead of InfiniBand. `module load 2025` and `module load foss/2025a` work as on Snellius. Options given to `sbatch` override the `#SBATCH` lines, so shrink a job on the command line instead of editing the script, for example `sbatch --nodes=3 --ntasks=6 submit-dot-hybrid.sh 30000000`. Every `Hyb` column of the tables asks for 16 cores or more; on three two-core workspaces fill `Hyb-2-1`, `Hyb-1-2`, `Hyb-3-2` and `Hyb-6-1` instead (`sbatch --nodes=3 --ntasks=6 --cpus-per-task=1 submit-axpy-hybrid.sh <N>` is the last), and leave out the two largest vector sizes, which need more memory than a workspace has. Expect weaker scaling across nodes than on Snellius.
+>
+> For a two-core SRC workspace, use these overrides from each exercise's
+> `hands-on/exN` directory. Check the actual core count with `sinfo` first:
+>
+> | Exercise | Submission on two-core nodes |
+> | --- | --- |
+> | 1, sequential AXPY | `sbatch --cpus-per-task=1 submit-axpy.sh 10000000` |
+> | 2, AXPY MPI | `sbatch --ntasks=2 submit-axpy-hybrid.sh 10000000` |
+> | 3, sequential dot product | `sbatch --cpus-per-task=1 submit-dot.sh 10000000` |
+> | 4, dot product MPI | `sbatch --nodes=3 --ntasks=6 submit-dot-hybrid.sh 30000000` |
+> | 5, sequential matrix multiplication | `sbatch --cpus-per-task=1 submit-matmul.sh 500` |
+>
+> For the hostname exercise use `--nodes=3 --ntasks=6 --ntasks-per-node=2`.
+> These are SRC resource overrides; retain the Snellius requests on Snellius.
 
 ### Connecting to Snellius
 
@@ -43,8 +60,8 @@ Since this module is part of the third section in the *Introduction to Supercomp
 
 However, if needed, you can refer to the following guides for assistance:
 
-- [Connecting to the system](https://servicedesk.surf.nl/wiki/display/WIKI/Connecting+to+the+system).
-- [Interacting with the filesystem](https://servicedesk.surf.nl/wiki/display/WIKI/Interacting+with+the+filesystem).
+- [Connecting to the system](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660216/Connecting+to+the+system).
+- [Interacting with the filesystem](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/92668034/Interacting+with+the+filesystem).
 
 ### Snellius environment modules
 
@@ -84,8 +101,8 @@ First, **create a Slurm script** named `load_modules.sh` with the following cont
 #SBATCH -t 01:00:00             # Time limit
 
 # Load the necessary modules
-module load 2023                # Load the general 2023 module
-module load foss/2023a          # Load the foss compiler module
+module load 2025                # Load the general 2025 module
+module load foss/2025a          # Load the foss compiler module
 
 # Verify the loaded modules by checking the version of the compiler
 echo "Loaded modules:"
