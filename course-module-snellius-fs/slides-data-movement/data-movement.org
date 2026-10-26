@@ -1,0 +1,463 @@
+#+TITLE: Moving data on HPC systems
+#+AUTHOR: Rohit Goswami
+#+DATE: October 26, 2026
+#+OPTIONS: H:1 ':t toc:nil num:nil title:nil ^:nil author:nil date:nil
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [t]
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: \input{pptx-style.tex}
+#+LATEX_HEADER: \input{data-movement-style.tex}
+
+# One heading per slide. Backgrounds are the file-systems deck's title
+# photo, section cards, and text panels. Build with make.
+
+* Moving data
+:PROPERTIES:
+:BEAMER_opt: tx=56.85,ty=348,ts=44,tc=cFFFFFF,tw=520,tl=48
+:END:
+#+beamer: \slidegraphics{figures/data-movement/g01}
+#+beamer: \fspanel{c283237}{0.92}{44,384}{620,532}
+#+attr_latex: :options [x=56.85,y=408,s=18,l=21.6,c=cFFFFFF,w=540]
+#+begin_tb
+on HPC systems
+#+end_tb
+#+attr_latex: :options [x=56.85,y=436,s=18,l=21.6,c=cFFFFFF,w=540]
+#+begin_tb
+Rohit Goswami
+#+end_tb
+#+attr_latex: :options [x=56.85,y=464,s=15.9,l=19.08,c=cFFFFFF,w=540]
+#+begin_tb
+Pack, copy, and stage on a parallel file system
+#+end_tb
+#+attr_latex: :options [x=56.85,y=502,s=15.9,l=19.08,c=cFFFFFF]
+#+begin_tb
+October 26, 2026
+#+end_tb
+#+attr_latex: :options [x=56.85,y=522,s=13.7,l=16.44,c=cFFFFFF]
+#+begin_tb
+rgoswami@ieee.org
+#+end_tb
+
+* Why copying hurts
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/data-movement/gtext}
+#+attr_latex: :options [x=84,y=136,s=15.9,l=19.08,w=790]
+#+begin_tb
+A parallel file system splits the work. *Data servers* move bytes. A *metadata server* records each create, open, and close. Copying a million small files asks that server for a million operations, and the data servers wait. Pack the files first.
+#+end_tb
+#+beamer: \input{figures/data-movement/mds.tex}
+
+* Where data lives
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/data-movement/gtext}
+#+attr_latex: :options [x=84,y=136,s=15.9,l=19.08,w=800]
+#+begin_tb
+Keep code and notes in *home*. Do the heavy copy on *scratch*. Keep the group's long-lived data on the *project* file system. Use the *node disk* only inside a job: it is the fastest, and it disappears when the job ends.
+#+end_tb
+#+beamer: \input{figures/data-movement/places.tex}
+
+* Pack, then checksum
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Before the move
+#+end_tb
+#+attr_latex: :options [x=76,y=166,s=15.9,l=19.08,w=370]
+#+begin_tb
+Turn a directory of small files into one archive, then record a checksum. Check it again after the copy. A squashfs image is one file you can mount read-only.
+#+end_tb
+#+attr_latex: :options [x=76,y=290,s=15.9,l=19.08,w=370]
+#+begin_tb
+GNU tar, sha256sum, and mksquashfs are the tools. ~--sort=name~ gives archive entries a stable order.
+#+end_tb
+#+attr_latex: :options [x=508,y=150,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Commands
+#+end_tb
+#+attr_latex: :options [x=508,y=178,s=13.7,l=17.2,w=400,c=cEEFFFF,code,p=3]
+#+begin_tb
+~tar --sort=name -cf run.tar run/~ \\
+~sha256sum run.tar > run.tar.sha256~ \\
+~sha256sum -c run.tar.sha256~ \\
+~mksquashfs run run.sqfs -comp zstd~
+#+end_tb
+
+* rsync, done well
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+One careful copy
+#+end_tb
+#+attr_latex: :options [x=76,y=166,s=15.9,l=19.08,w=370,ind=18,bf=cal,p=2]
+#+begin_tb
+- ~-a~ keeps links, times, and permissions.
+- ~--partial~ leaves a broken file in place so the next run continues.
+- ~--info=progress2~ is one progress line for the whole transfer.
+- ~--checksum~ reads every byte when size and time are not enough.
+- A trailing slash on the source copies the contents, not an extra directory level.
+#+end_tb
+#+attr_latex: :options [x=508,y=150,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Resume by running it again
+#+end_tb
+#+attr_latex: :options [x=508,y=186,s=13.7,l=17.2,w=400,c=cEEFFFF,code,p=4]
+#+begin_tb
+~rsync -a --partial~ \\
+~--info=progress2~ \\
+~run/ /scratch-shared/$USER/run/~
+#+end_tb
+#+attr_latex: :options [x=508,y=300,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+When you need a full read
+#+end_tb
+#+attr_latex: :options [x=508,y=328,s=13.7,l=17.2,w=400,c=cEEFFFF,code]
+#+begin_tb
+~rsync -a --checksum --partial~ \\
+~run/ /scratch-shared/$USER/run/~
+#+end_tb
+
+* Several streams
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Parallel rsync
+#+end_tb
+#+attr_latex: :options [x=76,y=166,s=15.9,l=19.08,w=370]
+#+begin_tb
+Four streams help when each shard is a large file. They do not fix a million tiny files: pack those first. ~xargs -P~ and ~fpsync~ (from the fpart package) both run several rsync processes.
+#+end_tb
+#+attr_latex: :options [x=76,y=272,s=15.9,l=19.08,w=370]
+#+begin_tb
+~--exclude~ skips build products. The destination tree must already exist for the ~xargs~ form, because each call writes one shard.
+#+end_tb
+#+attr_latex: :options [x=508,y=148,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+xargs
+#+end_tb
+#+attr_latex: :options [x=508,y=174,s=13.7,l=16.8,w=400,c=cEEFFFF,code,p=2]
+#+begin_tb
+~printf '%s\0' shard-*/ |~ \\
+~xargs -0 -P 4 -I{}~ \\
+~rsync -a --partial {}/~ \\
+~/scratch-shared/$USER/copy/{}/~
+#+end_tb
+#+attr_latex: :options [x=508,y=280,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+fpsync, and excludes
+#+end_tb
+#+attr_latex: :options [x=508,y=306,s=13.7,l=16.8,w=400,c=cEEFFFF,code,p=2]
+#+begin_tb
+~fpsync -n 4 -o '-a --partial'~ \\
+~/scratch-shared/$USER/run/~ \\
+~/scratch-shared/$USER/copy/~ \\
+~rsync -a --partial --exclude '*.o'~ \\
+~--exclude '.git/' run/ dest/~
+#+end_tb
+
+* mpiFileUtils
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Inside a Slurm job
+#+end_tb
+#+attr_latex: :options [x=76,y=166,s=15.9,l=19.08,w=370,ind=18,bf=cal,p=1]
+#+begin_tb
+These are MPI programs from the mpiFileUtils suite. ~srun~ starts one of them across the tasks in the job. Options below are from the project manual.
+- ~dwalk -v~ counts files and bytes.
+- ~dcp -p~ copies and keeps permissions, group, and timestamps.
+- ~dsync~ makes the destination match the source.
+- ~drm --dryrun~ lists what a recursive delete would remove.
+- ~dtar -c~ writes a pax archive.
+#+end_tb
+#+attr_latex: :options [x=508,y=148,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+One tool per srun
+#+end_tb
+#+attr_latex: :options [x=508,y=176,s=13.7,l=17.4,w=400,c=cEEFFFF,code,p=2]
+#+begin_tb
+~srun dwalk -v "$SRC"~ \\
+~srun dcp -p "$SRC" "$DST"~ \\
+~srun dsync -v "$SRC" "$DST"~ \\
+~srun drm --dryrun "$OLD"~ \\
+~srun dtar -c -f run.tar run/~
+#+end_tb
+
+* A real job script
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Two Rome nodes
+#+end_tb
+#+attr_latex: :options [x=76,y=166,s=15.9,l=19.08,w=370]
+#+begin_tb
+Snellius uses the ~rome~ partition for these CPU nodes. The script walks the source and copies it to the destination. EESSI 2023.06 and 2025.06 do not provide mpiFileUtils yet, so you use the module your site provides or build it with EasyBuild.
+#+end_tb
+#+attr_latex: :options [x=76,y=330,s=15.9,l=19.08,w=370]
+#+begin_tb
+Submit with ~sbatch dcp.slurm~ from a directory on scratch, not from home.
+#+end_tb
+#+attr_latex: :options [x=508,y=140,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+dcp.slurm
+#+end_tb
+#+attr_latex: :options [x=508,y=166,s=13.7,l=15.6,w=410,c=cEEFFFF,code,p=0]
+#+begin_tb
+~#!/bin/bash~ \\
+~#SBATCH --job-name=dcp~ \\
+~#SBATCH --partition=rome~ \\
+~#SBATCH --nodes=2~ \\
+~#SBATCH --ntasks-per-node=8~ \\
+~#SBATCH --time=01:00:00~ \\
+~#SBATCH --output=dcp-%j.out~ \\
+~set -eu~ \\
+~SRC=/scratch-shared/$USER/run~ \\
+~DST=/scratch-shared/$USER/run-copy~ \\
+~srun dwalk -v "$SRC"~ \\
+~srun dcp -p "$SRC" "$DST"~
+#+end_tb
+
+* From outside the cluster
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/data-movement/gtext}
+#+attr_latex: :options [x=84,y=148,s=15.9,l=22,w=780]
+#+begin_tb
+~scp~ starts again from the first file if the transfer stops. ~rsync~ continues a partial file. Globus moves between endpoints you registered. On Snellius, the iRODS iCommands on the next slide are the documented 2023 modules. The Data Archive is ~/archive/$USER~ on login and staging nodes only. ~daget~ stages tape, and compute nodes do not mount ~/archive~. Research Drive works as an rclone WebDAV remote; SURF documents the setup.
+#+end_tb
+
+* Commands from outside
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/data-movement/gtext}
+#+attr_latex: :options [x=84,y=140,s=15.9,l=19.08,w=780]
+#+begin_tb
+~SRC~ and ~DEST~ are Globus endpoints you registered. ~RD~ is the rclone remote in the SURF Research Drive example.
+#+end_tb
+#+attr_latex: :options [x=84,y=190,s=13.7,l=17.4,w=780,c=c283237,code,p=1]
+#+begin_tb
+~scp -r run/ USER@snellius.surf.nl:/scratch-shared/$USER/run~ \\
+~rsync -a --partial --info=progress2 run/~ \\
+~USER@snellius.surf.nl:/scratch-shared/$USER/run/~ \\
+~globus transfer SRC:run/ DEST:run/~ \\
+~module load 2023~ \\
+~module load iRODS-iCommands/4.3.0~ \\
+~iput -r run~ \\
+~daget /archive/$USER/run~ \\
+~srun -t 1:00:00 -p staging cp -r /archive/$USER/run /scratch-shared/$USER/~ \\
+~rclone copy run/ RD:run/~
+#+end_tb
+#+attr_latex: :options [x=84,y=400,s=15.9,l=19.08,w=780]
+#+begin_tb
+~snellius.surf.nl~ is the SSH host. ~archive.surf.nl~ is the Data Archive login host.
+#+end_tb
+
+* Stage in, stage out, clean up
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Around the job
+#+end_tb
+#+attr_latex: :options [x=76,y=166,s=15.9,l=19.08,w=370]
+#+begin_tb
+Copy the inputs from scratch to ~$TMPDIR~, which is the node disk. Write outputs there too. Copy the results back to scratch before the job ends: the node disk is removed for you. Then delete the scratch tree you no longer need.
+#+end_tb
+#+attr_latex: :options [x=76,y=330,s=15.9,l=19.08,w=370]
+#+begin_tb
+Use ~srun drm~ instead of ~rm -rf~ when the tree is large enough to stall one process. Run ~drm --dryrun~ first.
+#+end_tb
+#+attr_latex: :options [x=508,y=150,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+In the job script
+#+end_tb
+#+attr_latex: :options [x=508,y=178,s=13.7,l=16.8,w=400,c=cEEFFFF,code,p=2]
+#+begin_tb
+~rsync -a --partial~ \\
+~/scratch-shared/$USER/run/ $TMPDIR/run/~ \\
+~rsync -a --partial~ \\
+~$TMPDIR/out/ /scratch-shared/$USER/out/~
+#+end_tb
+#+attr_latex: :options [x=508,y=300,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+After the results are back
+#+end_tb
+#+attr_latex: :options [x=508,y=328,s=13.7,l=16.8,w=400,c=cEEFFFF,code,p=2]
+#+begin_tb
+~rm -rf /scratch-shared/$USER/run~ \\
+~srun drm --dryrun "$OLD"~ \\
+~srun drm "$OLD"~
+#+end_tb
+
+* Checklist
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/data-movement/gtext}
+#+attr_latex: :options [x=84,y=148,s=15.9,l=26,w=790,ind=28,bf=cal,p=6]
+#+begin_tb
+1. *Pack* small files with tar or mksquashfs before a wide copy.
+2. *Checksum* the archive before the move and again after it.
+3. Put the heavy copy on *scratch*, not in home.
+4. Use ~rsync -a --partial~, and run the same command again to resume.
+5. Open several streams only for *large* files.
+6. Stage into ~$TMPDIR~, copy results out, then delete the scratch copy.
+7. The Data Archive is not mounted on compute nodes. ~daget~ on a login or staging node first.
+#+end_tb
+
+* Hands-on
+:PROPERTIES:
+:BEAMER_opt: tx=71.13,ty=292.27,ts=66.34,tc=cFFFFFF,tl=63.46
+:END:
+#+beamer: \slidegraphics{figures/data-movement/g14}
+
+* Predict, then measure
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Write the order first
+#+end_tb
+#+attr_latex: :options [x=76,y=166,s=15.9,l=19.08,w=370,ind=18,bf=cal,p=2]
+#+begin_tb
+Use bash. ~time~ prints real, user, and sys: write down real.
+1. Make 20,000 small files.
+2. Time ~cp -r~, copying a packed tar, and ~rsync -a~.
+3. Checksum the archive, copy it, and check it again.
+4. Interrupt one rsync and resume it.
+5. Stage into ~$TMPDIR~ in a short Slurm job, then copy the result back.
+#+end_tb
+#+attr_latex: :options [x=508,y=140,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+On a scratch directory
+#+end_tb
+#+attr_latex: :options [x=508,y=168,s=13.7,l=16.2,w=400,c=cEEFFFF,code,p=1]
+#+begin_tb
+~mkdir -p src out~ \\
+~yes data | head -n 20000 |~ \\
+~split -l 1 -a 5 -d - src/f~ \\
+~ls src | wc -l~ \\
+~{ time cp -r src out/by-cp; }~ \\
+~tar --sort=name -cf src.tar src~ \\
+~{ time cp src.tar out/; }~ \\
+~{ time rsync -a src/ out/by-rsync/; }~ \\
+~sha256sum src.tar > src.tar.sha256~ \\
+~cp src.tar.sha256 out/~ \\
+~( cd out && sha256sum -c src.tar.sha256 )~
+#+end_tb
+
+* Resume a broken copy
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Catch it midway
+#+end_tb
+#+attr_latex: :options [x=76,y=170,s=15.9,l=19.08,w=370]
+#+begin_tb
+Predict a short ~part/big.bin~ after ~timeout~, then equal sizes. ~--bwlimit~ slows the first copy so two seconds is enough to stop it. ~--partial~ keeps the broken file, and the next ~rsync~ continues.
+#+end_tb
+#+attr_latex: :options [x=76,y=280,s=15.9,l=19.08,w=370]
+#+begin_tb
+~cmp~ exits 0 when the bytes match, and it prints nothing.
+#+end_tb
+#+attr_latex: :options [x=508,y=148,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Commands
+#+end_tb
+#+attr_latex: :options [x=508,y=176,s=13.7,l=16.6,w=400,c=cEEFFFF,code,p=2]
+#+begin_tb
+~dd if=/dev/zero of=big.bin bs=1M count=48~ \\
+~mkdir -p part~ \\
+~timeout 2 rsync -a --partial~ \\
+~--bwlimit=2000 big.bin part/~ \\
+~ls -l big.bin part/big.bin~ \\
+~rsync -a --partial big.bin part/~ \\
+~cmp big.bin part/big.bin~
+#+end_tb
+
+* Stage into the job
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/data-movement/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+A ten-minute job
+#+end_tb
+#+attr_latex: :options [x=76,y=170,s=15.9,l=19.08,w=370]
+#+begin_tb
+Submit from scratch with ~sbatch stage.slurm~. ~--constraint=scratch-node~ selects a node where ~$TMPDIR~ is the node disk. That disk is removed when the job ends, so the script copies the tree back to scratch before it exits.
+#+end_tb
+#+attr_latex: :options [x=508,y=136,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+stage.slurm
+#+end_tb
+#+attr_latex: :options [x=508,y=162,s=13.7,l=15.4,w=410,c=cEEFFFF,code,p=0]
+#+begin_tb
+~#!/bin/bash~ \\
+~#SBATCH --job-name=stage~ \\
+~#SBATCH --partition=rome~ \\
+~#SBATCH --constraint=scratch-node~ \\
+~#SBATCH --nodes=1~ \\
+~#SBATCH --ntasks=1~ \\
+~#SBATCH --time=00:10:00~ \\
+~#SBATCH --output=stage-%j.out~ \\
+~set -eu~ \\
+~rsync -a --partial~ \\
+~/scratch-shared/$USER/src/ "$TMPDIR/src/"~ \\
+~rsync -a --partial~ \\
+~"$TMPDIR/src/" /scratch-shared/$USER/out/~
+#+end_tb
+
+* An example
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/data-movement/gtext}
+#+attr_latex: :options [x=84,y=136,s=15.9,l=19.08,w=780]
+#+begin_tb
+Local ext4 example, 26 October 2026; measure your own Snellius times. The archive bar measures copying an existing tar, excluding packing. The other copies create 20,000 files. The interrupted copy held 4128768 of 50331648 bytes; rerunning rsync passed cmp, and sha256sum reported src.tar: OK.
+#+end_tb
+#+beamer: \input{figures/data-movement/timings.tex}
+
+* Further reading
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/data-movement/gtext}
+#+attr_latex: :options [x=84,y=140,s=15.9,l=22,w=790,ind=22,bf=cal,p=3]
+#+begin_tb
+- ~man rsync~, ~man tar~, ~man sha256sum~, and ~man mksquashfs~.
+- mpiFileUtils manual: https://mpifileutils.readthedocs.io/ (dwalk, dcp, dsync, drm, dtar).
+- SURF User Knowledge Base: Connecting to the system (~snellius.surf.nl~).
+- SURF: Data Archive from Snellius (~daget~, ~/archive~, partition ~staging~) and login host ~archive.surf.nl~.
+- SURF: How to use Rclone with Research Drive (remote ~RD~), and Snellius filesystems (~$TMPDIR~, ~scratch-node~).
+- EasyBuild: an mpiFileUtils easyconfig, when your site provides no module.
+#+end_tb

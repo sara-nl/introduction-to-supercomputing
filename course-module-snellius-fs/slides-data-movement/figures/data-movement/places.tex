@@ -1,0 +1,24 @@
+% Home, scratch, project, and the node disk. Colours match the file-systems diagram.
+\begin{tikzpicture}[remember picture, overlay, x=1bp, y=-1bp,
+    shift={(current page.north west)}]
+  \path[fill=fsgreen, rounded corners=12bp] (80,230) rectangle (280,400);
+  \path[fill=fsblue, rounded corners=12bp] (300,230) rectangle (500,400);
+  \path[fill=fspink, rounded corners=12bp] (520,230) rectangle (720,400);
+  \path[fill=fsyellow, rounded corners=12bp] (740,230) rectangle (900,400);
+  \node[anchor=north, align=center, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (180,258) {home};
+  \node[anchor=north, align=center, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (180,292) {/home/\$USER\\backed up};
+  \node[anchor=north, align=center, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (400,258) {scratch};
+  \node[anchor=north, align=center, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (400,292) {/scratch-shared\\not backed up};
+  \node[anchor=north, align=center, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (620,258) {project};
+  \node[anchor=north, align=center, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (620,292) {/projects\\shared quota};
+  \node[anchor=north, align=center, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (820,258) {node disk};
+  \node[anchor=north, align=center, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (820,292) {\$TMPDIR\\job lifetime};
+\end{tikzpicture}

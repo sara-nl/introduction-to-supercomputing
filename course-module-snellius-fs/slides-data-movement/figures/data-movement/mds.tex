@@ -1,0 +1,25 @@
+% Many small files pile onto the metadata server. One archive lets the data servers stream.
+\begin{tikzpicture}[remember picture, overlay, x=1bp, y=-1bp,
+    shift={(current page.north west)}]
+  \foreach \i in {0,...,11} {
+    \path[fill=cEE7628] ({110+22*\i},248) rectangle ({126+22*\i},264);
+  }
+  \node[anchor=north, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (242,278) {many small files};
+  \draw[-{Stealth[length=8bp]}, line width=1.6bp, draw=c283237]
+    (400,256) -- (470,256);
+  \path[fill=cEE7628, fill opacity=0.28, rounded corners=12bp]
+    (478,210) rectangle (690,330);
+  \node[anchor=center, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (584,248) {metadata server};
+  \node[anchor=north, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (584,292) {one operation per file};
+  \path[fill=c177ABF, fill opacity=0.28, rounded corners=12bp]
+    (730,210) rectangle (900,330);
+  \node[anchor=center, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (815,248) {data servers};
+  \node[anchor=north, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (815,292) {move the bytes};
+  \node[anchor=north west, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237, align=left, text width=760bp]
+    at (110,360) {One archive is a single metadata update. The data servers then stream that one file.};
+\end{tikzpicture}

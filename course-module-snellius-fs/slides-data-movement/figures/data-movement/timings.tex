@@ -1,0 +1,20 @@
+% Example seconds for 20,000 small files on a local ext4 disk.
+% Bar height is 160 bp at 0.67 s. Bottom of each bar is y=400.
+\begin{tikzpicture}[remember picture, overlay, x=1bp, y=-1bp,
+    shift={(current page.north west)}]
+  \path[fill=fsblue, rounded corners=6bp] (150,316.4) rectangle (310,400);
+  \path[fill=fsgreen, rounded corners=6bp] (400,380.9) rectangle (560,400);
+  \path[fill=cEE7628, rounded corners=6bp] (650,240) rectangle (810,400);
+  \node[anchor=south, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (230,308) {0.35 s};
+  \node[anchor=south, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (480,372) {0.08 s};
+  \node[anchor=south, font=\fontsize{15.9}{19}\selectfont\fcal\bfseries, text=c283237]
+    at (730,232) {0.67 s};
+  \node[anchor=north, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (230,412) {cp -r};
+  \node[anchor=north, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (480,412) {cp archive};
+  \node[anchor=north, font=\fontsize{15.9}{19}\selectfont\fcal, text=c283237]
+    at (730,412) {rsync -a};
+\end{tikzpicture}
