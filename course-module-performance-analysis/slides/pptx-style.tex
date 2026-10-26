@@ -1,0 +1,165 @@
+\makeatletter
+% Layout macros for slide decks that started life in PowerPoint.
+% Coordinates and sizes are PostScript points (bp) from the top-left
+% corner of a 960 x 540 bp page, the size PowerPoint uses for 16:9.
+\geometry{papersize={960bp,540bp}}
+\usepackage{fontspec}
+\usepackage{tikz}
+\usepackage{varwidth}
+\usepackage{etoolbox}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\setbeamersize{text margin left=0bp, text margin right=0bp}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{normal text}{fg=black}
+\hypersetup{colorlinks=false, pdfborder={0 0 0}}
+% Org turns a bare address inside a link text into \url; keep the text font.
+\urlstyle{same}
+
+% Fonts: each family key used by the decks gets a \f<key> switch.
+% A deck picks what it needs in its own style file.
+\newcommand{\pptxfamily}[3][]{%
+  \IfFontExistsTF{#2}%
+    {\expandafter\newfontfamily\csname f#3\endcsname{#2}}%
+    {\expandafter\newfontfamily\csname f#3\endcsname{#1}}}
+
+% ---------------------------------------------------------------- text boxes
+\newsavebox{\tbbox}
+\newcount\tbdepth
+\pgfkeys{/tb/.is family, /tb,
+  x/.store in=\tbx, y/.store in=\tby, s/.store in=\tbs, l/.store in=\tbl,
+  c/.store in=\tbc, f/.store in=\tbf, p/.store in=\tbp, a/.store in=\tba,
+  b/.code={\def\tbbold{\bfseries}}, i/.code={\def\tbital{\itshape}},
+  v/.code={\def\tbverb{1}}, bb/.code={\def\tbbb{\bfseries}},
+  ind/.store in=\tbind, ind2/.store in=\tbindtwo, off2/.store in=\tbofftwo,
+  bc/.store in=\tbbc, bf/.store in=\tbbf, bs/.store in=\tbbs, bs2/.store in=\tbbstwo,
+  w/.store in=\tbw, r/.store in=\tbr, fw/.store in=\tbfw,
+  % code: a code listing; the deck's \pptxcode family keeps quotes and
+  % hyphens as typed (no TeX ligatures).
+  code/.code={\def\tbf{\pptxcode}},
+  defaults/.code={%
+    \def\tbx{0}\def\tby{0}\def\tbs{18}\def\tbl{21.6}\def\tbc{black}%
+    \def\tbf{\pptxbase}\def\tbp{0}\def\tba{l}\def\tbbold{}\def\tbital{}%
+    \def\tbverb{0}\def\tbind{18}\def\tbindtwo{18}\def\tbofftwo{0}%
+    \def\tbbc{}\def\tbbf{}\def\tbbs{\textbullet}\def\tbbstwo{}\def\tbw{}\def\tbr{0}\def\tbfw{}\def\tbbb{\mdseries}%
+    \providecommand\pptxcode{\pptxbase}}}
+
+\newcommand{\tblabel}[1]{%
+  {\ifx\tbbf\empty\else\csname f\tbbf\endcsname\fi
+   \ifx\tbbc\empty\else\color{\tbbc}\fi\tbbb\upshape #1}}
+\newcommand{\tblists}{%
+  \renewenvironment{itemize}{%
+    \global\advance\tbdepth by 1
+    \ifnum\tbdepth=1
+      \def\tbcurlabel{\tblabel{\tbbs}}%
+      \begin{list}{\tbcurlabel}{%
+        \setlength\leftmargin{\tbind bp}\setlength\labelwidth{\tbind bp}%
+        \setlength\labelsep{0pt}\setlength\itemsep{\tbp bp}%
+        \setlength\topsep{0pt}\setlength\partopsep{0pt}\setlength\parsep{0pt}%
+        \setlength\itemindent{0pt}\setlength\listparindent{0pt}%
+        \def\makelabel####1{####1\hfil}}%
+    \else
+      \ifx\tbbstwo\empty\def\tbcurlabel{\tblabel{\tbbs}}\else\def\tbcurlabel{\tblabel{\tbbstwo}}\fi
+      \begin{list}{\tbcurlabel}{%
+        \setlength\leftmargin{\dimexpr\tbofftwo bp+\tbindtwo bp\relax}%
+        \setlength\labelwidth{\tbindtwo bp}%
+        \setlength\labelsep{0pt}\setlength\itemsep{\tbp bp}%
+        \setlength\topsep{\tbp bp}\setlength\partopsep{0pt}\setlength\parsep{0pt}%
+        \setlength\itemindent{0pt}\setlength\listparindent{0pt}%
+        \def\makelabel####1{####1\hfil}}%
+    \fi}%
+    {\end{list}\global\advance\tbdepth by -1 }%
+  % Numbered lists: same geometry, the label is the item number.
+  \renewenvironment{enumerate}{%
+    \global\advance\tbdepth by 1
+    \begin{list}{\tblabel{\arabic{enumi}.}}{\usecounter{enumi}%
+      \setlength\leftmargin{\tbind bp}\setlength\labelwidth{\tbind bp}%
+      \setlength\labelsep{0pt}\setlength\itemsep{\tbp bp}%
+      \setlength\topsep{0pt}\setlength\partopsep{0pt}\setlength\parsep{0pt}%
+      \setlength\itemindent{0pt}\setlength\listparindent{0pt}%
+      \def\makelabel####1{####1\hfil}}}%
+    {\end{list}\global\advance\tbdepth by -1 }}
+
+\NewDocumentEnvironment{tb}{O{}}{%
+  \begingroup
+  \pgfkeys{/tb/.cd, defaults, #1}%
+  \global\tbdepth=0
+  \def\tbanchor{base west}%
+  \if c\tba \def\tbanchor{base}\fi
+  \if r\tba \def\tbanchor{base east}\fi
+  \begin{lrbox}{\tbbox}%
+  % Font and colour go outside the [t] box: a colour change at the top of
+  % its vertical list would move the box baseline above the first line.
+  \csname f\tbf\endcsname
+  \fontsize{\tbs bp}{\tbl bp}\selectfont\tbbold\tbital\color{\tbc}%
+  \ifnum\tbverb=1 \begin{minipage}[t]{900bp}\else\begin{varwidth}[t]{940bp}\fi
+  \setlength\parskip{\tbp bp}\setlength\parindent{0pt}%
+  \if c\tba\centering\fi \if r\tba\raggedleft\fi \if l\tba\raggedright\fi
+  \tblists
+  \ifnum\tbverb=1 \def\verbatim@font{\normalfont\ttfamily\fontsize{\tbs bp}{\tbl bp}\selectfont}\fi
+}{%
+  \ifnum\tbverb=1 \end{minipage}\else\end{varwidth}\fi
+  \end{lrbox}%
+  % fw: squeeze or stretch the text to the width it had in the PDF
+  \ifx\tbfw\empty\else
+    \sbox{\tbbox}{\resizebox{\tbfw bp}{\height}{\usebox{\tbbox}}}%
+  \fi
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[inner sep=0pt, outer sep=0pt, anchor=\tbanchor, rotate=\tbr]
+      at ([shift={(\tbx bp,-\tby bp)}]current page.north west) {\usebox{\tbbox}};
+  \end{tikzpicture}%
+  \endgroup\ignorespacesafterend}
+
+% Shapes and pictures go on the background canvas, under the title.
+% The frame body runs before the page is shipped out, so the file name
+% is kept in a global macro that the background template reads.
+\gdef\slidegfx{}
+\newcommand{\slidegraphics}[1]{\gdef\slidegfx{#1}}
+% \pptximg{width}{height}{file}: xdvipdfmx embeds every \includegraphics
+% anew, so a picture that recurs on many slides would be stored many
+% times.  This draws a file the first time and reuses that copy after.
+\newcount\pptx@imgn
+\newcommand\pptximg[3]{%
+  \ifcsname pptx@img@#3\endcsname
+    \def\pptx@do{uxobj}\def\pptx@file{}%
+  \else
+    \global\advance\pptx@imgn 1
+    \expandafter\xdef\csname pptx@img@#3\endcsname{\the\pptx@imgn}%
+    \def\pptx@do{image}\def\pptx@file{(#3)}%
+  \fi
+  \vbox to #2{\vss\hbox to #1{%
+    \special{pdf:\pptx@do\space @pptximg\csname pptx@img@#3\endcsname\space
+      width #1 height #2 \pptx@file}\hss}}}
+\setbeamertemplate{background}{\ifx\slidegfx\empty\else\input{\slidegfx}\fi}
+\BeforeBeginEnvironment{frame}{\gdef\slidegfx{}}
+
+% ---------------------------------------------------------------- titles
+% Frame options: tx, ty (baseline), ts (size), tc (colour), tf (family),
+% tw (wrap width), tl (line pitch), notitle, pg (page in the old PDF).
+\define@key{beamerframe}{pg}{}
+\define@key{beamerframe}{tx}{\def\ftx{#1}}
+\define@key{beamerframe}{ty}{\def\fty{#1}}
+\define@key{beamerframe}{ts}{\def\fts{#1}}
+\define@key{beamerframe}{tc}{\def\ftc{#1}}
+\define@key{beamerframe}{tf}{\def\ftf{#1}}
+\define@key{beamerframe}{tw}{\def\ftw{#1}}
+\define@key{beamerframe}{tl}{\def\ftl{#1}}
+\define@key{beamerframe}{notitle}[]{\def\fnotitle{1}}
+\newcommand{\titledefaults}{%
+  \def\ftx{\pptxtitlex}\def\fty{\pptxtitley}\def\fts{\pptxtitles}%
+  \def\ftc{black}\def\ftf{\pptxtitlef}\def\ftw{900}\def\ftl{0}\def\fnotitle{0}}
+\titledefaults
+\BeforeBeginEnvironment{frame}{\titledefaults}
+\setbeamertemplate{frametitle}{%
+  \ifnum\fnotitle=0
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[inner sep=0pt, anchor=base west, text=\ftc]
+      at ([shift={(\ftx bp,-\fty bp)}]current page.north west)
+      {\begin{varwidth}[t]{\ftw bp}\raggedright
+        \csname f\ftf\endcsname\bfseries
+        \ifdim\ftl pt=0pt \fontsize{\fts bp}{1.15\dimexpr\fts bp\relax}\else\fontsize{\fts bp}{\ftl bp}\fi
+        \selectfont\insertframetitle\end{varwidth}};
+  \end{tikzpicture}%
+  \fi}
+\makeatother

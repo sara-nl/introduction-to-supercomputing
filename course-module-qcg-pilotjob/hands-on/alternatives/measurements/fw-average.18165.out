@@ -1,0 +1,615 @@
+Module for EESSI/2025.06 loaded successfully
+2026-10-25 11:25:45,021 INFO Performing db tune-up
+2026-10-25 11:25:45,028 INFO LaunchPad was RESET.
+2026-10-25 11:25:45,083 INFO Added a workflow. id_map: {-101: 1, -100: 2, -99: 3, -98: 4, -97: 5, -96: 6, -95: 7, -94: 8, -93: 9, -92: 10, -91: 11, -90: 12, -89: 13, -88: 14, -87: 15, -86: 16, -85: 17, -84: 18, -83: 19, -82: 20, -81: 21, -80: 22, -79: 23, -78: 24, -77: 25, -76: 26, -75: 27, -74: 28, -73: 29, -72: 30, -71: 31, -70: 32, -69: 33, -68: 34, -67: 35, -66: 36, -65: 37, -64: 38, -63: 39, -62: 40, -61: 41, -60: 42, -59: 43, -58: 44, -57: 45, -56: 46, -55: 47, -54: 48, -53: 49, -52: 50, -51: 51, -50: 52, -49: 53, -48: 54, -47: 55, -46: 56, -45: 57, -44: 58, -43: 59, -42: 60, -41: 61, -40: 62, -39: 63, -38: 64, -37: 65, -36: 66, -35: 67, -34: 68, -33: 69, -32: 70, -31: 71, -30: 72, -29: 73, -28: 74, -27: 75, -26: 76, -25: 77, -24: 78, -23: 79, -22: 80, -21: 81, -20: 82, -19: 83, -18: 84, -17: 85, -16: 86, -15: 87, -14: 88, -13: 89, -12: 90, -11: 91, -10: 92, -9: 93, -8: 94, -7: 95, -6: 96, -5: 97, -4: 98, -3: 99, -2: 100, -1: 101}
+added 100 averages and the aggregation
+2026-10-25 11:25:45,716 INFO Hostname/IP lookup (this will take a few seconds)
+2026-10-25 11:25:46,643 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-46-643619
+2026-10-25 11:25:46,646 INFO Launching Rocket
+2026-10-25 11:25:46,657 INFO RUNNING fw_id: 2 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-46-643619
+2026-10-25 11:25:46,660 INFO Task started: ScriptTask.
+2026-10-25 11:25:46,747 INFO Task completed: ScriptTask
+2026-10-25 11:25:46,756 INFO Rocket finished
+2026-10-25 11:25:46,761 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-46-761449
+2026-10-25 11:25:46,763 INFO Launching Rocket
+2026-10-25 11:25:46,772 INFO RUNNING fw_id: 3 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-46-761449
+2026-10-25 11:25:46,775 INFO Task started: ScriptTask.
+2026-10-25 11:25:46,840 INFO Task completed: ScriptTask
+2026-10-25 11:25:46,849 INFO Rocket finished
+2026-10-25 11:25:46,854 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-46-853990
+2026-10-25 11:25:46,856 INFO Launching Rocket
+2026-10-25 11:25:46,865 INFO RUNNING fw_id: 4 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-46-853990
+2026-10-25 11:25:46,868 INFO Task started: ScriptTask.
+2026-10-25 11:25:46,932 INFO Task completed: ScriptTask
+2026-10-25 11:25:46,941 INFO Rocket finished
+2026-10-25 11:25:46,946 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-46-946526
+2026-10-25 11:25:46,948 INFO Launching Rocket
+2026-10-25 11:25:46,958 INFO RUNNING fw_id: 5 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-46-946526
+2026-10-25 11:25:46,960 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,028 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,037 INFO Rocket finished
+2026-10-25 11:25:47,042 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-041967
+2026-10-25 11:25:47,044 INFO Launching Rocket
+2026-10-25 11:25:47,053 INFO RUNNING fw_id: 6 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-041967
+2026-10-25 11:25:47,056 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,121 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,130 INFO Rocket finished
+2026-10-25 11:25:47,135 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-135109
+2026-10-25 11:25:47,137 INFO Launching Rocket
+2026-10-25 11:25:47,146 INFO RUNNING fw_id: 7 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-135109
+2026-10-25 11:25:47,149 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,212 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,221 INFO Rocket finished
+2026-10-25 11:25:47,226 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-225982
+2026-10-25 11:25:47,228 INFO Launching Rocket
+2026-10-25 11:25:47,237 INFO RUNNING fw_id: 8 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-225982
+2026-10-25 11:25:47,240 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,306 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,314 INFO Rocket finished
+2026-10-25 11:25:47,319 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-319904
+2026-10-25 11:25:47,322 INFO Launching Rocket
+2026-10-25 11:25:47,331 INFO RUNNING fw_id: 9 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-319904
+2026-10-25 11:25:47,334 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,399 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,408 INFO Rocket finished
+2026-10-25 11:25:47,413 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-413177
+2026-10-25 11:25:47,415 INFO Launching Rocket
+2026-10-25 11:25:47,424 INFO RUNNING fw_id: 10 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-413177
+2026-10-25 11:25:47,427 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,493 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,502 INFO Rocket finished
+2026-10-25 11:25:47,507 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-507355
+2026-10-25 11:25:47,509 INFO Launching Rocket
+2026-10-25 11:25:47,518 INFO RUNNING fw_id: 11 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-507355
+2026-10-25 11:25:47,521 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,589 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,597 INFO Rocket finished
+2026-10-25 11:25:47,602 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-602551
+2026-10-25 11:25:47,604 INFO Launching Rocket
+2026-10-25 11:25:47,614 INFO RUNNING fw_id: 12 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-602551
+2026-10-25 11:25:47,616 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,683 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,691 INFO Rocket finished
+2026-10-25 11:25:47,696 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-696821
+2026-10-25 11:25:47,699 INFO Launching Rocket
+2026-10-25 11:25:47,709 INFO RUNNING fw_id: 13 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-696821
+2026-10-25 11:25:47,712 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,804 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,819 INFO Rocket finished
+2026-10-25 11:25:47,823 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-823628
+2026-10-25 11:25:47,826 INFO Launching Rocket
+2026-10-25 11:25:47,835 INFO RUNNING fw_id: 14 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-823628
+2026-10-25 11:25:47,838 INFO Task started: ScriptTask.
+2026-10-25 11:25:47,907 INFO Task completed: ScriptTask
+2026-10-25 11:25:47,916 INFO Rocket finished
+2026-10-25 11:25:47,921 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-921576
+2026-10-25 11:25:47,924 INFO Launching Rocket
+2026-10-25 11:25:47,933 INFO RUNNING fw_id: 15 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-47-921576
+2026-10-25 11:25:47,936 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,003 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,012 INFO Rocket finished
+2026-10-25 11:25:48,017 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-017609
+2026-10-25 11:25:48,019 INFO Launching Rocket
+2026-10-25 11:25:48,029 INFO RUNNING fw_id: 16 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-017609
+2026-10-25 11:25:48,032 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,097 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,106 INFO Rocket finished
+2026-10-25 11:25:48,112 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-112429
+2026-10-25 11:25:48,114 INFO Launching Rocket
+2026-10-25 11:25:48,124 INFO RUNNING fw_id: 17 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-112429
+2026-10-25 11:25:48,126 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,191 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,200 INFO Rocket finished
+2026-10-25 11:25:48,205 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-205262
+2026-10-25 11:25:48,207 INFO Launching Rocket
+2026-10-25 11:25:48,216 INFO RUNNING fw_id: 18 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-205262
+2026-10-25 11:25:48,219 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,286 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,295 INFO Rocket finished
+2026-10-25 11:25:48,300 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-300358
+2026-10-25 11:25:48,302 INFO Launching Rocket
+2026-10-25 11:25:48,312 INFO RUNNING fw_id: 19 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-300358
+2026-10-25 11:25:48,315 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,379 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,389 INFO Rocket finished
+2026-10-25 11:25:48,393 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-393713
+2026-10-25 11:25:48,396 INFO Launching Rocket
+2026-10-25 11:25:48,405 INFO RUNNING fw_id: 20 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-393713
+2026-10-25 11:25:48,409 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,473 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,482 INFO Rocket finished
+2026-10-25 11:25:48,487 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-487394
+2026-10-25 11:25:48,489 INFO Launching Rocket
+2026-10-25 11:25:48,499 INFO RUNNING fw_id: 21 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-487394
+2026-10-25 11:25:48,505 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,572 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,581 INFO Rocket finished
+2026-10-25 11:25:48,586 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-586359
+2026-10-25 11:25:48,588 INFO Launching Rocket
+2026-10-25 11:25:48,598 INFO RUNNING fw_id: 22 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-586359
+2026-10-25 11:25:48,601 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,664 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,674 INFO Rocket finished
+2026-10-25 11:25:48,679 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-679826
+2026-10-25 11:25:48,682 INFO Launching Rocket
+2026-10-25 11:25:48,691 INFO RUNNING fw_id: 23 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-679826
+2026-10-25 11:25:48,694 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,762 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,774 INFO Rocket finished
+2026-10-25 11:25:48,781 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-781414
+2026-10-25 11:25:48,783 INFO Launching Rocket
+2026-10-25 11:25:48,792 INFO RUNNING fw_id: 24 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-781414
+2026-10-25 11:25:48,798 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,872 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,882 INFO Rocket finished
+2026-10-25 11:25:48,887 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-887077
+2026-10-25 11:25:48,889 INFO Launching Rocket
+2026-10-25 11:25:48,898 INFO RUNNING fw_id: 25 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-887077
+2026-10-25 11:25:48,901 INFO Task started: ScriptTask.
+2026-10-25 11:25:48,965 INFO Task completed: ScriptTask
+2026-10-25 11:25:48,974 INFO Rocket finished
+2026-10-25 11:25:48,980 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-980432
+2026-10-25 11:25:48,982 INFO Launching Rocket
+2026-10-25 11:25:48,992 INFO RUNNING fw_id: 26 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-48-980432
+2026-10-25 11:25:48,995 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,058 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,068 INFO Rocket finished
+2026-10-25 11:25:49,073 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-073722
+2026-10-25 11:25:49,075 INFO Launching Rocket
+2026-10-25 11:25:49,085 INFO RUNNING fw_id: 27 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-073722
+2026-10-25 11:25:49,088 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,152 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,162 INFO Rocket finished
+2026-10-25 11:25:49,167 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-167367
+2026-10-25 11:25:49,169 INFO Launching Rocket
+2026-10-25 11:25:49,179 INFO RUNNING fw_id: 28 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-167367
+2026-10-25 11:25:49,183 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,248 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,257 INFO Rocket finished
+2026-10-25 11:25:49,262 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-262565
+2026-10-25 11:25:49,264 INFO Launching Rocket
+2026-10-25 11:25:49,274 INFO RUNNING fw_id: 29 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-262565
+2026-10-25 11:25:49,277 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,344 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,353 INFO Rocket finished
+2026-10-25 11:25:49,358 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-358298
+2026-10-25 11:25:49,360 INFO Launching Rocket
+2026-10-25 11:25:49,371 INFO RUNNING fw_id: 30 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-358298
+2026-10-25 11:25:49,374 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,439 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,448 INFO Rocket finished
+2026-10-25 11:25:49,453 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-453844
+2026-10-25 11:25:49,455 INFO Launching Rocket
+2026-10-25 11:25:49,465 INFO RUNNING fw_id: 31 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-453844
+2026-10-25 11:25:49,468 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,536 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,546 INFO Rocket finished
+2026-10-25 11:25:49,550 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-550691
+2026-10-25 11:25:49,553 INFO Launching Rocket
+2026-10-25 11:25:49,562 INFO RUNNING fw_id: 32 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-550691
+2026-10-25 11:25:49,566 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,633 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,643 INFO Rocket finished
+2026-10-25 11:25:49,647 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-647899
+2026-10-25 11:25:49,650 INFO Launching Rocket
+2026-10-25 11:25:49,660 INFO RUNNING fw_id: 33 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-647899
+2026-10-25 11:25:49,663 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,729 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,739 INFO Rocket finished
+2026-10-25 11:25:49,744 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-744132
+2026-10-25 11:25:49,746 INFO Launching Rocket
+2026-10-25 11:25:49,756 INFO RUNNING fw_id: 34 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-744132
+2026-10-25 11:25:49,759 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,826 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,835 INFO Rocket finished
+2026-10-25 11:25:49,842 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-842122
+2026-10-25 11:25:49,844 INFO Launching Rocket
+2026-10-25 11:25:49,854 INFO RUNNING fw_id: 35 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-842122
+2026-10-25 11:25:49,857 INFO Task started: ScriptTask.
+2026-10-25 11:25:49,924 INFO Task completed: ScriptTask
+2026-10-25 11:25:49,933 INFO Rocket finished
+2026-10-25 11:25:49,938 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-938563
+2026-10-25 11:25:49,941 INFO Launching Rocket
+2026-10-25 11:25:49,950 INFO RUNNING fw_id: 36 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-49-938563
+2026-10-25 11:25:49,954 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,020 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,030 INFO Rocket finished
+2026-10-25 11:25:50,035 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-035826
+2026-10-25 11:25:50,038 INFO Launching Rocket
+2026-10-25 11:25:50,047 INFO RUNNING fw_id: 37 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-035826
+2026-10-25 11:25:50,051 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,119 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,129 INFO Rocket finished
+2026-10-25 11:25:50,133 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-133753
+2026-10-25 11:25:50,135 INFO Launching Rocket
+2026-10-25 11:25:50,145 INFO RUNNING fw_id: 38 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-133753
+2026-10-25 11:25:50,148 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,213 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,223 INFO Rocket finished
+2026-10-25 11:25:50,228 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-228575
+2026-10-25 11:25:50,230 INFO Launching Rocket
+2026-10-25 11:25:50,240 INFO RUNNING fw_id: 39 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-228575
+2026-10-25 11:25:50,244 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,308 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,318 INFO Rocket finished
+2026-10-25 11:25:50,323 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-323643
+2026-10-25 11:25:50,326 INFO Launching Rocket
+2026-10-25 11:25:50,337 INFO RUNNING fw_id: 40 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-323643
+2026-10-25 11:25:50,340 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,406 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,416 INFO Rocket finished
+2026-10-25 11:25:50,420 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-420695
+2026-10-25 11:25:50,423 INFO Launching Rocket
+2026-10-25 11:25:50,433 INFO RUNNING fw_id: 41 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-420695
+2026-10-25 11:25:50,436 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,500 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,511 INFO Rocket finished
+2026-10-25 11:25:50,516 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-515943
+2026-10-25 11:25:50,518 INFO Launching Rocket
+2026-10-25 11:25:50,528 INFO RUNNING fw_id: 42 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-515943
+2026-10-25 11:25:50,531 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,600 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,610 INFO Rocket finished
+2026-10-25 11:25:50,615 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-614918
+2026-10-25 11:25:50,617 INFO Launching Rocket
+2026-10-25 11:25:50,627 INFO RUNNING fw_id: 43 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-614918
+2026-10-25 11:25:50,630 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,696 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,706 INFO Rocket finished
+2026-10-25 11:25:50,711 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-710966
+2026-10-25 11:25:50,713 INFO Launching Rocket
+2026-10-25 11:25:50,724 INFO RUNNING fw_id: 44 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-710966
+2026-10-25 11:25:50,727 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,793 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,804 INFO Rocket finished
+2026-10-25 11:25:50,809 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-809378
+2026-10-25 11:25:50,811 INFO Launching Rocket
+2026-10-25 11:25:50,821 INFO RUNNING fw_id: 45 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-809378
+2026-10-25 11:25:50,825 INFO Task started: ScriptTask.
+2026-10-25 11:25:50,893 INFO Task completed: ScriptTask
+2026-10-25 11:25:50,904 INFO Rocket finished
+2026-10-25 11:25:50,909 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-909505
+2026-10-25 11:25:50,911 INFO Launching Rocket
+2026-10-25 11:25:50,922 INFO RUNNING fw_id: 46 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-50-909505
+2026-10-25 11:25:50,927 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,003 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,013 INFO Rocket finished
+2026-10-25 11:25:51,018 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-018542
+2026-10-25 11:25:51,020 INFO Launching Rocket
+2026-10-25 11:25:51,031 INFO RUNNING fw_id: 47 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-018542
+2026-10-25 11:25:51,034 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,102 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,113 INFO Rocket finished
+2026-10-25 11:25:51,118 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-118391
+2026-10-25 11:25:51,120 INFO Launching Rocket
+2026-10-25 11:25:51,130 INFO RUNNING fw_id: 48 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-118391
+2026-10-25 11:25:51,134 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,201 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,211 INFO Rocket finished
+2026-10-25 11:25:51,216 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-216512
+2026-10-25 11:25:51,218 INFO Launching Rocket
+2026-10-25 11:25:51,228 INFO RUNNING fw_id: 49 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-216512
+2026-10-25 11:25:51,231 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,300 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,311 INFO Rocket finished
+2026-10-25 11:25:51,317 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-317214
+2026-10-25 11:25:51,319 INFO Launching Rocket
+2026-10-25 11:25:51,329 INFO RUNNING fw_id: 50 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-317214
+2026-10-25 11:25:51,332 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,398 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,408 INFO Rocket finished
+2026-10-25 11:25:51,413 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-413085
+2026-10-25 11:25:51,415 INFO Launching Rocket
+2026-10-25 11:25:51,425 INFO RUNNING fw_id: 51 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-413085
+2026-10-25 11:25:51,429 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,495 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,505 INFO Rocket finished
+2026-10-25 11:25:51,510 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-510551
+2026-10-25 11:25:51,512 INFO Launching Rocket
+2026-10-25 11:25:51,522 INFO RUNNING fw_id: 52 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-510551
+2026-10-25 11:25:51,526 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,593 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,603 INFO Rocket finished
+2026-10-25 11:25:51,612 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-612504
+2026-10-25 11:25:51,615 INFO Launching Rocket
+2026-10-25 11:25:51,628 INFO RUNNING fw_id: 53 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-612504
+2026-10-25 11:25:51,631 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,711 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,722 INFO Rocket finished
+2026-10-25 11:25:51,727 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-727396
+2026-10-25 11:25:51,729 INFO Launching Rocket
+2026-10-25 11:25:51,740 INFO RUNNING fw_id: 54 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-727396
+2026-10-25 11:25:51,744 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,810 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,820 INFO Rocket finished
+2026-10-25 11:25:51,826 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-826200
+2026-10-25 11:25:51,828 INFO Launching Rocket
+2026-10-25 11:25:51,839 INFO RUNNING fw_id: 55 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-826200
+2026-10-25 11:25:51,842 INFO Task started: ScriptTask.
+2026-10-25 11:25:51,908 INFO Task completed: ScriptTask
+2026-10-25 11:25:51,919 INFO Rocket finished
+2026-10-25 11:25:51,925 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-925344
+2026-10-25 11:25:51,927 INFO Launching Rocket
+2026-10-25 11:25:51,937 INFO RUNNING fw_id: 56 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-51-925344
+2026-10-25 11:25:51,940 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,010 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,022 INFO Rocket finished
+2026-10-25 11:25:52,027 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-027406
+2026-10-25 11:25:52,029 INFO Launching Rocket
+2026-10-25 11:25:52,040 INFO RUNNING fw_id: 57 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-027406
+2026-10-25 11:25:52,044 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,113 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,123 INFO Rocket finished
+2026-10-25 11:25:52,128 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-127972
+2026-10-25 11:25:52,130 INFO Launching Rocket
+2026-10-25 11:25:52,140 INFO RUNNING fw_id: 58 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-127972
+2026-10-25 11:25:52,143 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,210 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,220 INFO Rocket finished
+2026-10-25 11:25:52,225 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-225193
+2026-10-25 11:25:52,227 INFO Launching Rocket
+2026-10-25 11:25:52,237 INFO RUNNING fw_id: 59 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-225193
+2026-10-25 11:25:52,241 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,305 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,316 INFO Rocket finished
+2026-10-25 11:25:52,321 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-320979
+2026-10-25 11:25:52,323 INFO Launching Rocket
+2026-10-25 11:25:52,334 INFO RUNNING fw_id: 60 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-320979
+2026-10-25 11:25:52,337 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,403 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,413 INFO Rocket finished
+2026-10-25 11:25:52,418 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-418273
+2026-10-25 11:25:52,420 INFO Launching Rocket
+2026-10-25 11:25:52,429 INFO RUNNING fw_id: 61 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-418273
+2026-10-25 11:25:52,432 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,494 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,504 INFO Rocket finished
+2026-10-25 11:25:52,508 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-508743
+2026-10-25 11:25:52,510 INFO Launching Rocket
+2026-10-25 11:25:52,520 INFO RUNNING fw_id: 62 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-508743
+2026-10-25 11:25:52,523 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,585 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,596 INFO Rocket finished
+2026-10-25 11:25:52,599 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-599758
+2026-10-25 11:25:52,601 INFO Launching Rocket
+2026-10-25 11:25:52,612 INFO RUNNING fw_id: 63 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-599758
+2026-10-25 11:25:52,614 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,677 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,687 INFO Rocket finished
+2026-10-25 11:25:52,692 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-692288
+2026-10-25 11:25:52,694 INFO Launching Rocket
+2026-10-25 11:25:52,703 INFO RUNNING fw_id: 64 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-692288
+2026-10-25 11:25:52,706 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,768 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,779 INFO Rocket finished
+2026-10-25 11:25:52,783 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-783370
+2026-10-25 11:25:52,785 INFO Launching Rocket
+2026-10-25 11:25:52,794 INFO RUNNING fw_id: 65 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-783370
+2026-10-25 11:25:52,797 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,857 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,867 INFO Rocket finished
+2026-10-25 11:25:52,872 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-872063
+2026-10-25 11:25:52,874 INFO Launching Rocket
+2026-10-25 11:25:52,884 INFO RUNNING fw_id: 66 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-872063
+2026-10-25 11:25:52,886 INFO Task started: ScriptTask.
+2026-10-25 11:25:52,949 INFO Task completed: ScriptTask
+2026-10-25 11:25:52,959 INFO Rocket finished
+2026-10-25 11:25:52,964 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-964028
+2026-10-25 11:25:52,966 INFO Launching Rocket
+2026-10-25 11:25:52,976 INFO RUNNING fw_id: 67 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-52-964028
+2026-10-25 11:25:52,979 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,043 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,054 INFO Rocket finished
+2026-10-25 11:25:53,058 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-058595
+2026-10-25 11:25:53,060 INFO Launching Rocket
+2026-10-25 11:25:53,070 INFO RUNNING fw_id: 68 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-058595
+2026-10-25 11:25:53,074 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,139 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,149 INFO Rocket finished
+2026-10-25 11:25:53,154 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-154089
+2026-10-25 11:25:53,155 INFO Launching Rocket
+2026-10-25 11:25:53,165 INFO RUNNING fw_id: 69 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-154089
+2026-10-25 11:25:53,168 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,233 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,243 INFO Rocket finished
+2026-10-25 11:25:53,248 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-247974
+2026-10-25 11:25:53,250 INFO Launching Rocket
+2026-10-25 11:25:53,260 INFO RUNNING fw_id: 70 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-247974
+2026-10-25 11:25:53,263 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,325 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,336 INFO Rocket finished
+2026-10-25 11:25:53,340 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-340470
+2026-10-25 11:25:53,342 INFO Launching Rocket
+2026-10-25 11:25:53,352 INFO RUNNING fw_id: 71 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-340470
+2026-10-25 11:25:53,355 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,418 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,429 INFO Rocket finished
+2026-10-25 11:25:53,433 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-433200
+2026-10-25 11:25:53,435 INFO Launching Rocket
+2026-10-25 11:25:53,446 INFO RUNNING fw_id: 72 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-433200
+2026-10-25 11:25:53,448 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,513 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,523 INFO Rocket finished
+2026-10-25 11:25:53,528 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-528124
+2026-10-25 11:25:53,530 INFO Launching Rocket
+2026-10-25 11:25:53,540 INFO RUNNING fw_id: 73 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-528124
+2026-10-25 11:25:53,543 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,605 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,616 INFO Rocket finished
+2026-10-25 11:25:53,620 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-620000
+2026-10-25 11:25:53,621 INFO Launching Rocket
+2026-10-25 11:25:53,632 INFO RUNNING fw_id: 74 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-620000
+2026-10-25 11:25:53,635 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,697 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,707 INFO Rocket finished
+2026-10-25 11:25:53,712 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-712389
+2026-10-25 11:25:53,714 INFO Launching Rocket
+2026-10-25 11:25:53,724 INFO RUNNING fw_id: 75 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-712389
+2026-10-25 11:25:53,727 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,791 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,802 INFO Rocket finished
+2026-10-25 11:25:53,807 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-807202
+2026-10-25 11:25:53,808 INFO Launching Rocket
+2026-10-25 11:25:53,819 INFO RUNNING fw_id: 76 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-807202
+2026-10-25 11:25:53,822 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,887 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,898 INFO Rocket finished
+2026-10-25 11:25:53,902 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-902315
+2026-10-25 11:25:53,904 INFO Launching Rocket
+2026-10-25 11:25:53,915 INFO RUNNING fw_id: 77 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-902315
+2026-10-25 11:25:53,918 INFO Task started: ScriptTask.
+2026-10-25 11:25:53,982 INFO Task completed: ScriptTask
+2026-10-25 11:25:53,993 INFO Rocket finished
+2026-10-25 11:25:53,997 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-997583
+2026-10-25 11:25:53,999 INFO Launching Rocket
+2026-10-25 11:25:54,009 INFO RUNNING fw_id: 78 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-53-997583
+2026-10-25 11:25:54,012 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,078 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,088 INFO Rocket finished
+2026-10-25 11:25:54,093 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-092964
+2026-10-25 11:25:54,094 INFO Launching Rocket
+2026-10-25 11:25:54,105 INFO RUNNING fw_id: 79 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-092964
+2026-10-25 11:25:54,108 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,171 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,182 INFO Rocket finished
+2026-10-25 11:25:54,186 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-186487
+2026-10-25 11:25:54,188 INFO Launching Rocket
+2026-10-25 11:25:54,198 INFO RUNNING fw_id: 80 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-186487
+2026-10-25 11:25:54,201 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,266 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,277 INFO Rocket finished
+2026-10-25 11:25:54,281 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-281726
+2026-10-25 11:25:54,283 INFO Launching Rocket
+2026-10-25 11:25:54,294 INFO RUNNING fw_id: 81 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-281726
+2026-10-25 11:25:54,297 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,362 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,373 INFO Rocket finished
+2026-10-25 11:25:54,377 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-377115
+2026-10-25 11:25:54,379 INFO Launching Rocket
+2026-10-25 11:25:54,389 INFO RUNNING fw_id: 82 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-377115
+2026-10-25 11:25:54,392 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,455 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,466 INFO Rocket finished
+2026-10-25 11:25:54,470 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-470576
+2026-10-25 11:25:54,472 INFO Launching Rocket
+2026-10-25 11:25:54,483 INFO RUNNING fw_id: 83 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-470576
+2026-10-25 11:25:54,486 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,550 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,561 INFO Rocket finished
+2026-10-25 11:25:54,565 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-565555
+2026-10-25 11:25:54,567 INFO Launching Rocket
+2026-10-25 11:25:54,577 INFO RUNNING fw_id: 84 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-565555
+2026-10-25 11:25:54,580 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,644 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,655 INFO Rocket finished
+2026-10-25 11:25:54,659 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-659592
+2026-10-25 11:25:54,661 INFO Launching Rocket
+2026-10-25 11:25:54,671 INFO RUNNING fw_id: 85 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-659592
+2026-10-25 11:25:54,674 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,737 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,748 INFO Rocket finished
+2026-10-25 11:25:54,752 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-752728
+2026-10-25 11:25:54,754 INFO Launching Rocket
+2026-10-25 11:25:54,765 INFO RUNNING fw_id: 86 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-752728
+2026-10-25 11:25:54,768 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,832 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,843 INFO Rocket finished
+2026-10-25 11:25:54,847 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-847346
+2026-10-25 11:25:54,849 INFO Launching Rocket
+2026-10-25 11:25:54,859 INFO RUNNING fw_id: 87 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-847346
+2026-10-25 11:25:54,862 INFO Task started: ScriptTask.
+2026-10-25 11:25:54,925 INFO Task completed: ScriptTask
+2026-10-25 11:25:54,936 INFO Rocket finished
+2026-10-25 11:25:54,940 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-940559
+2026-10-25 11:25:54,942 INFO Launching Rocket
+2026-10-25 11:25:54,952 INFO RUNNING fw_id: 88 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-54-940559
+2026-10-25 11:25:54,955 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,018 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,030 INFO Rocket finished
+2026-10-25 11:25:55,034 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-034632
+2026-10-25 11:25:55,036 INFO Launching Rocket
+2026-10-25 11:25:55,048 INFO RUNNING fw_id: 89 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-034632
+2026-10-25 11:25:55,050 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,114 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,124 INFO Rocket finished
+2026-10-25 11:25:55,129 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-129461
+2026-10-25 11:25:55,130 INFO Launching Rocket
+2026-10-25 11:25:55,141 INFO RUNNING fw_id: 90 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-129461
+2026-10-25 11:25:55,144 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,209 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,221 INFO Rocket finished
+2026-10-25 11:25:55,225 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-225475
+2026-10-25 11:25:55,227 INFO Launching Rocket
+2026-10-25 11:25:55,237 INFO RUNNING fw_id: 91 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-225475
+2026-10-25 11:25:55,240 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,303 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,314 INFO Rocket finished
+2026-10-25 11:25:55,318 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-318500
+2026-10-25 11:25:55,320 INFO Launching Rocket
+2026-10-25 11:25:55,330 INFO RUNNING fw_id: 92 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-318500
+2026-10-25 11:25:55,333 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,396 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,406 INFO Rocket finished
+2026-10-25 11:25:55,411 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-411245
+2026-10-25 11:25:55,413 INFO Launching Rocket
+2026-10-25 11:25:55,423 INFO RUNNING fw_id: 93 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-411245
+2026-10-25 11:25:55,426 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,490 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,500 INFO Rocket finished
+2026-10-25 11:25:55,505 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-504959
+2026-10-25 11:25:55,507 INFO Launching Rocket
+2026-10-25 11:25:55,517 INFO RUNNING fw_id: 94 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-504959
+2026-10-25 11:25:55,520 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,584 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,595 INFO Rocket finished
+2026-10-25 11:25:55,599 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-599337
+2026-10-25 11:25:55,601 INFO Launching Rocket
+2026-10-25 11:25:55,612 INFO RUNNING fw_id: 95 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-599337
+2026-10-25 11:25:55,614 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,679 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,690 INFO Rocket finished
+2026-10-25 11:25:55,694 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-694631
+2026-10-25 11:25:55,696 INFO Launching Rocket
+2026-10-25 11:25:55,706 INFO RUNNING fw_id: 96 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-694631
+2026-10-25 11:25:55,709 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,770 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,781 INFO Rocket finished
+2026-10-25 11:25:55,785 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-785576
+2026-10-25 11:25:55,787 INFO Launching Rocket
+2026-10-25 11:25:55,798 INFO RUNNING fw_id: 97 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-785576
+2026-10-25 11:25:55,801 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,863 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,874 INFO Rocket finished
+2026-10-25 11:25:55,878 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-878709
+2026-10-25 11:25:55,880 INFO Launching Rocket
+2026-10-25 11:25:55,891 INFO RUNNING fw_id: 98 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-878709
+2026-10-25 11:25:55,895 INFO Task started: ScriptTask.
+2026-10-25 11:25:55,958 INFO Task completed: ScriptTask
+2026-10-25 11:25:55,970 INFO Rocket finished
+2026-10-25 11:25:55,975 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-975023
+2026-10-25 11:25:55,977 INFO Launching Rocket
+2026-10-25 11:25:55,988 INFO RUNNING fw_id: 99 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-55-975023
+2026-10-25 11:25:55,992 INFO Task started: ScriptTask.
+2026-10-25 11:25:56,058 INFO Task completed: ScriptTask
+2026-10-25 11:25:56,070 INFO Rocket finished
+2026-10-25 11:25:56,075 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-56-075194
+2026-10-25 11:25:56,077 INFO Launching Rocket
+2026-10-25 11:25:56,089 INFO RUNNING fw_id: 100 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-56-075194
+2026-10-25 11:25:56,092 INFO Task started: ScriptTask.
+2026-10-25 11:25:56,159 INFO Task completed: ScriptTask
+2026-10-25 11:25:56,169 INFO Rocket finished
+2026-10-25 11:25:56,174 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-56-174462
+2026-10-25 11:25:56,176 INFO Launching Rocket
+2026-10-25 11:25:56,187 INFO RUNNING fw_id: 101 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-56-174462
+2026-10-25 11:25:56,191 INFO Task started: ScriptTask.
+2026-10-25 11:25:56,256 INFO Task completed: ScriptTask
+2026-10-25 11:25:56,268 INFO Rocket finished
+2026-10-25 11:25:56,273 INFO Created new dir /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-56-273093
+2026-10-25 11:25:56,275 INFO Launching Rocket
+2026-10-25 11:25:56,287 INFO RUNNING fw_id: 1 in directory: /localscratch/learner01.18165.0/launcher_2026-10-25-10-25-56-273093
+2026-10-25 11:25:56,290 INFO Task started: ScriptTask.
+2026-10-25 11:25:56,366 INFO Task completed: ScriptTask
+2026-10-25 11:25:56,377 INFO Rocket finished
+101
+completed 101 Fireworks
+result.csv: 100 rows

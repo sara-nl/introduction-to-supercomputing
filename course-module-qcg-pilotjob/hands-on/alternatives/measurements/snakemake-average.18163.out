@@ -1,0 +1,1456 @@
+Module for EESSI/2025.06 loaded successfully
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-10-25 11:25:16
+  Workflow ID: b896e2d3-8c08-4d22-a71a-d52ed4682877
+  Platform: Linux-6.8.0-147-generic-x86_64-AMD_EPYC-Rome_Processor-with-glibc2.41
+  Host: coursenode3.advisorssrcdemo.src.surf-hosted.nl
+  User: learner01
+  Snakemake version: 9.22.0
+  Python version: 3.13.5 (main, Oct 22 2026, 10:12:48) [GCC 14.3.0]
+  Command: /cvmfs/software.eessi.io/versions/2025.06/software/linux/x86_64/amd/zen2/software/snakemake/9.22.0-foss-2025b/bin/snakemake --snakefile Snakefile --cores 2
+  Snakefile: /scratch/learner01/alt-measure-20261025/alternatives/snakemake/Snakefile
+  Base directory: /scratch/learner01/alt-measure-20261025/alternatives/snakemake
+  Run directory: /scratch/learner01/alt-measure-20261025/alternatives/snakemake
+  Working directory: /scratch/learner01/alt-measure-20261025/alternatives/snakemake
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /cvmfs/software.eessi.io/versions/2025.06/compat/linux/x86_64/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job          count
+---------  -------
+average        100
+aggregate        1
+all              1
+total          102
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Sun Oct 25 11:25:17 2026]
+localrule average:
+    input: input/ASN00092045.csv, ../../example_04/average.py
+    output: averages/ASN00092045.csv
+    jobid: 72
+    reason: Missing output files: averages/ASN00092045.csv
+    wildcards: name=ASN00092045
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:17 2026]
+localrule average:
+    input: input/CA001017230.csv, ../../example_04/average.py
+    output: averages/CA001017230.csv
+    jobid: 76
+    reason: Missing output files: averages/CA001017230.csv
+    wildcards: name=CA001017230
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:17 2026]
+Finished jobid: 72 (Rule: average)
+1 of 102 steps (1%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:17 2026]
+localrule average:
+    input: input/ASN00085296.csv, ../../example_04/average.py
+    output: averages/ASN00085296.csv
+    jobid: 64
+    reason: Missing output files: averages/ASN00085296.csv
+    wildcards: name=ASN00085296
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:17 2026]
+Finished jobid: 76 (Rule: average)
+2 of 102 steps (2%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:18 2026]
+localrule average:
+    input: input/ASN00040913.csv, ../../example_04/average.py
+    output: averages/ASN00040913.csv
+    jobid: 34
+    reason: Missing output files: averages/ASN00040913.csv
+    wildcards: name=ASN00040913
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:18 2026]
+Finished jobid: 64 (Rule: average)
+3 of 102 steps (3%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:18 2026]
+localrule average:
+    input: input/AM000037704.csv, ../../example_04/average.py
+    output: averages/AM000037704.csv
+    jobid: 3
+    reason: Missing output files: averages/AM000037704.csv
+    wildcards: name=AM000037704
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:18 2026]
+Finished jobid: 34 (Rule: average)
+4 of 102 steps (4%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:18 2026]
+localrule average:
+    input: input/CA001173210.csv, ../../example_04/average.py
+    output: averages/CA001173210.csv
+    jobid: 94
+    reason: Missing output files: averages/CA001173210.csv
+    wildcards: name=CA001173210
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:18 2026]
+Finished jobid: 3 (Rule: average)
+5 of 102 steps (5%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:18 2026]
+localrule average:
+    input: input/ASN00001006.csv, ../../example_04/average.py
+    output: averages/ASN00001006.csv
+    jobid: 4
+    reason: Missing output files: averages/ASN00001006.csv
+    wildcards: name=ASN00001006
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:18 2026]
+Finished jobid: 94 (Rule: average)
+6 of 102 steps (6%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:18 2026]
+localrule average:
+    input: input/ASN00086068.csv, ../../example_04/average.py
+    output: averages/ASN00086068.csv
+    jobid: 65
+    reason: Missing output files: averages/ASN00086068.csv
+    wildcards: name=ASN00086068
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:18 2026]
+Finished jobid: 4 (Rule: average)
+7 of 102 steps (7%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:18 2026]
+localrule average:
+    input: input/CA00116FRMN.csv, ../../example_04/average.py
+    output: averages/CA00116FRMN.csv
+    jobid: 93
+    reason: Missing output files: averages/CA00116FRMN.csv
+    wildcards: name=CA00116FRMN
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:18 2026]
+Finished jobid: 65 (Rule: average)
+8 of 102 steps (8%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:18 2026]
+localrule average:
+    input: input/ASN00040958.csv, ../../example_04/average.py
+    output: averages/ASN00040958.csv
+    jobid: 35
+    reason: Missing output files: averages/ASN00040958.csv
+    wildcards: name=ASN00040958
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:18 2026]
+Finished jobid: 93 (Rule: average)
+9 of 102 steps (9%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:19 2026]
+localrule average:
+    input: input/CA001192341.csv, ../../example_04/average.py
+    output: averages/CA001192341.csv
+    jobid: 95
+    reason: Missing output files: averages/CA001192341.csv
+    wildcards: name=CA001192341
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:19 2026]
+Finished jobid: 35 (Rule: average)
+10 of 102 steps (10%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:19 2026]
+localrule average:
+    input: input/ASN00005007.csv, ../../example_04/average.py
+    output: averages/ASN00005007.csv
+    jobid: 5
+    reason: Missing output files: averages/ASN00005007.csv
+    wildcards: name=ASN00005007
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:19 2026]
+Finished jobid: 95 (Rule: average)
+11 of 102 steps (11%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:19 2026]
+localrule average:
+    input: input/ASN00072162.csv, ../../example_04/average.py
+    output: averages/ASN00072162.csv
+    jobid: 55
+    reason: Missing output files: averages/ASN00072162.csv
+    wildcards: name=ASN00072162
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:19 2026]
+Finished jobid: 5 (Rule: average)
+12 of 102 steps (12%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:19 2026]
+localrule average:
+    input: input/ASN00029038.csv, ../../example_04/average.py
+    output: averages/ASN00029038.csv
+    jobid: 25
+    reason: Missing output files: averages/ASN00029038.csv
+    wildcards: name=ASN00029038
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:19 2026]
+Finished jobid: 55 (Rule: average)
+13 of 102 steps (13%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:19 2026]
+localrule average:
+    input: input/CA001096453.csv, ../../example_04/average.py
+    output: averages/CA001096453.csv
+    jobid: 85
+    reason: Missing output files: averages/CA001096453.csv
+    wildcards: name=CA001096453
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:19 2026]
+Finished jobid: 25 (Rule: average)
+14 of 102 steps (14%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:19 2026]
+localrule average:
+    input: input/ASN00074148.csv, ../../example_04/average.py
+    output: averages/ASN00074148.csv
+    jobid: 56
+    reason: Missing output files: averages/ASN00074148.csv
+    wildcards: name=ASN00074148
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:19 2026]
+Finished jobid: 85 (Rule: average)
+15 of 102 steps (15%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:19 2026]
+localrule average:
+    input: input/ASN00005017.csv, ../../example_04/average.py
+    output: averages/ASN00005017.csv
+    jobid: 6
+    reason: Missing output files: averages/ASN00005017.csv
+    wildcards: name=ASN00005017
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:20 2026]
+Finished jobid: 56 (Rule: average)
+16 of 102 steps (16%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:20 2026]
+localrule average:
+    input: input/ASN00089002.csv, ../../example_04/average.py
+    output: averages/ASN00089002.csv
+    jobid: 67
+    reason: Missing output files: averages/ASN00089002.csv
+    wildcards: name=ASN00089002
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:20 2026]
+Finished jobid: 6 (Rule: average)
+17 of 102 steps (17%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:20 2026]
+localrule average:
+    input: input/ASN00041525.csv, ../../example_04/average.py
+    output: averages/ASN00041525.csv
+    jobid: 37
+    reason: Missing output files: averages/ASN00041525.csv
+    wildcards: name=ASN00041525
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:20 2026]
+Finished jobid: 67 (Rule: average)
+18 of 102 steps (18%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:20 2026]
+localrule average:
+    input: input/CA002201450.csv, ../../example_04/average.py
+    output: averages/CA002201450.csv
+    jobid: 97
+    reason: Missing output files: averages/CA002201450.csv
+    wildcards: name=CA002201450
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:20 2026]
+Finished jobid: 37 (Rule: average)
+19 of 102 steps (19%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:20 2026]
+localrule average:
+    input: input/CA002100181.csv, ../../example_04/average.py
+    output: averages/CA002100181.csv
+    jobid: 96
+    reason: Missing output files: averages/CA002100181.csv
+    wildcards: name=CA002100181
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:20 2026]
+Finished jobid: 97 (Rule: average)
+20 of 102 steps (20%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:20 2026]
+localrule average:
+    input: input/ASN00007176.csv, ../../example_04/average.py
+    output: averages/ASN00007176.csv
+    jobid: 7
+    reason: Missing output files: averages/ASN00007176.csv
+    wildcards: name=ASN00007176
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:20 2026]
+Finished jobid: 96 (Rule: average)
+21 of 102 steps (21%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:20 2026]
+localrule average:
+    input: input/ASN00089112.csv, ../../example_04/average.py
+    output: averages/ASN00089112.csv
+    jobid: 68
+    reason: Missing output files: averages/ASN00089112.csv
+    wildcards: name=ASN00089112
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:20 2026]
+Finished jobid: 7 (Rule: average)
+22 of 102 steps (22%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:21 2026]
+localrule average:
+    input: input/ASN00041529.csv, ../../example_04/average.py
+    output: averages/ASN00041529.csv
+    jobid: 38
+    reason: Missing output files: averages/ASN00041529.csv
+    wildcards: name=ASN00041529
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:21 2026]
+Finished jobid: 68 (Rule: average)
+23 of 102 steps (23%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:21 2026]
+localrule average:
+    input: input/ASN00047029.csv, ../../example_04/average.py
+    output: averages/ASN00047029.csv
+    jobid: 41
+    reason: Missing output files: averages/ASN00047029.csv
+    wildcards: name=ASN00047029
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:21 2026]
+Finished jobid: 38 (Rule: average)
+24 of 102 steps (24%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:21 2026]
+localrule average:
+    input: input/CA002300904.csv, ../../example_04/average.py
+    output: averages/CA002300904.csv
+    jobid: 101
+    reason: Missing output files: averages/CA002300904.csv
+    wildcards: name=CA002300904
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:21 2026]
+Finished jobid: 41 (Rule: average)
+25 of 102 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:21 2026]
+localrule average:
+    input: input/CA001106200.csv, ../../example_04/average.py
+    output: averages/CA001106200.csv
+    jobid: 86
+    reason: Missing output files: averages/CA001106200.csv
+    wildcards: name=CA001106200
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:21 2026]
+Finished jobid: 101 (Rule: average)
+26 of 102 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:21 2026]
+localrule average:
+    input: input/ASN00015135.csv, ../../example_04/average.py
+    output: averages/ASN00015135.csv
+    jobid: 19
+    reason: Missing output files: averages/ASN00015135.csv
+    wildcards: name=ASN00015135
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:21 2026]
+Finished jobid: 86 (Rule: average)
+27 of 102 steps (26%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:21 2026]
+localrule average:
+    input: input/ASN00030022.csv, ../../example_04/average.py
+    output: averages/ASN00030022.csv
+    jobid: 26
+    reason: Missing output files: averages/ASN00030022.csv
+    wildcards: name=ASN00030022
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:21 2026]
+Finished jobid: 19 (Rule: average)
+28 of 102 steps (27%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:21 2026]
+localrule average:
+    input: input/CA001035612.csv, ../../example_04/average.py
+    output: averages/CA001035612.csv
+    jobid: 79
+    reason: Missing output files: averages/CA001035612.csv
+    wildcards: name=CA001035612
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:21 2026]
+Finished jobid: 26 (Rule: average)
+29 of 102 steps (28%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:22 2026]
+localrule average:
+    input: input/ASN00058077.csv, ../../example_04/average.py
+    output: averages/ASN00058077.csv
+    jobid: 49
+    reason: Missing output files: averages/ASN00058077.csv
+    wildcards: name=ASN00058077
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:22 2026]
+Finished jobid: 79 (Rule: average)
+30 of 102 steps (29%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:22 2026]
+localrule average:
+    input: input/ASN00010614.csv, ../../example_04/average.py
+    output: averages/ASN00010614.csv
+    jobid: 12
+    reason: Missing output files: averages/ASN00010614.csv
+    wildcards: name=ASN00010614
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:22 2026]
+Finished jobid: 49 (Rule: average)
+31 of 102 steps (30%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:22 2026]
+localrule average:
+    input: input/ASN00091311.csv, ../../example_04/average.py
+    output: averages/ASN00091311.csv
+    jobid: 71
+    reason: Missing output files: averages/ASN00091311.csv
+    wildcards: name=ASN00091311
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:22 2026]
+Finished jobid: 12 (Rule: average)
+32 of 102 steps (31%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:22 2026]
+localrule average:
+    input: input/ASN00076031.csv, ../../example_04/average.py
+    output: averages/ASN00076031.csv
+    jobid: 57
+    reason: Missing output files: averages/ASN00076031.csv
+    wildcards: name=ASN00076031
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:22 2026]
+Finished jobid: 71 (Rule: average)
+33 of 102 steps (32%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:22 2026]
+localrule average:
+    input: input/ASN00088162.csv, ../../example_04/average.py
+    output: averages/ASN00088162.csv
+    jobid: 66
+    reason: Missing output files: averages/ASN00088162.csv
+    wildcards: name=ASN00088162
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:22 2026]
+Finished jobid: 57 (Rule: average)
+34 of 102 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:22 2026]
+localrule average:
+    input: input/CA001046392.csv, ../../example_04/average.py
+    output: averages/CA001046392.csv
+    jobid: 81
+    reason: Missing output files: averages/CA001046392.csv
+    wildcards: name=CA001046392
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:22 2026]
+Finished jobid: 66 (Rule: average)
+35 of 102 steps (34%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:22 2026]
+localrule average:
+    input: input/ASN00018083.csv, ../../example_04/average.py
+    output: averages/ASN00018083.csv
+    jobid: 21
+    reason: Missing output files: averages/ASN00018083.csv
+    wildcards: name=ASN00018083
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:22 2026]
+Finished jobid: 81 (Rule: average)
+36 of 102 steps (35%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:22 2026]
+localrule average:
+    input: input/ASN00063292.csv, ../../example_04/average.py
+    output: averages/ASN00063292.csv
+    jobid: 51
+    reason: Missing output files: averages/ASN00063292.csv
+    wildcards: name=ASN00063292
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:22 2026]
+Finished jobid: 21 (Rule: average)
+37 of 102 steps (36%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:23 2026]
+localrule average:
+    input: input/ASN00050017.csv, ../../example_04/average.py
+    output: averages/ASN00050017.csv
+    jobid: 43
+    reason: Missing output files: averages/ASN00050017.csv
+    wildcards: name=ASN00050017
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:23 2026]
+Finished jobid: 51 (Rule: average)
+38 of 102 steps (37%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:23 2026]
+localrule average:
+    input: input/ASN00041522.csv, ../../example_04/average.py
+    output: averages/ASN00041522.csv
+    jobid: 36
+    reason: Missing output files: averages/ASN00041522.csv
+    wildcards: name=ASN00041522
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:23 2026]
+Finished jobid: 43 (Rule: average)
+39 of 102 steps (38%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:23 2026]
+localrule average:
+    input: input/CA001108446.csv, ../../example_04/average.py
+    output: averages/CA001108446.csv
+    jobid: 88
+    reason: Missing output files: averages/CA001108446.csv
+    wildcards: name=CA001108446
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:23 2026]
+Finished jobid: 36 (Rule: average)
+40 of 102 steps (39%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:23 2026]
+localrule average:
+    input: input/ASN00012044.csv, ../../example_04/average.py
+    output: averages/ASN00012044.csv
+    jobid: 14
+    reason: Missing output files: averages/ASN00012044.csv
+    wildcards: name=ASN00012044
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:23 2026]
+Finished jobid: 88 (Rule: average)
+41 of 102 steps (40%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:23 2026]
+localrule average:
+    input: input/ASN00033106.csv, ../../example_04/average.py
+    output: averages/ASN00033106.csv
+    jobid: 28
+    reason: Missing output files: averages/ASN00033106.csv
+    wildcards: name=ASN00033106
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:23 2026]
+Finished jobid: 14 (Rule: average)
+42 of 102 steps (41%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:23 2026]
+localrule average:
+    input: input/AYM00089642.csv, ../../example_04/average.py
+    output: averages/AYM00089642.csv
+    jobid: 74
+    reason: Missing output files: averages/AYM00089642.csv
+    wildcards: name=AYM00089642
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:23 2026]
+Finished jobid: 28 (Rule: average)
+43 of 102 steps (42%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:23 2026]
+localrule average:
+    input: input/ASN00099005.csv, ../../example_04/average.py
+    output: averages/ASN00099005.csv
+    jobid: 73
+    reason: Missing output files: averages/ASN00099005.csv
+    wildcards: name=ASN00099005
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:23 2026]
+Finished jobid: 74 (Rule: average)
+44 of 102 steps (43%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:23 2026]
+localrule average:
+    input: input/ASN00084084.csv, ../../example_04/average.py
+    output: averages/ASN00084084.csv
+    jobid: 59
+    reason: Missing output files: averages/ASN00084084.csv
+    wildcards: name=ASN00084084
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:23 2026]
+Finished jobid: 73 (Rule: average)
+45 of 102 steps (44%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:24 2026]
+localrule average:
+    input: input/ASN00081125.csv, ../../example_04/average.py
+    output: averages/ASN00081125.csv
+    jobid: 58
+    reason: Missing output files: averages/ASN00081125.csv
+    wildcards: name=ASN00081125
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:24 2026]
+Finished jobid: 59 (Rule: average)
+46 of 102 steps (45%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:24 2026]
+localrule average:
+    input: input/ASN00051161.csv, ../../example_04/average.py
+    output: averages/ASN00051161.csv
+    jobid: 44
+    reason: Missing output files: averages/ASN00051161.csv
+    wildcards: name=ASN00051161
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:24 2026]
+Finished jobid: 58 (Rule: average)
+47 of 102 steps (46%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:24 2026]
+localrule average:
+    input: input/ASN00011019.csv, ../../example_04/average.py
+    output: averages/ASN00011019.csv
+    jobid: 13
+    reason: Missing output files: averages/ASN00011019.csv
+    wildcards: name=ASN00011019
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:24 2026]
+Finished jobid: 44 (Rule: average)
+48 of 102 steps (47%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:24 2026]
+localrule average:
+    input: input/ASN00037010.csv, ../../example_04/average.py
+    output: averages/ASN00037010.csv
+    jobid: 29
+    reason: Missing output files: averages/ASN00037010.csv
+    wildcards: name=ASN00037010
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:24 2026]
+Finished jobid: 13 (Rule: average)
+49 of 102 steps (48%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:24 2026]
+localrule average:
+    input: input/ASN00061055.csv, ../../example_04/average.py
+    output: averages/ASN00061055.csv
+    jobid: 50
+    reason: Missing output files: averages/ASN00061055.csv
+    wildcards: name=ASN00061055
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:24 2026]
+Finished jobid: 29 (Rule: average)
+50 of 102 steps (49%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:24 2026]
+localrule average:
+    input: input/CA001108824.csv, ../../example_04/average.py
+    output: averages/CA001108824.csv
+    jobid: 89
+    reason: Missing output files: averages/CA001108824.csv
+    wildcards: name=CA001108824
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:24 2026]
+Finished jobid: 50 (Rule: average)
+51 of 102 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:24 2026]
+localrule average:
+    input: input/ASN00022823.csv, ../../example_04/average.py
+    output: averages/ASN00022823.csv
+    jobid: 24
+    reason: Missing output files: averages/ASN00022823.csv
+    wildcards: name=ASN00022823
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:24 2026]
+Finished jobid: 89 (Rule: average)
+52 of 102 steps (51%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:24 2026]
+localrule average:
+    input: input/CA001073615.csv, ../../example_04/average.py
+    output: averages/CA001073615.csv
+    jobid: 84
+    reason: Missing output files: averages/CA001073615.csv
+    wildcards: name=CA001073615
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:24 2026]
+Finished jobid: 24 (Rule: average)
+53 of 102 steps (52%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/CA001057052.csv, ../../example_04/average.py
+    output: averages/CA001057052.csv
+    jobid: 82
+    reason: Missing output files: averages/CA001057052.csv
+    wildcards: name=CA001057052
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 84 (Rule: average)
+54 of 102 steps (53%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/ASN00069138.csv, ../../example_04/average.py
+    output: averages/ASN00069138.csv
+    jobid: 52
+    reason: Missing output files: averages/ASN00069138.csv
+    wildcards: name=ASN00069138
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 82 (Rule: average)
+55 of 102 steps (54%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/ASN00022031.csv, ../../example_04/average.py
+    output: averages/ASN00022031.csv
+    jobid: 22
+    reason: Missing output files: averages/ASN00022031.csv
+    wildcards: name=ASN00022031
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 52 (Rule: average)
+56 of 102 steps (55%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/ASN00014198.csv, ../../example_04/average.py
+    output: averages/ASN00014198.csv
+    jobid: 15
+    reason: Missing output files: averages/ASN00014198.csv
+    wildcards: name=ASN00014198
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 22 (Rule: average)
+57 of 102 steps (56%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/CA001046391.csv, ../../example_04/average.py
+    output: averages/CA001046391.csv
+    jobid: 80
+    reason: Missing output files: averages/CA001046391.csv
+    wildcards: name=CA001046391
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 15 (Rule: average)
+58 of 102 steps (57%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/BLM00085196.csv, ../../example_04/average.py
+    output: averages/BLM00085196.csv
+    jobid: 75
+    reason: Missing output files: averages/BLM00085196.csv
+    wildcards: name=BLM00085196
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 80 (Rule: average)
+59 of 102 steps (58%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/ASN00015643.csv, ../../example_04/average.py
+    output: averages/ASN00015643.csv
+    jobid: 20
+    reason: Missing output files: averages/ASN00015643.csv
+    wildcards: name=ASN00015643
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 75 (Rule: average)
+60 of 102 steps (59%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/ASN00084142.csv, ../../example_04/average.py
+    output: averages/ASN00084142.csv
+    jobid: 60
+    reason: Missing output files: averages/ASN00084142.csv
+    wildcards: name=ASN00084142
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 20 (Rule: average)
+61 of 102 steps (60%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:25 2026]
+localrule average:
+    input: input/CA001108380.csv, ../../example_04/average.py
+    output: averages/CA001108380.csv
+    jobid: 87
+    reason: Missing output files: averages/CA001108380.csv
+    wildcards: name=CA001108380
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:25 2026]
+Finished jobid: 60 (Rule: average)
+62 of 102 steps (61%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/ASN00054038.csv, ../../example_04/average.py
+    output: averages/ASN00054038.csv
+    jobid: 45
+    reason: Missing output files: averages/ASN00054038.csv
+    wildcards: name=ASN00054038
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 87 (Rule: average)
+63 of 102 steps (62%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/ASN00032040.csv, ../../example_04/average.py
+    output: averages/ASN00032040.csv
+    jobid: 27
+    reason: Missing output files: averages/ASN00032040.csv
+    wildcards: name=ASN00032040
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 45 (Rule: average)
+64 of 102 steps (63%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/CA001145297.csv, ../../example_04/average.py
+    output: averages/CA001145297.csv
+    jobid: 90
+    reason: Missing output files: averages/CA001145297.csv
+    wildcards: name=CA001145297
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 27 (Rule: average)
+65 of 102 steps (64%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/ASN00009965.csv, ../../example_04/average.py
+    output: averages/ASN00009965.csv
+    jobid: 10
+    reason: Missing output files: averages/ASN00009965.csv
+    wildcards: name=ASN00009965
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 90 (Rule: average)
+66 of 102 steps (65%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/ASN00049000.csv, ../../example_04/average.py
+    output: averages/ASN00049000.csv
+    jobid: 42
+    reason: Missing output files: averages/ASN00049000.csv
+    wildcards: name=ASN00049000
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 10 (Rule: average)
+67 of 102 steps (66%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/ASN00072023.csv, ../../example_04/average.py
+    output: averages/ASN00072023.csv
+    jobid: 54
+    reason: Missing output files: averages/ASN00072023.csv
+    wildcards: name=ASN00072023
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 42 (Rule: average)
+68 of 102 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/ASN00091126.csv, ../../example_04/average.py
+    output: averages/ASN00091126.csv
+    jobid: 69
+    reason: Missing output files: averages/ASN00091126.csv
+    wildcards: name=ASN00091126
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 54 (Rule: average)
+69 of 102 steps (68%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/ASN00043020.csv, ../../example_04/average.py
+    output: averages/ASN00043020.csv
+    jobid: 39
+    reason: Missing output files: averages/ASN00043020.csv
+    wildcards: name=ASN00043020
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 69 (Rule: average)
+70 of 102 steps (69%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/CA002202678.csv, ../../example_04/average.py
+    output: averages/CA002202678.csv
+    jobid: 99
+    reason: Missing output files: averages/CA002202678.csv
+    wildcards: name=CA002202678
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:26 2026]
+Finished jobid: 39 (Rule: average)
+71 of 102 steps (70%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:26 2026]
+localrule average:
+    input: input/ASN00014704.csv, ../../example_04/average.py
+    output: averages/ASN00014704.csv
+    jobid: 17
+    reason: Missing output files: averages/ASN00014704.csv
+    wildcards: name=ASN00014704
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 99 (Rule: average)
+72 of 102 steps (71%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/CA001022795.csv, ../../example_04/average.py
+    output: averages/CA001022795.csv
+    jobid: 77
+    reason: Missing output files: averages/CA001022795.csv
+    wildcards: name=CA001022795
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 17 (Rule: average)
+73 of 102 steps (72%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/ASN00085072.csv, ../../example_04/average.py
+    output: averages/ASN00085072.csv
+    jobid: 62
+    reason: Missing output files: averages/ASN00085072.csv
+    wildcards: name=ASN00085072
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 77 (Rule: average)
+74 of 102 steps (73%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/ASN00055325.csv, ../../example_04/average.py
+    output: averages/ASN00055325.csv
+    jobid: 47
+    reason: Missing output files: averages/ASN00055325.csv
+    wildcards: name=ASN00055325
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 62 (Rule: average)
+75 of 102 steps (74%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/ASN00040004.csv, ../../example_04/average.py
+    output: averages/ASN00040004.csv
+    jobid: 32
+    reason: Missing output files: averages/ASN00040004.csv
+    wildcards: name=ASN00040004
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 47 (Rule: average)
+76 of 102 steps (75%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/CA001165793.csv, ../../example_04/average.py
+    output: averages/CA001165793.csv
+    jobid: 92
+    reason: Missing output files: averages/CA001165793.csv
+    wildcards: name=CA001165793
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 32 (Rule: average)
+77 of 102 steps (75%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/ASN00039322.csv, ../../example_04/average.py
+    output: averages/ASN00039322.csv
+    jobid: 31
+    reason: Missing output files: averages/ASN00039322.csv
+    wildcards: name=ASN00039322
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 92 (Rule: average)
+78 of 102 steps (76%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/ASN00009519.csv, ../../example_04/average.py
+    output: averages/ASN00009519.csv
+    jobid: 9
+    reason: Missing output files: averages/ASN00009519.csv
+    wildcards: name=ASN00009519
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 31 (Rule: average)
+79 of 102 steps (77%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/ASN00091292.csv, ../../example_04/average.py
+    output: averages/ASN00091292.csv
+    jobid: 70
+    reason: Missing output files: averages/ASN00091292.csv
+    wildcards: name=ASN00091292
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 9 (Rule: average)
+80 of 102 steps (78%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/ASN00010286.csv, ../../example_04/average.py
+    output: averages/ASN00010286.csv
+    jobid: 11
+    reason: Missing output files: averages/ASN00010286.csv
+    wildcards: name=ASN00010286
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:27 2026]
+Finished jobid: 70 (Rule: average)
+81 of 102 steps (79%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:27 2026]
+localrule average:
+    input: input/ASN00008297.csv, ../../example_04/average.py
+    output: averages/ASN00008297.csv
+    jobid: 8
+    reason: Missing output files: averages/ASN00008297.csv
+    wildcards: name=ASN00008297
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 11 (Rule: average)
+82 of 102 steps (80%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/ASN00014948.csv, ../../example_04/average.py
+    output: averages/ASN00014948.csv
+    jobid: 18
+    reason: Missing output files: averages/ASN00014948.csv
+    wildcards: name=ASN00014948
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 8 (Rule: average)
+83 of 102 steps (81%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/CA001034600.csv, ../../example_04/average.py
+    output: averages/CA001034600.csv
+    jobid: 78
+    reason: Missing output files: averages/CA001034600.csv
+    wildcards: name=CA001034600
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 18 (Rule: average)
+84 of 102 steps (82%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/ASN00014401.csv, ../../example_04/average.py
+    output: averages/ASN00014401.csv
+    jobid: 16
+    reason: Missing output files: averages/ASN00014401.csv
+    wildcards: name=ASN00014401
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 78 (Rule: average)
+85 of 102 steps (83%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/ASN00084150.csv, ../../example_04/average.py
+    output: averages/ASN00084150.csv
+    jobid: 61
+    reason: Missing output files: averages/ASN00084150.csv
+    wildcards: name=ASN00084150
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 16 (Rule: average)
+86 of 102 steps (84%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/ASN00055136.csv, ../../example_04/average.py
+    output: averages/ASN00055136.csv
+    jobid: 46
+    reason: Missing output files: averages/ASN00055136.csv
+    wildcards: name=ASN00055136
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 61 (Rule: average)
+87 of 102 steps (85%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/ASN00085280.csv, ../../example_04/average.py
+    output: averages/ASN00085280.csv
+    jobid: 63
+    reason: Missing output files: averages/ASN00085280.csv
+    wildcards: name=ASN00085280
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 46 (Rule: average)
+88 of 102 steps (86%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/ASN00056238.csv, ../../example_04/average.py
+    output: averages/ASN00056238.csv
+    jobid: 48
+    reason: Missing output files: averages/ASN00056238.csv
+    wildcards: name=ASN00056238
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 63 (Rule: average)
+89 of 102 steps (87%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/ASN00040842.csv, ../../example_04/average.py
+    output: averages/ASN00040842.csv
+    jobid: 33
+    reason: Missing output files: averages/ASN00040842.csv
+    wildcards: name=ASN00040842
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 48 (Rule: average)
+90 of 102 steps (88%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/AGM00060355.csv, ../../example_04/average.py
+    output: averages/AGM00060355.csv
+    jobid: 2
+    reason: Missing output files: averages/AGM00060355.csv
+    wildcards: name=AGM00060355
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 33 (Rule: average)
+91 of 102 steps (89%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/CA00114B1F0.csv, ../../example_04/average.py
+    output: averages/CA00114B1F0.csv
+    jobid: 91
+    reason: Missing output files: averages/CA00114B1F0.csv
+    wildcards: name=CA00114B1F0
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 2 (Rule: average)
+92 of 102 steps (90%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:28 2026]
+localrule average:
+    input: input/ASN00045025.csv, ../../example_04/average.py
+    output: averages/ASN00045025.csv
+    jobid: 40
+    reason: Missing output files: averages/ASN00045025.csv
+    wildcards: name=ASN00045025
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:28 2026]
+Finished jobid: 91 (Rule: average)
+93 of 102 steps (91%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:29 2026]
+localrule average:
+    input: input/CA002300501.csv, ../../example_04/average.py
+    output: averages/CA002300501.csv
+    jobid: 100
+    reason: Missing output files: averages/CA002300501.csv
+    wildcards: name=CA002300501
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:29 2026]
+Finished jobid: 40 (Rule: average)
+94 of 102 steps (92%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:29 2026]
+localrule average:
+    input: input/CA002202578.csv, ../../example_04/average.py
+    output: averages/CA002202578.csv
+    jobid: 98
+    reason: Missing output files: averages/CA002202578.csv
+    wildcards: name=CA002202578
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:29 2026]
+Finished jobid: 100 (Rule: average)
+95 of 102 steps (93%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:29 2026]
+localrule average:
+    input: input/CA001066482.csv, ../../example_04/average.py
+    output: averages/CA001066482.csv
+    jobid: 83
+    reason: Missing output files: averages/CA001066482.csv
+    wildcards: name=CA001066482
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:29 2026]
+Finished jobid: 98 (Rule: average)
+96 of 102 steps (94%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:29 2026]
+localrule average:
+    input: input/ASN00039066.csv, ../../example_04/average.py
+    output: averages/ASN00039066.csv
+    jobid: 30
+    reason: Missing output files: averages/ASN00039066.csv
+    wildcards: name=ASN00039066
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:29 2026]
+Finished jobid: 83 (Rule: average)
+97 of 102 steps (95%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:29 2026]
+localrule average:
+    input: input/ASN00022803.csv, ../../example_04/average.py
+    output: averages/ASN00022803.csv
+    jobid: 23
+    reason: Missing output files: averages/ASN00022803.csv
+    wildcards: name=ASN00022803
+    resources: tmpdir=/localscratch/learner01.18163.0
+Select jobs to execute...
+[Sun Oct 25 11:25:29 2026]
+Finished jobid: 30 (Rule: average)
+98 of 102 steps (96%) done
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:29 2026]
+localrule average:
+    input: input/ASN00069148.csv, ../../example_04/average.py
+    output: averages/ASN00069148.csv
+    jobid: 53
+    reason: Missing output files: averages/ASN00069148.csv
+    wildcards: name=ASN00069148
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:29 2026]
+Finished jobid: 23 (Rule: average)
+99 of 102 steps (97%) done
+[Sun Oct 25 11:25:29 2026]
+Finished jobid: 53 (Rule: average)
+100 of 102 steps (98%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:29 2026]
+localrule aggregate:
+    input: averages/AGM00060355.csv, averages/AM000037704.csv, averages/ASN00001006.csv, averages/ASN00005007.csv, averages/ASN00005017.csv, averages/ASN00007176.csv, averages/ASN00008297.csv, averages/ASN00009519.csv, averages/ASN00009965.csv, averages/ASN00010286.csv, averages/ASN00010614.csv, averages/ASN00011019.csv, averages/ASN00012044.csv, averages/ASN00014198.csv, averages/ASN00014401.csv, averages/ASN00014704.csv, averages/ASN00014948.csv, averages/ASN00015135.csv, averages/ASN00015643.csv, averages/ASN00018083.csv, averages/ASN00022031.csv, averages/ASN00022803.csv, averages/ASN00022823.csv, averages/ASN00029038.csv, averages/ASN00030022.csv, averages/ASN00032040.csv, averages/ASN00033106.csv, averages/ASN00037010.csv, averages/ASN00039066.csv, averages/ASN00039322.csv, averages/ASN00040004.csv, averages/ASN00040842.csv, averages/ASN00040913.csv, averages/ASN00040958.csv, averages/ASN00041522.csv, averages/ASN00041525.csv, averages/ASN00041529.csv, averages/ASN00043020.csv, averages/ASN00045025.csv, averages/ASN00047029.csv, averages/ASN00049000.csv, averages/ASN00050017.csv, averages/ASN00051161.csv, averages/ASN00054038.csv, averages/ASN00055136.csv, averages/ASN00055325.csv, averages/ASN00056238.csv, averages/ASN00058077.csv, averages/ASN00061055.csv, averages/ASN00063292.csv, averages/ASN00069138.csv, averages/ASN00069148.csv, averages/ASN00072023.csv, averages/ASN00072162.csv, averages/ASN00074148.csv, averages/ASN00076031.csv, averages/ASN00081125.csv, averages/ASN00084084.csv, averages/ASN00084142.csv, averages/ASN00084150.csv, averages/ASN00085072.csv, averages/ASN00085280.csv, averages/ASN00085296.csv, averages/ASN00086068.csv, averages/ASN00088162.csv, averages/ASN00089002.csv, averages/ASN00089112.csv, averages/ASN00091126.csv, averages/ASN00091292.csv, averages/ASN00091311.csv, averages/ASN00092045.csv, averages/ASN00099005.csv, averages/AYM00089642.csv, averages/BLM00085196.csv, averages/CA001017230.csv, averages/CA001022795.csv, averages/CA001034600.csv, averages/CA001035612.csv, averages/CA001046391.csv, averages/CA001046392.csv, averages/CA001057052.csv, averages/CA001066482.csv, averages/CA001073615.csv, averages/CA001096453.csv, averages/CA001106200.csv, averages/CA001108380.csv, averages/CA001108446.csv, averages/CA001108824.csv, averages/CA001145297.csv, averages/CA00114B1F0.csv, averages/CA001165793.csv, averages/CA00116FRMN.csv, averages/CA001173210.csv, averages/CA001192341.csv, averages/CA002100181.csv, averages/CA002201450.csv, averages/CA002202578.csv, averages/CA002202678.csv, averages/CA002300501.csv, averages/CA002300904.csv
+    output: result.csv
+    jobid: 1
+    reason: Missing output files: result.csv; Input files updated by another job: averages/ASN00091311.csv, averages/ASN00084150.csv, averages/ASN00086068.csv, averages/ASN00040004.csv, averages/ASN00099005.csv, averages/ASN00012044.csv, averages/ASN00039322.csv, averages/CA001034600.csv, averages/AM000037704.csv, averages/ASN00088162.csv, averages/CA001108446.csv, averages/ASN00085072.csv, averages/ASN00014704.csv, averages/ASN00084084.csv, averages/CA001066482.csv, averages/CA001035612.csv, averages/CA001108380.csv, averages/ASN00015643.csv, averages/ASN00047029.csv, averages/ASN00084142.csv, averages/ASN00041522.csv, averages/ASN00051161.csv, averages/ASN00040958.csv, averages/ASN00089002.csv, averages/ASN00069148.csv, averages/ASN00069138.csv, averages/ASN00030022.csv, averages/AGM00060355.csv, averages/ASN00045025.csv, averages/ASN00055136.csv, averages/CA001022795.csv, averages/CA001096453.csv, averages/CA001145297.csv, averages/ASN00022031.csv, averages/ASN00081125.csv, averages/ASN00009965.csv, averages/ASN00089112.csv, averages/ASN00001006.csv, averages/CA001057052.csv, averages/CA001173210.csv, averages/CA001046391.csv, averages/CA002202578.csv, averages/CA001046392.csv, averages/ASN00091292.csv, averages/ASN00049000.csv, averages/ASN00041525.csv, averages/BLM00085196.csv, averages/CA00116FRMN.csv, averages/CA002201450.csv, averages/CA001192341.csv, averages/ASN00043020.csv, averages/ASN00072023.csv, averages/ASN00055325.csv, averages/CA00114B1F0.csv, averages/ASN00029038.csv, averages/ASN00041529.csv, averages/CA001017230.csv, averages/CA001165793.csv, averages/ASN00009519.csv, averages/AYM00089642.csv, averages/ASN00040913.csv, averages/CA001106200.csv, averages/ASN00010286.csv, averages/ASN00008297.csv, averages/ASN00037010.csv, averages/ASN00010614.csv, averages/CA002300501.csv, averages/ASN00085296.csv, averages/CA002100181.csv, averages/ASN00072162.csv, averages/ASN00085280.csv, averages/ASN00032040.csv, averages/ASN00022823.csv, averages/ASN00033106.csv, averages/ASN00015135.csv, averages/ASN00092045.csv, averages/ASN00014401.csv, averages/ASN00091126.csv, averages/ASN00022803.csv, averages/ASN00011019.csv, averages/CA002300904.csv, averages/ASN00076031.csv, averages/ASN00014948.csv, averages/ASN00063292.csv, averages/ASN00039066.csv, averages/ASN00005017.csv, averages/ASN00014198.csv, averages/ASN00007176.csv, averages/ASN00056238.csv, averages/ASN00005007.csv, averages/ASN00018083.csv, averages/CA001073615.csv, averages/ASN00061055.csv, averages/ASN00054038.csv, averages/ASN00058077.csv, averages/CA001108824.csv, averages/CA002202678.csv, averages/ASN00040842.csv, averages/ASN00074148.csv, averages/ASN00050017.csv
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:30 2026]
+Finished jobid: 1 (Rule: aggregate)
+101 of 102 steps (99%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Oct 25 11:25:30 2026]
+localrule all:
+    input: result.csv
+    jobid: 0
+    reason: Input files updated by another job: result.csv
+    resources: tmpdir=/localscratch/learner01.18163.0
+[Sun Oct 25 11:25:30 2026]
+Finished jobid: 0 (Rule: all)
+102 of 102 steps (100%) done
+Complete log(s): /scratch/learner01/alt-measure-20261025/alternatives/snakemake/.snakemake/log/2026-10-25T112515.379062.snakemake.log
+result.csv: 100 rows

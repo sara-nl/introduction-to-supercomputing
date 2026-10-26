@@ -1,0 +1,58 @@
+Module for EESSI/2025.06 loaded successfully
+2026-10-25T10:24:16Z INFO HyperQueue v0.24.0
+2026-10-25T10:24:16Z INFO No online server found, starting a new server
+2026-10-25T10:24:16Z INFO Storing access file as '/localscratch/learner01.18161.0/hq-average.P2CZTkB9/001/access.json'
++------------------+-----------------------------------------------------+
+| Server directory | /localscratch/learner01.18161.0/hq-average.P2CZTkB9 |
+| Server UID       | HDKgfP                                              |
+| Client host      | coursenode3.advisorssrcdemo.src.surf-hosted.nl      |
+| Client port      | 34029                                               |
+| Worker host      | coursenode3.advisorssrcdemo.src.surf-hosted.nl      |
+| Worker port      | 45791                                               |
+| Version          | v0.24.0                                             |
+| Pid              | 3824428                                             |
+| Start date       | 2026-10-25 10:24:16 UTC                             |
+| Journal path     |                                                     |
++------------------+-----------------------------------------------------+
+2026-10-25T10:24:17Z INFO HyperQueue v0.24.0
+2026-10-25T10:24:17Z INFO SLURM environment detected
+2026-10-25T10:24:17Z INFO Detected 16770793472B of memory (15.62 GiB)
+2026-10-25T10:24:17Z INFO Starting hyperqueue worker
+2026-10-25T10:24:17Z INFO Connecting to: coursenode3.advisorssrcdemo.src.surf-hosted.nl:45791
+2026-10-25T10:24:17Z INFO Listening on port 43253
+2026-10-25T10:24:17Z INFO Connecting to server (candidate addresses = [10.77.0.13:45791, 145.38.191.3:45791])
+2026-10-25T10:24:17Z INFO Worker 1 registered from 10.77.0.13:38436
+2026-10-25T10:24:17Z +-------------------+------------------------------------------------------+
+| Worker            | 1                                                   WARN Worker 1 connected from an unknown allocation 18161
+ |
+| State             | RUNNING                                              |
+| Hostname          | coursenode3.advisorssrcdemo.src.surf-hosted.nl       |
+| Started           | "2026-10-25T10:24:17.372975621Z"                     |
+| Data provider     | coursenode3.advisorssrcdemo.src.surf-hosted.nl:43253 |
+| Working directory | /localscratch/learner01.18161.0/hq-workerRN3f4n/work |
+| Heartbeat         | 8s                                                   |
+| Idle timeout      | None                                                 |
+| Overview interval | None                                                 |
+| Resources         | cpus: 2                                              |
+|                   | mem: 15.62 GiB                                       |
+| Time Limit        | 59m 57s                                              |
+| Process pid       | 3824435                                              |
+| Group             | 18161                                                |
+| Downloads         | 4 parallel; max 8 fails + 1s delay                   |
+| Manager           | SLURM                                                |
+| Manager Job ID    | 18161                                                |
+| Last task started |                                                      |
++-------------------+------------------------------------------------------+
+2026-10-25T10:24:22Z INFO Reading file: files.txt
+Job submitted successfully, job ID: 1
+Wait finished in 3s 382ms 235us 788ns: 1 job finished
++----+------+----------+-------+
+| ID | Name | State    | Tasks |
++----+------+----------+-------+
+|  1 | bash | FINISHED | 100   |
++----+------+----------+-------+
+result.csv: 100 rows from 100 files
+2026-10-25T10:24:25Z 2026-10-25T10:24:25Z INFO Received Stop command from client
+INFO Stopping server
+2026-10-25T10:24:25Z INFO Stopping server
+Server connection closed
