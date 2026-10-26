@@ -15,8 +15,8 @@ if [ -z "$1" ]; then
 fi
 
 # Load necessary modules
-module load 2023               # Load the specific environment (update as needed)
-module load foss/2023a         # Load the desired compiler/toolchain (update as needed)
+module load 2025               # Load the specific environment (update as needed)
+module load foss/2025a         # Load the desired compiler/toolchain (update as needed)
 
 # Compile the program
 gcc -O2 axpy.c -o axpy.out

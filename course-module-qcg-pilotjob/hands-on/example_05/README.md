@@ -10,8 +10,8 @@ embarrassingly parallel workflows.
 The helper script sleeps for n seconds and reports the assigned CPU and the 
 time interval (start and end time) of the process.
 ```
-module load 2024
-module load Python/3.12.3-GCCcore-13.3.0
+module load 2025
+module load Python/3.13.1-GCCcore-14.2.0
 python sleep.py 7
 TASK,54,1763290002.014343,1763290009.014470
 ```
@@ -34,9 +34,9 @@ Wait for until the jobs are finished and check the content of the generated outp
 
 The profile plots can be generated as follows:
 ```
-module load 2024
-module load SciPy-bundle/2024.05-gfbf-2024a 
-module load matplotlib/3.9.2-gfbf-2024a
+module load 2025
+module load SciPy-bundle/2025.06-gfbf-2025a
+module load matplotlib/3.10.3-gfbf-2025a
 
 python plot_profile.py pipeline.<<<SLURM_JOB_ID>>>.out 
 python plot_profile.py qcg.<<<SLURM_JOB_ID>>>.out 

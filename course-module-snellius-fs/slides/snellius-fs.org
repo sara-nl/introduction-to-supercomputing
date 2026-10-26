@@ -1,0 +1,431 @@
+#+TITLE: Snellius File Systems
+#+AUTHOR: Xavier Álvarez-Farré
+#+DATE: October 9, 2024
+#+OPTIONS: H:1 ':t toc:nil num:nil title:nil ^:nil author:nil date:nil
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [t]
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: \input{pptx-style.tex}
+#+LATEX_HEADER: \input{snellius-fs-style.tex}
+
+# One heading per slide. Backgrounds are the QCG deck's title photo,
+# section cards and text panels. Build with make.
+
+* Snellius File Systems
+:PROPERTIES:
+:BEAMER_opt: tx=56.85,ty=356,ts=49.75,tc=cFFFFFF,tw=520,tl=54.08
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/g01}
+#+beamer: \fspanel{c283237}{0.92}{44,384}{620,532}
+#+attr_latex: :options [x=56.85,y=408,s=18,l=21.6,c=cFFFFFF,w=540]
+#+begin_tb
+Hands-on data management in high-performance computing
+#+end_tb
+#+attr_latex: :options [x=56.85,y=434,s=18,l=21.6,c=cFFFFFF,w=540]
+#+begin_tb
+Xavier Álvarez-Farré
+#+end_tb
+#+attr_latex: :options [x=56.85,y=460,s=15.9,l=19.08,c=cFFFFFF,w=540]
+#+begin_tb
+High-Performance Computing and Visualization, SURF, Science Park 140, 1098XG Amsterdam, The Netherlands
+#+end_tb
+#+attr_latex: :options [x=56.85,y=502,s=15.9,l=19.08,c=cFFFFFF]
+#+begin_tb
+October 9, 2024
+#+end_tb
+#+attr_latex: :options [x=56.85,y=522,s=13.7,l=16.44,c=cFFFFFF]
+#+begin_tb
+Adapted and updated by Rohit Goswami
+#+end_tb
+
+* Introduction
+:PROPERTIES:
+:BEAMER_opt: tx=71.13,ty=292.27,ts=66.34,tc=cFFFFFF,tl=63.46
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/g02}
+
+* Overview of HPC applications
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/gtext}
+#+beamer: \only<2->{\fspanel{c177ABF}{0.22}{70,186}{890,292}}
+#+beamer: \only<3->{\fspanel{cEE7628}{0.22}{70,300}{890,372}}
+#+beamer: \only<4->{\fspanel{c2CA055}{0.22}{70,380}{890,452}}
+#+attr_latex: :options [x=84,y=136,s=15.9,l=19.08,w=790]
+#+begin_tb
+*HPC applications* exploit the power of supercomputers or high-performance clusters with the goal of solving complex problems.
+They perform intensive \alert{computations}, coordinate \alert{communications} between parallel processes, and manage \alert{input/output} operations on a high-performance file system.
+#+end_tb
+#+beamer: \only<2->{
+#+attr_latex: :options [x=88,y=210,s=15.9,l=19.08,b,w=780]
+#+begin_tb
+Computations
+#+end_tb
+#+attr_latex: :options [x=88,y=234,s=13.7,l=16.44,w=780,ind=18,bf=cal]
+#+begin_tb
+Extensive numerical operations on a specific region of interest (/e.g./, mesh elements, particles, or even words in a text document).
+
+- Ideal speedup is $P$ for $P$ processors at fixed total work; dependencies and imbalance reduce it.
+#+end_tb
+#+beamer: }
+#+beamer: \only<3->{
+#+attr_latex: :options [x=88,y=322,s=15.9,l=19.08,b,w=780]
+#+begin_tb
+Communications
+#+end_tb
+#+attr_latex: :options [x=88,y=346,s=13.7,l=16.44,w=780,ind=18,bf=cal]
+#+begin_tb
+Coordination and data exchanges between parallel processes to produce the final results.
+
+- Cost depends on topology, message sizes and synchronization; more workers can add overhead.
+#+end_tb
+#+beamer: }
+#+beamer: \only<4->{
+#+attr_latex: :options [x=88,y=400,s=15.9,l=19.08,b,w=780]
+#+begin_tb
+I/O operations
+#+end_tb
+#+attr_latex: :options [x=88,y=424,s=13.7,l=16.44,w=780,ind=18,bf=cal]
+#+begin_tb
+Interactions with the file system to read input data, write output results, and perform intermediate data storage.
+
+- Throughput depends on the file system and access pattern; more processes can increase contention.
+#+end_tb
+#+beamer: }
+
+* Overview of I/O operations
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/gtext}
+#+beamer: \only<1>{\fspanel{c2CA055}{0.22}{70,118}{890,228}}
+#+beamer: \only<2->{\fspanel{c2CA055}{0.22}{70,118}{890,268}}
+#+beamer: \only<3>{\fspanel{c177ABF}{0.22}{70,278}{890,392}}
+#+beamer: \only<4>{\fspanel{c177ABF}{0.22}{70,278}{890,430}}
+#+beamer: \only<5->{\fspanel{c177ABF}{0.22}{70,278}{890,456}}
+#+attr_latex: :options [x=88,y=140,s=15.9,l=19.08,b,w=780]
+#+begin_tb
+Input operations
+#+end_tb
+#+attr_latex: :options [x=88,y=164,s=13.7,l=16.44,w=780,ind=18,ind2=16,bf=cal]
+#+begin_tb
+- *Initialization data*: grids, genomic sequences, climate data, or text.
+  - Massive files that require a high level of precision.
+  - Involve parallel input operations.
+#+end_tb
+#+beamer: \only<2->{
+#+attr_latex: :options [x=88,y=230,s=13.7,l=16.44,w=780,ind=18,bf=cal]
+#+begin_tb
+- *Job parameters*: small configuration files that coordinate the processes.
+#+end_tb
+#+beamer: }
+#+beamer: \only<3->{
+#+attr_latex: :options [x=88,y=296,s=15.9,l=19.08,b,w=780]
+#+begin_tb
+Output operations
+#+end_tb
+#+beamer: }
+#+beamer: \only<3->{
+#+attr_latex: :options [x=88,y=320,s=13.7,l=16.44,w=780,ind=18,ind2=16,bf=cal]
+#+begin_tb
+- *Restart files* or checkpoints enable job continuation in the event of an interruption.
+  - Large files that require full precision of simulation data.
+  - Involve periodic parallel output operations.
+#+end_tb
+#+beamer: }
+#+beamer: \only<4->{
+#+attr_latex: :options [x=88,y=386,s=13.7,l=16.44,w=780,ind=18,ind2=16,bf=cal]
+#+begin_tb
+- *Analysis data* for visualization, post-processing and in-depth examination.
+  - May be possible to use reduced precision or store a subset of the full-resolution data.
+  - Involve periodic parallel output operations.
+#+end_tb
+#+beamer: }
+#+beamer: \only<5->{
+#+attr_latex: :options [x=88,y=446,s=13.7,l=16.44,w=780,ind=18,bf=cal]
+#+begin_tb
+- *Job monitoring*: progress and performance logs, typically plain text from process 0.
+#+end_tb
+#+beamer: }
+
+* Overview of Snellius file-systems
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/gtext}
+#+attr_latex: :options [x=84,y=132,s=15.9,l=19.08,w=800]
+#+begin_tb
+*Data management* in HPC applications covers \alert{diverse tasks}, each with its own nature and specific requirements.
+At the same time, HPC systems are equipped with \alert{distinct file systems} to meet these specific needs.
+#+end_tb
+#+beamer: \only<1>{\input{figures/fs-diagram.tex}}
+#+begin_export latex
+\only<2>{%
+\begin{tb}[x=480,y=214,s=15.9,l=19.08,w=830,a=c]
+\setlength{\tabcolsep}{9bp}%
+\renewcommand{\arraystretch}{1.55}%
+\begin{tabular}[t]{@{}lllll@{}}
+\textbf{File system} & \textbf{Speed} & \textbf{Size} & \textbf{Backed-up} & \textbf{Expiration} \\
+\midrule
+\texttt{/home} & Normal & 200 GiB & Yes & Project end + 15 weeks \\
+\texttt{/scratch-shared} & Fast & \multirow{2}{*}{8 TiB total} & No & 14 days \\
+\texttt{/scratch-local} & Fast & & No & 6 days \\
+\texttt{/scratch-node} & Very fast & & No & End of job \\
+\texttt{/projects} & Fast & On demand & No & Project end \\
+\texttt{/archive} & Very slow & On demand & Yes & Project end \\
+\end{tabular}
+\end{tb}}
+#+end_export
+
+* Hands-on
+:PROPERTIES:
+:BEAMER_opt: tx=71.13,ty=292.27,ts=66.34,tc=cFFFFFF,tl=63.46
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/g14}
+
+* Objectives of the hands-on session
+:PROPERTIES:
+:BEAMER_opt: tw=820
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/gtext}
+#+attr_latex: :options [x=84,y=140,s=15.9,l=20,w=790,ind=28,ind2=16,off2=12,p=1,bf=cal]
+#+begin_tb
+1. *Exploring file systems*:
+   - Know the file systems of the table (home, scratch, project, archive)
+   - Move between your home and scratch-shared and check the current location
+2. *File management*:
+   - Create, view, and edit files using basic terminal commands
+   - Move, rename, and copy files between different file systems
+3. *Directory management*:
+   - Create and delete directories
+   - Change into directories and manage file hierarchy
+4. *File permissions*:
+   - Check and modify file access permissions
+5. *Disk usage monitoring*:
+   - Monitor storage usage and available space across file systems
+#+end_tb
+
+* 1. Exploring file systems
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Objective
+#+end_tb
+#+attr_latex: :options [x=76,y=162,s=15.9,l=19.08,w=370]
+#+begin_tb
+Learn how to move between your home and your scratch-shared directory, the two file systems every account has, and check where you are.
+#+end_tb
+#+attr_latex: :options [x=76,y=250,s=18,l=21.6,b]
+#+begin_tb
+Tasks
+#+end_tb
+#+attr_latex: :options [x=76,y=276,s=15.9,l=19.08,w=370,ind=18,bf=cal,p=2]
+#+begin_tb
+- Start in the ~home~ directory and use ~pwd~ to check your location.
+- Create your scratch directory: ~mkdir -p /scratch-shared/$USER~.
+- Explore it: ~cd /scratch-shared/$USER~ and ~ls~.
+- Return to your home directory using ~cd~.
+#+end_tb
+#+attr_latex: :options [x=508,y=160,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Key commands
+#+end_tb
+#+attr_latex: :options [x=508,y=186,s=13.7,l=17.5,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal,p=2]
+#+begin_tb
+- ~pwd~ - Display the current directory
+- ~ls~ - List the contents of a directory
+- ~cd <path>~ - Change directories
+#+end_tb
+#+attr_latex: :options [x=508,y=280,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Expected output
+#+end_tb
+#+attr_latex: :options [x=508,y=306,s=13.7,l=17.5,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal]
+#+begin_tb
+- ~pwd~ prints ~/home/<user>~ at the start and ~/scratch-shared/<user>~ after the ~cd~; ~ls~ of the new directory prints nothing.
+#+end_tb
+
+* 2. File management
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Objective
+#+end_tb
+#+attr_latex: :options [x=76,y=162,s=15.9,l=19.08,w=370]
+#+begin_tb
+Learn how to create, view, move, and rename files across different file systems in an HPC environment.
+#+end_tb
+#+attr_latex: :options [x=76,y=240,s=18,l=21.6,b]
+#+begin_tb
+Tasks
+#+end_tb
+#+attr_latex: :options [x=76,y=266,s=15.9,l=19.08,w=370,ind=18,bf=cal,p=2]
+#+begin_tb
+- Create a file in the ~home~ directory using ~touch~.
+- Edit the file with ~nano~ or ~vim~, and view its contents with ~cat~.
+- Copy the file to the ~scratch~ directory using ~cp~.
+- Rename or move the file using ~mv~.
+#+end_tb
+#+attr_latex: :options [x=508,y=148,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Key commands
+#+end_tb
+#+attr_latex: :options [x=508,y=174,s=13.7,l=17.5,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal,p=1]
+#+begin_tb
+- ~touch <fname>~ - Create a new empty file
+- ~nano <fname>~ or ~vim <fname>~ - Edit a file
+- ~cat <fname>~ - Display the contents of a file
+- ~cp <src> <tgt>~ - Copy files between directories
+- ~mv <src> <tgt>~ - Move or rename files
+#+end_tb
+#+attr_latex: :options [x=508,y=310,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Expected output
+#+end_tb
+#+attr_latex: :options [x=508,y=336,s=13.7,l=17.5,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal]
+#+begin_tb
+- ~cat~ prints the line you typed; ~ls /scratch-shared/$USER~ lists the copy; after ~mv~, ~ls~ shows the new name and not the old one.
+#+end_tb
+
+* 3. Directory management
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Objective
+#+end_tb
+#+attr_latex: :options [x=76,y=162,s=15.9,l=19.08,w=370]
+#+begin_tb
+Learn how to create, enter, and remove directories within the HPC file system.
+#+end_tb
+#+attr_latex: :options [x=76,y=230,s=18,l=21.6,b]
+#+begin_tb
+Tasks
+#+end_tb
+#+attr_latex: :options [x=76,y=256,s=15.9,l=19.08,w=370,ind=18,bf=cal,p=2]
+#+begin_tb
+- Create a new directory in the ~home~ directory using ~mkdir~.
+- Change into the new directory with ~cd~.
+- List its contents with ~ls~, then return to the ~home~ directory.
+- Remove the directory using ~rmdir~.
+#+end_tb
+#+attr_latex: :options [x=508,y=148,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Key commands
+#+end_tb
+#+attr_latex: :options [x=508,y=174,s=13.7,l=17.5,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal,p=2]
+#+begin_tb
+- ~mkdir <dname>~ - create a new directory
+- ~cd <dname>~ - enter a directory
+- ~rmdir <dname>~ - remove an empty directory
+- ~ls [dname]~ - list directory contents
+#+end_tb
+#+attr_latex: :options [x=508,y=300,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Expected output
+#+end_tb
+#+attr_latex: :options [x=508,y=326,s=13.7,l=17.5,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal]
+#+begin_tb
+- ~ls~ inside the new directory prints nothing; after ~rmdir~, ~ls ~~ no longer lists it.
+#+end_tb
+
+* 4. File permissions
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/ghand}
+#+attr_latex: :options [x=76,y=132,s=18,l=21.6,b]
+#+begin_tb
+Objective
+#+end_tb
+#+attr_latex: :options [x=76,y=156,s=15.9,l=18.5,w=370]
+#+begin_tb
+Learn how to view and modify file access permissions to control who can read, write, or execute files.
+#+end_tb
+#+attr_latex: :options [x=76,y=214,s=18,l=21.6,b]
+#+begin_tb
+Explanation
+#+end_tb
+#+attr_latex: :options [x=76,y=238,s=15.9,l=18.5,w=370,ind=18,bf=cal,p=1]
+#+begin_tb
+- Permissions are shown as ~rwxrwxrwx~ (for owner, group, others).
+- ~r~ - read (4), ~w~ - write (2), ~x~ - execute (1).
+- Numeric format: ~chmod 755~ means owner can ~rwx~, group and others can ~r-x~.
+#+end_tb
+#+attr_latex: :options [x=76,y=340,s=18,l=21.6,b]
+#+begin_tb
+Tasks
+#+end_tb
+#+attr_latex: :options [x=76,y=364,s=15.9,l=18.5,w=370,ind=18,bf=cal,p=1]
+#+begin_tb
+- Use ~ls -l~ to check the permissions of a file.
+- Modify the file's permissions to allow read access for everyone using ~chmod 644~.
+- Verify the permission changes with ~ls -l~.
+#+end_tb
+#+attr_latex: :options [x=508,y=160,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Key commands
+#+end_tb
+#+attr_latex: :options [x=508,y=186,s=13.7,l=18,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal,p=2]
+#+begin_tb
+- ~ls -l~ - view file permissions
+- ~chmod~ - change file permissions
+#+end_tb
+#+attr_latex: :options [x=508,y=270,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Expected output
+#+end_tb
+#+attr_latex: :options [x=508,y=296,s=13.7,l=18,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal]
+#+begin_tb
+- ~ls -l~ shows ~-rw-r--r--~ for the file after ~chmod 644~.
+#+end_tb
+
+* 5. Disk usage monitoring
+:PROPERTIES:
+:BEAMER_opt: tw=390
+:END:
+#+beamer: \slidegraphics{figures/snellius-fs/ghand}
+#+attr_latex: :options [x=76,y=136,s=18,l=21.6,b]
+#+begin_tb
+Objective
+#+end_tb
+#+attr_latex: :options [x=76,y=162,s=15.9,l=19.08,w=370]
+#+begin_tb
+Learn how to monitor storage usage and check available space across different file systems.
+#+end_tb
+#+attr_latex: :options [x=76,y=240,s=18,l=21.6,b]
+#+begin_tb
+Tasks
+#+end_tb
+#+attr_latex: :options [x=76,y=266,s=15.9,l=19.08,w=370,ind=18,bf=cal,p=2]
+#+begin_tb
+- Use ~df -h~ to view overall disk usage and available space in the home, scratch, and project file systems.
+- Check the size of a specific directory in your home using ~du -sh~.
+- Identify where you are using the most space.
+#+end_tb
+#+attr_latex: :options [x=508,y=160,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Key commands
+#+end_tb
+#+attr_latex: :options [x=508,y=186,s=13.7,l=17.5,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal,p=2]
+#+begin_tb
+- ~df -h~ - view disk space usage for all mounted file systems
+- ~du -sh~ - check the size of a specific directory
+#+end_tb
+#+attr_latex: :options [x=508,y=270,s=15.9,l=19.08,b,c=cC3E88D]
+#+begin_tb
+Expected output
+#+end_tb
+#+attr_latex: :options [x=508,y=296,s=13.7,l=17.5,w=400,c=cEEFFFF,code,ind=16,bc=cEEFFFF,bf=cal]
+#+begin_tb
+- ~df -h /home /scratch-shared~ prints one line per file system with its size, use and free space; ~du -sh ~~ prints one size for your home.
+#+end_tb

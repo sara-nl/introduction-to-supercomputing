@@ -1,0 +1,50 @@
+% Snellius file systems diagram, laid out on the 960x540 template page.
+% Same topology and the same disk colours as the 2024 figure:
+% node-local disks are fsblue; home fsgreen; scratch fsblue;
+% projects fspink; archive fsyellow.
+% \fsdisk{x centre}{y top}{width}{height}{ellipse radius}{colour}
+\newcommand{\fsdisk}[6]{%
+  \path[draw, line width=0.6bp, fill=#6]
+    (#1-#3/2, #2) -- (#1-#3/2, #2+#4-#5)
+    arc[start angle=180, end angle=0, x radius=#3/2, y radius=#5]
+    -- (#1+#3/2, #2)
+    arc[start angle=0, end angle=-180, x radius=#3/2, y radius=#5]
+    -- cycle;
+  \draw[line width=0.6bp] (#1, #2) ellipse [x radius=#3/2, y radius=#5];}
+\begin{tikzpicture}[remember picture, overlay,
+    x=1bp, y=-1bp, shift={(current page.north west)}, black,
+    every node/.style={text=black, font=\fontsize{14}{16}\fontspec{TeX Gyre Cursor}},
+    wire/.style={line width=1.15bp, black},
+    box/.style={draw, line width=0.7bp, fill=white}]
+  % Compute nodes and their node-local disks. The divider is covered
+  % by the node fills and shows again below the rack.
+  \draw[box] (400,196) rectangle (630,356);
+  \draw[line width=1.15bp] (515,214) -- (515,396);
+  \node at (515,184) {compute nodes};
+  \foreach \r in {0,...,4} {
+    \foreach \c in {0,1,2} {
+      \draw[box] (412+72*\c,208+28*\r) rectangle ++(64,22);
+    }
+    \draw[wire] (620,219+28*\r) -- (652,219+28*\r);
+    \fsdisk{688}{209+28*\r}{56}{20}{4}{fsblue}
+  }
+  % Login node and user.
+  \node[cloud, cloud puffs=11, cloud puff arc=115, aspect=1.45, draw,
+    line width=0.8bp, fill=white, minimum width=124bp, minimum height=82bp]
+    (user) at (168,276) {};
+  \node at (168,274) {\includegraphics[width=58bp]{figures/user-laptop.png}};
+  \draw[box] (278,260) rectangle (356,292);
+  \node at (317,278) {login};
+  \draw[wire] (user.east |- 0,276) -- (278,276);
+  \draw[wire] (356,276) -- (400,276);
+  % Shared file systems.
+  \draw[wire] (458,356) -- (458,380) -- (572,380) -- (572,356);
+  \draw[wire] (210,408) -- (210,396) -- (800,396) -- (800,408);
+  \draw[wire] (406,396) -- (406,408);
+  \draw[wire] (602,396) -- (602,408);
+  \foreach \x/\col/\name in {210/fsgreen/home, 406/fsblue/scratch,
+      602/fspink/projects, 800/fsyellow/archive} {
+    \fsdisk{\x}{408}{124}{38}{8}{\col}
+    \node at (\x,430) {/\name};
+  }
+\end{tikzpicture}

@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <errno.h>
+#include <stdint.h>
 
 void generate_random_values(double *array, long n){
     srand(time(NULL));
@@ -14,10 +16,16 @@ void generate_random_values(double *array, long n){
 
 // Flush the data to the file system and return the number of bytes written
 long close_file(FILE *output_file){
-    fflush(output_file);
-    fsync(fileno(output_file));
+    int failed = ferror(output_file);
+    if(fflush(output_file) != 0) failed = 1;
+    if(fsync(fileno(output_file)) != 0) failed = 1;
     long bytes = ftell(output_file);
-    fclose(output_file);
+    if(bytes < 0) failed = 1;
+    if(fclose(output_file) != 0) failed = 1;
+    if(failed){
+        fprintf(stderr, "Error writing or flushing output file\n");
+        return -1;
+    }
     return bytes;
 }
 
@@ -56,11 +64,13 @@ int main(int argc, char** argv){
         return 1;
     }
 
-    long int n = strtol(argv[1], NULL, 10);
+    char *number_end;
+    errno = 0;
+    long int n = strtol(argv[1], &number_end, 10);
     const char* filename = argv[2];
     const char* format = argv[3];
 
-    if(n<=0){
+    if(errno || number_end == argv[1] || *number_end || n<=0 || (unsigned long)n > SIZE_MAX/sizeof(double)){
         printf("Parameter <n> must be a positive integer\n");
         return 1;
     }

@@ -1,0 +1,45 @@
+% Fonts and title position for the Snellius file-systems deck.
+% Copied from the QCG-PilotJob deck: Carlito for Calibri, Liberation
+% Sans for Helvetica, DejaVu Sans for the Segoe UI symbols, Liberation
+% Mono for code.
+% Ligatures=TeX turns the ASCII quotes and dashes of the source into
+% typographic ones; the code listings use Carlito without them, so they
+% keep quotes and hyphens as typed.
+\newfontfamily\fcal{Carlito}[Ligatures=TeX]
+\newfontfamily\fcalc{Carlito}
+\newfontfamily\farial{Liberation Sans}[Ligatures=TeX]
+\newfontfamily\fsym{DejaVu Sans}
+\setmonofont{Liberation Mono}
+\def\pptxbase{cal}
+\def\pptxcode{calc}
+\def\pptxtitlef{cal}
+\def\pptxtitlex{68.15}
+\def\pptxtitley{75.72}
+\def\pptxtitles{23.1}
+\input{figures/snellius-fs/colors.tex}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usetikzlibrary{shapes.geometric,shapes.symbols}
+
+% Disk colours from the 2024 file-systems figure.
+\definecolor{fsblue}{cmyk}{0.3,0.1,0,0}
+\definecolor{fsgreen}{cmyk}{0.3,0,0.4,0}
+\definecolor{fspink}{cmyk}{0,0.5,0.25,0}
+\definecolor{fsyellow}{cmyk}{0,0,0.5,0}
+\setbeamercolor{alerted text}{fg=cEE7628}
+
+% Rounded panel in a template colour. Arguments: colour, opacity,
+% top-left, bottom-right. Coordinates are bp from the top-left.
+\newcommand{\fspanel}[4]{%
+  \begin{tikzpicture}[remember picture, overlay, x=1bp, y=-1bp,
+      shift={(current page.north west)}]
+    \path[fill=#1, fill opacity=#2, rounded corners=12bp] (#3) rectangle (#4);
+  \end{tikzpicture}}
+
+% pptx-style clears the navigation bar before \usetheme runs. Keep it
+% clear, and keep the orange metropolis bar from coming back.
+\AtBeginDocument{%
+  \setbeamertemplate{navigation symbols}{}%
+  \setbeamertemplate{headline}{}%
+  \setbeamertemplate{footline}{}}
